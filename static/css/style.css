@@ -10320,16 +10320,6 @@ h6, .h6 {
   font-size: 16px;
 }
 
-.navbar-bottom-menu .navbar-nav .nav-item:last-child {
-  padding-right: 0;
-  padding-left: 50px;
-}
-
-@media (max-width: 767px) {
-  .navbar-bottom-menu .navbar-nav .nav-item:last-child {
-    display: none;
-  }
-}
 
 @media (max-width: 999px) {
   .navbar-bottom-menu .navbar-toggler {
@@ -10810,7 +10800,7 @@ footer .footer-horizontal-menu li a {
 }
 
 footer .footer-logo {
-  width: 210px;
+  width: 180px;
 }
 
 @media (max-width: 767px) {

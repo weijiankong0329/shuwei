@@ -1,0 +1,22 @@
+.social-media-footer {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding-left: 22px;
+}
+
+.social-media-footer li {
+  padding: 0 4px;
+}
+
+.social-media-footer li a {
+  padding: 6px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  color: #000;
+}
+
+.social-media-footer li a i {
+  font-size: 14px;
+}

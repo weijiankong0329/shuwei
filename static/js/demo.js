@@ -29,13 +29,16 @@ $(function() {
   // Get the header
   var header = $(".navbar-bottom-menu");
   var body = $("body");
+  var menu_logo = $("#menu-logo");
   function scrollHeader() {
     // adding sticky class
     if (window.pageYOffset > 105) {
       $(header).addClass("sticky");
+      $(menu_logo).attr("hidden",false);
     } else {
       // removing sticky class
       $(header).removeClass("sticky");
+      $(menu_logo).attr("hidden",true);
     }
   }
 
@@ -45,10 +48,12 @@ $(function() {
     $("body").toggleClass("layer-open");
     // $(header).toggleClass("sticky-not");
     $(".navbar-close").show();
+    $(menu_logo).show();
   });
   $(".navbar-close").on("click", function() {
     $(".collapse").toggleClass("show");
     $(".navbar-close").hide();
+    $(menu_logo).hide();
     $("body").toggleClass("layer-open");
     // $(header).toggleClass("sticky-not");
     $(".dark-overlay").click(function() {
