@@ -61,7 +61,7 @@ class 评论_文艺(models.Model):
 
 class 问答(models.Model):
     问题 = models.CharField(max_length=150)
-    回答 = models.TextField()
+    答案 = models.TextField()
     序号 = models.IntegerField()
 
 class 评论_问答(models.Model):

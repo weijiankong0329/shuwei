@@ -30,15 +30,18 @@ $(function() {
   var header = $(".navbar-bottom-menu");
   var body = $("body");
   var menu_logo = $("#menu-logo");
+  var search_form = $("#search-form")
   function scrollHeader() {
     // adding sticky class
     if (window.pageYOffset > 105) {
       $(header).addClass("sticky");
       $(menu_logo).attr("hidden",false);
+      $(search_form).attr("hidden",false);
     } else {
       // removing sticky class
       $(header).removeClass("sticky");
       $(menu_logo).attr("hidden",true);
+      $(search_form).attr("hidden",true);
     }
   }
 

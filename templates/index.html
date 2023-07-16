@@ -7,7 +7,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>World Vision</title>
+    <title>書味</title>
     <!-- plugin css for this page -->
     <link rel="stylesheet" href="{% static 'css/materialdesignicons.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/aos.css' %}" />
@@ -29,47 +29,21 @@
             <!-- partial:partials/_navbar.html -->
             <nav class="navbar navbar-expand-lg navbar-light">
               <div class="d-flex justify-content-between align-items-center navbar-top">
-                <div>
-                  <a class="navbar-brand" href="#" ><img src="{% static 'images/logo_black.png' %}" alt=""/></a>
+                <div class="p-0 m-0" >
+                    <ul class="navbar-left-base mx-0 px-0">
+                      <li id="time-show"></li>
+                    </ul>
                 </div>
                 <div>
-                  <div class="row">
-                    <ul class="social-media">
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-instagram"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-facebook"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-youtube"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-linkedin"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div class = "row">
-                    <div id="date-time"></div>
-                    <ul class="navbar-left">
-                      <li>Wed, March 4, 2020</li>
-                      <li>30°C,London</li>
-                    </ul>
-                  </div>
+                  <a class="navbar-brand" href="#" ><img src="{% static 'images/logo_black.png' %}" class="header-logo" alt=""/></a>
+                </div>
+                <div>
+                  <form class="form-inline" method="get">
+                    <div class="search-bar">
+                      <input class="search-input ml-3" type="text" placeholder="关键词..."/>
+                      <button class="search-button" type="submit">{% bs_icon 'search' size='0.75em' %}</button>
+                    </div>
+                  </form>
                 </div>
               </div>
               <div class="navbar-bottom-menu">
@@ -81,7 +55,6 @@
                   aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="navbar-collapse justify-content-center collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav d-lg-flex justify-content-between align-items-center">
                     <li><a class="nav-item" href="#" ><img class="p-2" src="{% static 'images/logo_black.png' %}" id ="menu-logo" alt="" style ="width:100px;" hidden="true"/></a></li>
@@ -127,6 +100,14 @@
                     <li class="nav-item">
                       <a class="nav-link" href="pages/travel.html">书库</a>
                     </li>
+                    <li>
+                      <form class="form-inline" id="search-form" method="get" hidden="true">
+                        <div class="search-bar">
+                          <input class="search-input ml-3" type="text" placeholder="关键词..."/>
+                          <button class="search-button" type="submit">{% bs_icon 'search' size='0.75em' %}</button>
+                        </div>
+                      </form>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -135,6 +116,7 @@
             <!-- partial -->
           </div>
         </header>
+        {% comment %}
         <div class="container">
           <div class="banner-top-thumb-wrap">
             <div class="d-lg-flex justify-content-between align-items-center">
@@ -729,56 +711,67 @@
         </div>
         <!-- main-panel ends -->
         <!-- container-scroller ends -->
-
+        {% endcomment %}
         <!-- partial:partials/_footer.html -->
-        <footer class="bg-dark text-light">
+        <footer class="bg-secondary text-light">
           <div class="container">
-
-            <div class="row">
-              <div class="col-sm-12">
+            <div class="d-flex justify-content-around">
+              <div class="col-sm-4">
+                <p class="font-weight-bold">其他讯息</p>
+                <p>
+                  <ul class="list-unstyled">
+                    <li class="mb-1">关于书味</li>
+                    <li class="mb-1">联系我们</li>
+                    <li class="mb-1">条款与隐私权限</li>
+                    <li class="mb-1">管理员</li>
+                  </ul>
+                </p>
+              </div>
+              <div class="col-sm-4">
                   <div class="row justify-content-center">
                     <img src="{% static 'images/logo_white.png' %}" class="footer-logo"  alt=""/>
                   </div>
-                  <div class="row justify-content-center mt-2">
+                  <div class="row m-3 justify-content-center">
+                    <p class="small text-center">汉语穆斯林交流园地，信息、知识、思想共享<br/>
+                      为大众提供简洁、极有条理、富有专业性的学术网站</p>
+                    <p class="font-weight-bold">
+                      年轻 · 梦想 · 举意<br/>
+                    </p>
 
-                    <ul class="social-media-footer align-self-center">
-                      <h5 class="m-0 font-weight-600 mr-3 d-none d-lg-flex">关注我们</h5><br/>
+                  </div>
+                  <div class="row m-2 small justify-content-center">
+                      Copyright &copy; 2023
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="text-right">
+                    <h5 class="font-weight-bold">关注我们</h5>
+                    <br/>
+                    <ul class="social-media-footer justify-content-end">
                       <li>
-                        <a href="#">
-                          <i>{% bs_icon 'wechat' %}</i>
+                        <a href="#" class="btn-circle">
+                          {% bs_icon 'wechat' size='1.5em' %}
                         </a>
                       </li>
                       <li>
-                        <a href="#">
-                          <i>{% bs_icon 'twitter' %}</i>
+                        <a href="#" class="btn-circle">
+                          {% bs_icon 'twitter' size='1.5em' %}
                         </a>
                       </li>
                       <li>
-                        <a href="#">
-                          <i>{% bs_icon 'youtube' %}</i>
+                        <a href="#" class="btn-circle">
+                          {% bs_icon 'youtube' size='1.5em' %}
                         </a>
                       </li>
                       <li>
-                        <a href="#">
-                          <i>{% bs_icon 'tencent-qq' %}</i>
+                        <a href="#" class="btn-circle">
+                          {% bs_icon 'tencent-qq' size='1.5em' %}
                         </a>
                       </li>
 
                     </ul>
                   </div>
-
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="d-lg-flex justify-content-between align-items-center border-top mt-5 footer-bottom">
-
-                  <p class="font-weight-medium">Copyright</p>
-                  <p class="font-weight-medium">
-                    <a href="https://www.bootstrapdash.com/" target="_blank" class="text-dark">Bootstrap dashboard templates</a> from Bootstrapdash
-                  </p>
                 </div>
-              </div>
             </div>
           </div>
         </footer>
