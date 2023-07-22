@@ -29,96 +29,30 @@
             <!-- partial:partials/_navbar.html -->
             <nav class="navbar navbar-expand-lg navbar-light">
               <div class="row align-items-center navbar-top">
-                <div class="p-0 m-0 col" >
+
+                <div class="col text-left">
+                  <a class="navbar-brand" href="#" ><img src="{% static 'images/logo_black.png' %}" class="header-logo" alt=""/></a>
+                </div>
+                <div class="col text-center font-weight-medium">
+                  <h3>
+                    管理员登入页面
+                  </h3>
+                </div>
+                <div class="p-0 m-0 col text-right" >
                     <ul class="navbar-left-base mx-0 px-0">
                       <li><b>中国时间</b></li>
                       <li id="time-show"></li>
                     </ul>
                 </div>
-                <div class="coltext-center">
-                  <a class="navbar-brand" href="#" ><img src="{% static 'images/logo_black.png' %}" class="header-logo" alt=""/></a>
-                </div>
-                <div class="col">
-                  <form class="form-inline justify-content-end" method="get">
-                    <div class="search-bar ">
-                      <input class="search-input ml-3" type="text" placeholder="关键词..."/>
-                      <button class="search-button" type="submit">{% bs_icon 'search' size='0.75em' %}</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div class="navbar-bottom-menu">
-                <button class="navbar-toggler"
-                  type="button"
-                  data-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent"
-                  aria-expanded="true"
-                  aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse justify-content-center collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav d-lg-flex justify-content-between align-items-center">
-                    <li><a class="nav-item" href="#" ><img class="p-2" src="{% static 'images/logo_black.png' %}" id ="menu-logo" alt="" style ="width:100px;" hidden="true"/></a></li>
-                    <li class="nav-item active">
-                      <a class="nav-link active" href="index.html">首页</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/world.html">通讯</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/author.html">书讯</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/news-post.html">书评</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/business.html">观点</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/sports.html">文艺</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/art.html">问答</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/politics.html">视频</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/real-estate.html">译林</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/travel.html">文摘</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/travel.html">论文</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/travel.html">经训</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/travel.html">古籍</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="pages/travel.html">书库</a>
-                    </li>
-                    <li>
-                      <form class="form-inline" id="search-form" method="get" hidden="true">
-                        <div class="search-bar">
-                          <input class="search-input ml-3" type="text" placeholder="关键词..."/>
-                          <button class="search-button" type="submit">{% bs_icon 'search' size='0.75em' %}</button>
-                        </div>
-                      </form>
-                    </li>
-                  </ul>
-                </div>
+
               </div>
             </nav>
-
-            <!-- partial -->
           </div>
         </header>
+        {% block content %}
+        {% endblock %}
+        {% comment %}
         <div class="container">
-
           <div class="banner-top-thumb-wrap">
             <div class="d-lg-flex justify-content-between align-items-center">
               <div class="d-flex justify-content-between  mb-3 mb-lg-0">
@@ -169,7 +103,194 @@
               </div>
             </div>
           </div>
-
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="owl-carousel owl-theme" id="main-banner-carousel">
+                <div class="item">
+                  <div class="carousel-content-wrapper mb-2">
+                    <div class="carousel-content">
+                      <h1 class="font-weight-bold">
+                        If you wanted to get rich, how would you do it?
+                      </h1>
+                      <h5 class="font-weight-normal  m-0">
+                        Lorem Ipsum has been the industry's standard
+                      </h5>
+                      <p class="text-color m-0 pt-2 d-flex align-items-center">
+                        <span class="fs-10 mr-1">2 hours ago</span>
+                        <i class="mdi mdi-bookmark-outline mr-3"></i>
+                        <span class="fs-10 mr-1">126</span>
+                        <i class="mdi mdi-comment-outline"></i>
+                      </p>
+                    </div>
+                    <div class="carousel-image">
+                      <img src="assets/images/dashboard/banner.jpg" alt="" />
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="carousel-content-wrapper mb-2">
+                    <div class="carousel-content">
+                      <h1 class="font-weight-bold">
+                        If you wanted to get rich, how would you do it?
+                      </h1>
+                      <h5 class="font-weight-normal  m-0">
+                        Lorem Ipsum has been the industry's standard
+                      </h5>
+                      <p class="text-color m-0 pt-2 d-flex align-items-center">
+                        <span class="fs-10 mr-1">2 hours ago</span>
+                        <i class="mdi mdi-bookmark-outline mr-3"></i>
+                        <span class="fs-10 mr-1">126</span>
+                        <i class="mdi mdi-comment-outline"></i>
+                      </p>
+                    </div>
+                    <div class="carousel-image">
+                      <img src="assets/images/dashboard/banner_1.jpg" alt="" />
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="carousel-content-wrapper mb-2">
+                    <div class="carousel-content">
+                      <h1 class="font-weight-bold">
+                        If you wanted to get rich, how would you do it?
+                      </h1>
+                      <h5 class="font-weight-normal  m-0">
+                        Lorem Ipsum has been the industry's standard
+                      </h5>
+                      <p class="text-color m-0 pt-2 d-flex align-items-center">
+                        <span class="fs-10 mr-1">2 hours ago</span>
+                        <i class="mdi mdi-bookmark-outline mr-3"></i>
+                        <span class="fs-10 mr-1">126</span>
+                        <i class="mdi mdi-comment-outline"></i>
+                      </p>
+                    </div>
+                    <div class="carousel-image">
+                      <img src="assets/images/dashboard/banner_2.jpg" alt="" />
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="carousel-content-wrapper mb-2">
+                    <div class="carousel-content">
+                      <h1 class="font-weight-bold">
+                        If you wanted to get rich, how would you do it?
+                      </h1>
+                      <h5 class="font-weight-normal  m-0">
+                        Lorem Ipsum has been the industry's standard
+                      </h5>
+                      <p class="text-color m-0 pt-2 d-flex align-items-center">
+                        <span class="fs-10 mr-1">2 hours ago</span>
+                        <i class="mdi mdi-bookmark-outline mr-3"></i>
+                        <span class="fs-10 mr-1">126</span>
+                        <i class="mdi mdi-comment-outline"></i>
+                      </p>
+                    </div>
+                    <div class="carousel-image">
+                      <img src="assets/images/dashboard/banner_3.jpg" alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="py-3 border-bottom">
+                    <div class="d-flex align-items-center pb-2">
+                      <img
+                        src="assets/images/dashboard/Profile_1.jpg"
+                        class="img-xs img-rounded mr-2"
+                        alt="thumb"
+                      />
+                      <span class="fs-12 text-muted">Henry Itondo</span>
+                    </div>
+                    <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                      The Most And Least Visited Countries In The World
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="py-3 border-bottom">
+                    <div class="d-flex align-items-center pb-2">
+                      <img
+                        src="assets/images/dashboard/Profile_2.jpg"
+                        class="img-xs img-rounded mr-2"
+                        alt="thumb"
+                      />
+                      <span class="fs-12 text-muted">Oka Tomoaki</span>
+                    </div>
+                    <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                      The Best Places to Travel in month August
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="pt-4 pb-4 border-bottom">
+                    <div class="d-flex align-items-center pb-2">
+                      <img
+                        src="assets/images/dashboard/Profile_2.jpg"
+                        class="img-xs img-rounded mr-2"
+                        alt="thumb"
+                      />
+                      <span class="fs-12 text-muted">Joana Leite</span>
+                    </div>
+                    <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                      Focus On Fun And Challenging Lifetime Activities
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="pt-3 pb-4 border-bottom">
+                    <div class="d-flex align-items-center pb-2">
+                      <img
+                        src="assets/images/dashboard/Profile_4.jpg"
+                        class="img-xs img-rounded mr-2"
+                        alt="thumb"
+                      />
+                      <span class="fs-12 text-muted">Rita Leite</span>
+                    </div>
+                    <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                      Bread Is The Most Widely Consumed Food In The World
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="pt-4 pb-4">
+                    <div class="d-flex align-items-center pb-2">
+                      <img
+                        src="assets/images/dashboard/Profile_5.jpg"
+                        class="img-xs img-rounded mr-2"
+                        alt="thumb"
+                      />
+                      <span class="fs-12 text-muted">Jurrien Oldhof</span>
+                    </div>
+                    <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                      What Is Music, And What Does It Mean To Us
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="pt-3 pb-4">
+                    <div class="d-flex align-items-center pb-2">
+                      <img
+                        src="assets/images/dashboard/Profile_6.jpg"
+                        class="img-xs img-rounded mr-2"
+                        alt="thumb"
+                      />
+                      <span class="fs-12 text-muted">Yamaha Toshinobu</span>
+                    </div>
+                    <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                      Is Breakfast The Most Important Meal Of The Day
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="world-news">
             <div class="row">
               <div class="col-sm-12">
@@ -179,10 +300,84 @@
               </div>
             </div>
             <div class="row">
-
-
+              <div class="col-lg-3 col-sm-6 grid-margin mb-5 mb-sm-2">
+                <div class="position-relative image-hover">
+                  <img
+                    src="assets/images/dashboard/travel.jpg"
+                    class="img-fluid"
+                    alt="world-news"
+                  />
+                  <span class="thumb-title">TRAVEL</span>
+                </div>
+                <h5 class="font-weight-bold mt-3">
+                  Refugees flood Turkey's border with Greece
+                </h5>
+                <p class="fs-15 font-weight-normal">
+                  Lorem Ipsum has been the industry's standard dummy text
+                </p>
+                <a href="#" class="font-weight-bold text-dark pt-2"
+                  >Read Article</a
+                >
+              </div>
+              <div class="col-lg-3 col-sm-6 mb-5 mb-sm-2">
+                <div class="position-relative image-hover">
+                  <img
+                    src="assets/images/dashboard/news.jpg"
+                    class="img-fluid"
+                    alt="world-news"
+                  />
+                  <span class="thumb-title">NEWS</span>
+                </div>
+                <h5 class="font-weight-bold mt-3">
+                  South Korea’s Moon Jae-in sworn in vowing address
+                </h5>
+                <p class="fs-15 font-weight-normal">
+                  Lorem Ipsum has been the industry's standard dummy text
+                </p>
+                <a href="#" class="font-weight-bold text-dark pt-2"
+                  >Read Article</a
+                >
+              </div>
+              <div class="col-lg-3 col-sm-6 mb-5 mb-sm-2">
+                <div class="position-relative image-hover">
+                  <img
+                    src="assets/images/dashboard/art.jpg"
+                    class="img-fluid"
+                    alt="world-news"
+                  />
+                  <span class="thumb-title">ART</span>
+                </div>
+                <h5 class="font-weight-bold mt-3">
+                  These puppies are training to assist in avalanche rescue
+                </h5>
+                <p class="fs-15 font-weight-normal">
+                  Lorem Ipsum has been the industry's standard dummy text
+                </p>
+                <a href="#" class="font-weight-bold text-dark pt-2"
+                  >Read Article</a
+                >
+              </div>
+              <div class="col-lg-3 col-sm-6 mb-5 mb-sm-2">
+                <div class="position-relative image-hover">
+                  <img
+                    src="assets/images/dashboard/business.jpg"
+                    class="img-fluid"
+                    alt="world-news"
+                  />
+                  <span class="thumb-title">BUSINESS</span>
+                </div>
+                <h5 class="font-weight-bold mt-3">
+                  'Love Is Blind' couple opens up about their first year
+                </h5>
+                <p class="fs-15 font-weight-normal">
+                  Lorem Ipsum has been the industry's standard dummy text
+                </p>
+                <a href="#" class="font-weight-bold text-dark pt-2"
+                  >Read Article</a
+                >
+              </div>
+            </div>
           </div>
-          {% comment %}
           <div class="editors-news">
             <div class="row">
               <div class="col-lg-3">
@@ -448,28 +643,26 @@
               </div>
             </div>
           </div>
-          {% endcomment %}
         </div>
         <!-- main-panel ends -->
-      </div>
         <!-- container-scroller ends -->
-    </div>
+        {% endcomment %}
         <!-- partial:partials/_footer.html -->
-    <footer class="bg-secondary text-light footer">
-      <div class="container">
-        <div class="d-flex justify-content-around">
-          <div class="col-sm-4">
-            <p class="font-weight-bold">其他讯息</p>
-            <p>
-              <ul class="list-unstyled">
-                <li class="mb-1">关于书味</li>
-                <li class="mb-1">联系我们</li>
-                <li class="mb-1">条款与隐私权限</li>
-                <li class="mb-1"><a href="{% url 'admin_task:login' %}">管理员</a></li>
-              </ul>
-            </p>
-          </div>
-          <div class="col-sm-4">
+        <footer class="bg-secondary text-light mt-auto">
+          <div class="container">
+            <div class="d-flex justify-content-around">
+              <div class="col-sm-4">
+                <p class="font-weight-bold">其他讯息</p>
+                <p>
+                  <ul class="list-unstyled">
+                    <li class="mb-1">关于书味</li>
+                    <li class="mb-1">联系我们</li>
+                    <li class="mb-1">条款与隐私权限</li>
+                    <li class="mb-1">管理员</li>
+                  </ul>
+                </p>
+              </div>
+              <div class="col-sm-4">
                   <div class="row justify-content-center">
                     <img src="{% static 'images/logo_white.png' %}" class="footer-logo"  alt=""/>
                   </div>
@@ -485,7 +678,7 @@
                       Copyright &copy; 2023
                   </div>
               </div>
-          <div class="col-sm-4">
+              <div class="col-sm-4">
                   <div class="text-right">
                     <h5 class="font-weight-bold">关注我们</h5>
                     <br/>
@@ -514,12 +707,13 @@
                     </ul>
                   </div>
                 </div>
-        </div>
-      </div>
-    </footer>
+            </div>
+          </div>
+        </footer>
 
         <!-- partial -->
-
+      </div>
+    </div>
     <!-- inject:js -->
     <script src="{% static 'js/vendor.bundle.base.js' %}"></script>
     <!-- endinject -->

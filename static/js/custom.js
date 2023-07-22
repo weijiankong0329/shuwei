@@ -4,11 +4,11 @@ $(function() {
     var time_show = $('#time-show');
     fn();
 
-    function fn(){
+    function fn(response){
         var date = new Date();
-        var UTCTime = Date.now() + date.getTimezoneOffset()*60*1000;
-        var timeArr = dateFormat(date)
-        console.log(timeArr);
+        var test_Date = new Date(date).toLocaleString('en-US', {timeZone: 'Asia/Shanghai',});
+        var timeArr = dateFormat(test_Date);
+        console.log(test_Date);
         $(time_show).html(timeArr);
     }
 
@@ -21,7 +21,7 @@ $(function() {
         var hh = addZero(date.getHours());
         var mm = addZero(date.getMinutes());
         var ss = addZero(date.getSeconds());
-        return  YY + "年" + MM + "月" + DD + "日" + hh + "时" + mm + "分" +"\t"+ arr[Day]
+        return  YY + "年" + MM + "月" + DD + "日 " + arr[Day] + "<br />" + hh + "时" + mm + "分" + ss + "秒"
     }
 
     function addZero ( n ){

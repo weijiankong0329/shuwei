@@ -18,5 +18,6 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include(('home.urls','home'),namespace='home'))
+    path('',include(('home.urls','home'),namespace='home')),
+    path('admin_task/',include(('admin_task.urls','admin_task'),namespace='admin_task'))
 ]

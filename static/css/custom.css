@@ -76,3 +76,7 @@ footer .footer-logo {
 .navbar-left-base ul{
   margin:0px;
 }
+
+.w-40 {
+  width: 40% !important;
+}

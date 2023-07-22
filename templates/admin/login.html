@@ -1,0 +1,17 @@
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container w-40">
+    <form method="post">
+        <div class="form-group p-5 m-2">
+            {% csrf_token %}
+            <table>
+                {{ form|crispy }}
+            </table>
+            <div class="text-right">
+                <button type="submit" class="btn btn-secondary text-light">登入</button>
+            </div>
+        </div>
+    </form>
+ </div>
+{% endblock %}
