@@ -80,3 +80,43 @@ footer .footer-logo {
 .w-40 {
   width: 40% !important;
 }
+
+.btn-logout{
+    padding:10px;
+    border-radius: 5px;
+}
+
+.nav-link-sub {
+  display: block;
+  padding: 0.5rem 1rem;
+  margin-left:0.5rem;
+}
+
+.nav-link-sub:hover, .nav-link-sub:focus {
+  text-decoration: none;
+  background-color:grey;
+  color:white;
+}
+
+.expandable {
+  background: #fff;
+  overflow: hidden;
+  color: #000;
+  line-height: 50px;
+
+  transition: all .5s ease-in-out;
+  height: 0;
+ }
+
+.bg-grey {
+  background-color: grey;
+}
+
+#content-wrap {
+  margin: 0 auto;    /* Footer height */
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}

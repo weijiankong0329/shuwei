@@ -1,7 +1,24 @@
 {% extends 'base_admin.html' %}
 {% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% block title %}
+书味后台控制面板
+{% endblock %}
 {% block content %}
-<div class="container w-40">
-    Welcome
- </div>
+<div class="container justify-content-center h-100" id="content-wrap">
+    <div class="row">
+        <div class="col-3 h-100 pb-4 m-2">
+            {% include 'admin/side-nav.html' %}
+        </div>
+        <div class="col text-center pb-4 m-4 h-100 admin-main-content" id="content">
+            <h1 class="text-muted">
+                欢迎回来
+            </h1>
+            <br/>
+            <h3 class="text-muted">
+                请选择左侧菜单开始今天的工作
+            </h3>
+        </div>
+    </div>
+</div>
 {% endblock %}

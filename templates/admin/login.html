@@ -1,14 +1,17 @@
 {% extends 'base_admin.html' %}
 {% load crispy_forms_tags %}
+{% block title %}
+书味后台管理系统
+{% endblock %}
 {% block content %}
-<div class="container w-40">
+<div class="container w-40 my-5 mt-5">
     <form method="post">
-        <div class="form-group p-5 m-2">
+        <div class="form-group p-5 m-3">
             {% csrf_token %}
             <table>
                 {{ form|crispy }}
             </table>
-            <div class="text-right">
+            <div class="text-right mt-3 my-3">
                 <button type="submit" class="btn btn-secondary text-light">登入</button>
             </div>
         </div>

@@ -14,16 +14,18 @@
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/custom.css' %}"/>
+
     <!-- End plugin css for this page -->
     <link rel="shortcut icon" href="assets/images/favicon.png" />
     <!-- inject:css -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <!-- endinject -->
   </head>
 
-  <body>
+  <body class="d-flex flex-column h-100">
     <div class="container-scroller">
-      <div class="main-panel">
+      <div class="main-panel" id="page-container">
         <header id="header">
           <div class="container">
             <!-- partial:partials/_navbar.html -->
@@ -117,8 +119,8 @@
             <!-- partial -->
           </div>
         </header>
-        <div class="container">
 
+        <div class="container" id="content-wrap">
           <div class="banner-top-thumb-wrap">
             <div class="d-lg-flex justify-content-between align-items-center">
               <div class="d-flex justify-content-between  mb-3 mb-lg-0">
@@ -182,7 +184,6 @@
 
 
           </div>
-          {% comment %}
           <div class="editors-news">
             <div class="row">
               <div class="col-lg-3">
@@ -448,28 +449,27 @@
               </div>
             </div>
           </div>
-          {% endcomment %}
+
         </div>
         <!-- main-panel ends -->
-      </div>
+        </div>
         <!-- container-scroller ends -->
-    </div>
-        <!-- partial:partials/_footer.html -->
-    <footer class="bg-secondary text-light footer">
+
+        <footer class="bg-secondary text-light mt-auto" id="footer">
       <div class="container">
-        <div class="d-flex justify-content-around">
-          <div class="col-sm-4">
-            <p class="font-weight-bold">其他讯息</p>
-            <p>
-              <ul class="list-unstyled">
-                <li class="mb-1">关于书味</li>
-                <li class="mb-1">联系我们</li>
-                <li class="mb-1">条款与隐私权限</li>
-                <li class="mb-1"><a href="{% url 'admin_task:login' %}">管理员</a></li>
-              </ul>
-            </p>
-          </div>
-          <div class="col-sm-4">
+            <div class="d-flex justify-content-around">
+              <div class="col-sm-4">
+                <p class="font-weight-bold">其他讯息</p>
+                <p>
+                  <ul class="list-unstyled">
+                    <li class="mb-1">关于书味</li>
+                    <li class="mb-1">联系我们</li>
+                    <li class="mb-1">条款与隐私权限</li>
+                    <li class="mb-1"><a href="{% url 'admin_task:login' %}">管理员</a></li>
+                  </ul>
+                </p>
+              </div>
+              <div class="col-sm-4">
                   <div class="row justify-content-center">
                     <img src="{% static 'images/logo_white.png' %}" class="footer-logo"  alt=""/>
                   </div>
@@ -485,7 +485,7 @@
                       Copyright &copy; 2023
                   </div>
               </div>
-          <div class="col-sm-4">
+              <div class="col-sm-4">
                   <div class="text-right">
                     <h5 class="font-weight-bold">关注我们</h5>
                     <br/>
@@ -514,9 +514,12 @@
                     </ul>
                   </div>
                 </div>
-        </div>
+            </div>
+          </div>
+        </footer>
       </div>
-    </footer>
+    </div>
+
 
         <!-- partial -->
 
@@ -531,4 +534,5 @@
     <script src="{% static 'js/custom.js' %}"></script>
     <!-- End custom js for this page-->
   </body>
+
 </html>

@@ -1,0 +1,143 @@
+<ul class="navbar-nav">
+    {% if perms.home.change_通讯 %}
+    <li class="nav-item active" id="">
+        <a class="active border nav-link text-center mb-1 mt-1 admin-nav-link tongxun-content"  href="{% url 'admin_task:通讯' %}">通讯</a>
+        <ul class="navbar-nav navbar-nav-sub" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1">
+                <a class="nav-link-sub active border tongxun-content" href="{% url 'admin_task:通讯' %}">内容编辑</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if perms.home.change_书讯 %}
+    <li class="nav-item active ">
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="#">书讯</a>
+        <ul class="navbar-nav navbar-nav-sub" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border" href="#">内容编辑</a>
+            </li>
+            <li class="nav-item-sub active text-left mb-1 mt-1">
+                <a class="nav-link-sub active border" href="#">评论审查</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if perms.home.change_书评 %}
+    <li class="nav-item active ">
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">书评</a>
+        <ul class="navbar-nav" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border" href="">内容编辑</a>
+            </li>
+            <li class="nav-item-sub active text-left mb-1 mt-1">
+                <a class="nav-link-sub active border" href="">评论审查</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if  perms.home.change_观点 %}
+    <li class="nav-item active ">
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">观点</a>
+        <ul class="navbar-nav" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border" href="">内容编辑</a>
+            </li>
+            <li class="nav-item-sub active text-left mb-1 mt-1">
+                <a class="nav-link-sub active border" href="">评论审查</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if  perms.home.change_文艺 %}
+    <li class="nav-item active ">
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">文艺</a>
+        <ul class="navbar-nav" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border" href="">内容编辑</a>
+            </li>
+            <li class="nav-item-sub active text-left mb-1 mt-1">
+                <a class="nav-link-sub active border" href="">评论审查</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if  perms.home.change_问答 %}
+    <li class="nav-item active ">
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">问答</a>
+        <ul class="navbar-nav" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border" href="">内容编辑</a>
+            </li>
+            <li class="nav-item-sub active text-left mb-1 mt-1">
+                <a class="nav-link-sub active border" href="">评论审查</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if  perms.home.change_译林 %}
+    <li class="nav-item active ">
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">译林</a>
+        <ul class="navbar-nav" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border" href="l">内容编辑</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if  perms.home.change_文摘 %}
+    <li class="nav-item active ">
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">文摘</a>
+        <ul class="navbar-nav" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border" href="index.html">内容编辑</a>
+            </li>
+            <li class="nav-item-sub active text-left mb-1 mt-1">
+                <a class="nav-link-sub active border" href="">评论审查</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if perms.home.change_论文 %}
+    <li class="nav-item active ">
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">论文</a>
+        <ul class="navbar-nav" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border" href="">内容编辑</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if perms.home.change_经训 %}
+    <li class="nav-item active ">
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">经训</a>
+        <ul class="navbar-nav" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border" href="">内容编辑</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if perms.home.change_古籍 %}
+    <li class="nav-item active ">
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">古籍</a>
+        <ul class="navbar-nav" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border" href="">内容编辑</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if perms.home.change_书库 %}
+    <li class="nav-item active ">
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">书库</a>
+        <ul class="navbar-nav" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border" href="">内容编辑</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    <li class="nav-item active border text-center mb-1 mt-1">
+        <a class="nav-link active" href="{% url 'admin_task:logout' %}">登出</a>
+    </li>
+</ul>
