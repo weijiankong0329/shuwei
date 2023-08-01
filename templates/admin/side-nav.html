@@ -1,36 +1,33 @@
 <ul class="navbar-nav">
     {% if perms.home.change_通讯 %}
     <li class="nav-item active" id="">
-        <a class="active border nav-link text-center mb-1 mt-1 admin-nav-link tongxun-content"  href="{% url 'admin_task:通讯' %}">通讯</a>
+        <a class="active border nav-link text-center mb-1 mt-1 admin-nav-link tongxun"  href="{% url 'admin_task:通讯' %}">通讯</a>
         <ul class="navbar-nav navbar-nav-sub" hidden>
             <li class="nav-item-sub active text-left mb-1 mt-1">
-                <a class="nav-link-sub active border tongxun-content" href="{% url 'admin_task:通讯' %}">内容编辑</a>
+                <a class="nav-link-sub active border content" href="{% url 'admin_task:通讯' %}">内容编辑</a>
             </li>
         </ul>
     </li>
     {% endif %}
     {% if perms.home.change_书讯 %}
     <li class="nav-item active ">
-        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="#">书讯</a>
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link shuxun" href="{% url 'admin_task:书讯' %}">书讯</a>
         <ul class="navbar-nav navbar-nav-sub" hidden>
             <li class="nav-item-sub active text-left mb-1 mt-1 ">
-                <a class="nav-link-sub active border" href="#">内容编辑</a>
-            </li>
-            <li class="nav-item-sub active text-left mb-1 mt-1">
-                <a class="nav-link-sub active border" href="#">评论审查</a>
+                <a class="nav-link-sub active border content" href="{% url 'admin_task:书讯' %}">内容编辑</a>
             </li>
         </ul>
     </li>
     {% endif %}
     {% if perms.home.change_书评 %}
     <li class="nav-item active ">
-        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">书评</a>
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link shuping" href="{% url 'admin_task:书评' 'content' %}">书评</a>
         <ul class="navbar-nav" hidden>
             <li class="nav-item-sub active text-left mb-1 mt-1 ">
-                <a class="nav-link-sub active border" href="">内容编辑</a>
+                <a class="nav-link-sub active border content" href="{% url 'admin_task:书评' 'content' %}">内容编辑</a>
             </li>
             <li class="nav-item-sub active text-left mb-1 mt-1">
-                <a class="nav-link-sub active border" href="">评论审查</a>
+                <a class="nav-link-sub active border comment" href="{% url 'admin_task:书评' 'comment' %}">评论审查</a>
             </li>
         </ul>
     </li>

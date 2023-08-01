@@ -1,10 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% block title %}
+书味后台控制面板
+{% endblock %}
+{% block content %}
+<div class="container justify-content-center h-100" id="content-wrap">
+    <div class="row">
+        <div class="col-3 h-100 pb-4 m-2">
+            {% include 'admin/side-nav.html' %}
+        </div>
+        <div class="col text-center pb-4 m-4 h-100 admin-main-content" id="content">
+           <div class="row">
+               <div class="col p-2">
+                   <h3>
+                   {% if task == 'comment' %} 评论审查 {% else %} 内容编辑 {% endif %}
+                   </h3>
+               </div>
+               {% if task == 'content' %}
+               <div class="col-2 text-right pt-1">
+                   <button class="btn btn-primary " type="button">添加 {% bs_icon 'plus-circle' size='0.75em' %}</button>
+               </div>
+               {% endif %}
+           </div>
+            <div class="row border p-2 mt-2">
+            <table class="table">
+                {% if task == 'comment' %}
+                <tr class="border-bottom">
+                   <th>序号</th>
+                    <th>评论</th>
+                    <th>书评书籍标题</th>
+                    <th>发布日期</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                {% for obj in all_书评 %}
+                {% for comment in obj.评论_书评_set.all %}
+                <tr class="p-0">
+                    <td>{{comment.id}}</td>
+                    <td>{{comment.评论}}</td>
+                    <td>{{obj.书籍标题}}</td>
+                    <td>{{comment.发布时间|date:'Y-m-d H:i' }}</td>
+                    <td>{% if comment.通过 %}
+                        通过
+                        {% else %}
+                        未通过
+                        {% endif %}
+                    </td>
+                    <td>
+                        <button class="btn btn-info p-2" type="button">查看{% bs_icon 'file-text' size='0.75em' %}</button>
+                        <button class="btn btn-success p-2" type="button">通过{% bs_icon 'check-circle' size='0.75em' %}</button>
+                        <button class="btn btn-danger p-2" type="button">未通过{% bs_icon 'x-circle' size='0.75em' %}</button>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+                {% endif %}
+                {% if task == 'content' %}
+                <tr class="border-bottom">
+                   <th>序号</th>
+                    <th>书籍标题</th>
+                    <th>书评发布日期</th>
+                    <th>操作</th>
+                </tr>
+                {% for obj in all_书评 %}
+                <tr class="p-0">
+                    <td>{{obj.id}}</td>
+                    <td>{{obj.书籍标题}}</td>
+                    <td>{{obj.书评发布时间|date:'Y-m-d H:i' }}</td>
+                    <td>
+                        <button class="btn btn-info p-2" type="button">查看{% bs_icon 'file-text' size='0.75em' %}</button>
+                        <button class="btn btn-success p-2" type="button">编辑{% bs_icon 'pencil' size='0.75em' %}</button>
+                        <button class="btn btn-danger p-2" type="button">删除{% bs_icon 'trash3' size='0.75em' %}</button>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </table>
+                {{content}}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var content_title ="."+"{{content_title|escapejs }}";
+    var task = "."+"{{task|escapejs }}";
+</script>
+{% endblock %}

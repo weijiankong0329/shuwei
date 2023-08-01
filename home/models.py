@@ -5,10 +5,11 @@ from django.db import models
 class 通讯(models.Model):
     标题 = models.CharField(max_length=150)
     内容 = models.TextField()
-    发布时间 = models.DateTimeField(auto_now=True)
-    资源 = models.CharField(max_length=200,null=True,default='null')
-    作者 = models.CharField(max_length=200,null=True,default='null')
-    图片 = models.ImageField(upload_to='',default='null',null=True)
+    更新时间 = models.DateTimeField(auto_now=True)
+    发布状态 = models.BooleanField(default=False)
+    资源 = models.CharField(max_length=200,null=True,blank=True)
+    作者 = models.CharField(max_length=200,null=True,blank=True)
+    图片 = models.ImageField(upload_to='images/tongxun/',blank=True,null=True)
 
 class 书讯(models.Model):
     标题 = models.CharField(max_length=150)

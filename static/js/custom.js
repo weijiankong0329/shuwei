@@ -7,6 +7,14 @@ $(function() {
     $("#content-wrap").css("min-height",content_height);
     $(".admin-main-content").css("min-height",content_height);
 
+    if(content_title){
+        $(content_title).addClass("bg-dark text-white");
+        $(task).addClass("bg-grey text-white");
+        $(content_title).next('ul').attr('hidden',false);
+        $(content_title).css('pointer-events','none');
+        $(task).css('pointer-events','none');
+    }
+
     function fn(response){
         var date = new Date();
         var test_Date = new Date(date).toLocaleString('en-US', {timeZone: 'Asia/Shanghai',});
@@ -41,14 +49,6 @@ $(function() {
         $(this).next('ul').children('li').first().children('a').addClass("bg-grey text-white")
         $(this).addClass("bg-dark text-white");
         $(this).css('pointer-events','none');
-
-        if($(this).attr("value")=="admin_task:tongxun")
-        {
-            var link_val="{% url '"+$(this).attr("value")+"' %}";
-            fetch(link_val)
-                    .then(response => response.text())
-                    .then(data=>$("#content").innerHTML=data);
-        }
    });
 
    $(".nav-link-sub").click(function(){
@@ -58,5 +58,17 @@ $(function() {
         $(this).css('pointer-events','none');
    });
 
+
+    $("#image").change(function () {
+        $("#img-preview-div").removeAttr('hidden');
+        const file = this.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (event) {
+                $("#img-preview").attr("src", event.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 
 });

@@ -137,3 +137,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/admin_task/main'
 LOGOUT_REDIRECT_URL = '/'
+
+MEDIA_ROOT = 'media/'

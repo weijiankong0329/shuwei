@@ -9,13 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>書味</title>
     <!-- plugin css for this page -->
-    <link rel="stylesheet" href="{% static 'css/materialdesignicons.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/aos.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}"/>
+
+
+
     <link rel="stylesheet" href="{% static 'css/custom.css' %}"/>
-    <!-- End plugin css for this page -->
-    <link rel="shortcut icon" href="assets/images/favicon.png" />
     <!-- inject:css -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- endinject -->
@@ -24,6 +21,13 @@
   <body class="d-flex flex-column h-100">
     <div class="container-scroller" >
       <div class="main-panel" id="page-container">
+        {% if messages %}
+          <ul class="messages">
+          {% for message in messages %}
+            <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+          {% endfor %}
+          </ul>
+        {% endif %}
         <header id="header">
           <div class="container">
             <!-- partial:partials/_navbar.html -->
@@ -71,7 +75,7 @@
                   <div class="row justify-content-center">
                     <img src="{% static 'images/logo_white.png' %}" class="footer-logo"  alt=""/>
                   </div>
-                  <div class="row m-3 justify-content-center">
+                  <div class="row m-1 justify-content-center text-center">
                     <p class="small text-center">汉语穆斯林交流园地，信息、知识、思想共享<br/>
                       为大众提供简洁、极有条理、富有专业性的学术网站</p>
                     <p class="font-weight-bold">
