@@ -2336,7 +2336,7 @@ textarea.form-control {
   background-color: transparent;
   border: 1px solid transparent;
   padding: 10px 24px;
-  font-size: 0.75rem;
+  font-size: 1.5rem;
   line-height: 1;
   border-radius: 0px;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;

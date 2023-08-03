@@ -97,5 +97,47 @@ class addTongXunView(generic.TemplateView):
             messages.error(request, '通讯添加失败请检查填表！')
             return render(request, 'admin/通讯_add.html', {'form': form,'content_title': 'tongxun','task': 'content'})
 
+def TongxunDetailView(request,pk):
+    tongxun = 通讯.objects.get(id=pk)
+    context = {
+        '通讯': tongxun,
+        'content_title': 'tongxun',
+        'task': 'content'
+    }
+    return render(request,'admin/通讯_detail.html',context)
+
+def TongXunDelete(request,pk):
+    tongxun = 通讯.objects.get(id=pk)
+    tongxun.delete()
+    messages.success(request, '选中通讯已被删除')
+    return HttpResponseRedirect(reverse('admin_task:通讯'))
+
+class TongXunEditView(generic.TemplateView):
+    template_name="admin/通讯_edit.html"
+
+    def get(self,request,pk):
+        tongxun = 通讯.objects.get(id=pk)
+        form = 通讯_add_form(instance=tongxun)
+        args={
+            'form':form,
+            '通讯':tongxun,
+            'content_title': 'tongxun',
+            'task': 'content'
+        }
+        return render(request,self.template_name,args)
+
+    def post(self,request,pk):
+        tongxun = 通讯.objects.get(id=pk)
+        form = 通讯_add_form(request.POST, request.FILES, instance=tongxun)
+        print(form)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '通讯内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:通讯_detail',kwargs={'pk':pk}))
+        else:
+            messages.error(request, '通讯内容修改错误，请更正错误后提交更改内容')
+            return HttpResponseRedirect(reverse('admin_task:通讯_edit', kwargs={'pk':pk}))
+
+
 
 

@@ -10,11 +10,13 @@ class CustomLoginForm(AuthenticationForm):
 class 通讯_add_form(ModelForm):
     class Meta:
         model = 通讯
-        exclude =['发布状态']
+        fields ="__all__"
+        labels={
+            '发布状态':'确认发布'
+        }
         widgets = {
             '标题': forms.TextInput(attrs={'class': 'form-control'}),
             '内容': forms.Textarea(attrs={'class': 'form-control'}),
             '资源': forms.TextInput(attrs={'class': 'form-control'}),
-            '作者': forms.TextInput(attrs={'class': 'form-control'}),
-            '图片': forms.FileInput(attrs={'id':'image'})
+            '作者': forms.TextInput(attrs={'class': 'form-control'})
         }

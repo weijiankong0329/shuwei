@@ -6,6 +6,10 @@ $(function() {
     var content_height = $("body").height()-$("header").height()-$("footer").height();
     $("#content-wrap").css("min-height",content_height);
     $(".admin-main-content").css("min-height",content_height);
+    console.log("body:"+ $("body").height());
+    console.log("header:"+$("header").height());
+    console.log("footer:"+$("footer").height());
+     console.log(content_height);
 
     if(content_title){
         $(content_title).addClass("bg-dark text-white");
@@ -59,7 +63,8 @@ $(function() {
    });
 
 
-    $("#image").change(function () {
+    $("#id_图片").change(function () {
+        console.log(this);
         $("#img-preview-div").removeAttr('hidden');
         const file = this.files[0];
         if (file) {

@@ -41,9 +41,21 @@
                     {% endif %}
                     </td>
                     <td>
-                        <button class="btn btn-info p-2" type="button"><a href="" class="text-white">查看{% bs_icon 'file-text' size='0.75em' %}</a></button>
-                        <button class="btn btn-success p-2" type="button"><a href="" class="text-white">编辑{% bs_icon 'pencil' size='0.75em' %}</a></button>
-                        <button class="btn btn-danger p-2" type="button"><a href="" class="text-white">删除{% bs_icon 'trash3' size='0.75em' %}</a></button>
+                        <a href="{% url 'admin_task:通讯_detail' obj.id %}">
+                            <button class="btn btn-info p-2" type="button">
+                                查看{% bs_icon 'file-text' size='0.75em' %}
+                            </button>
+                        </a>
+                        <a href="{% url 'admin_task:通讯_edit' obj.id %}">
+                            <button class="btn btn-success p-2" type="button">
+                                编辑{% bs_icon 'pencil' size='0.75em' %}
+                            </button>
+                        </a>
+                        <a href="{% url 'admin_task:通讯_delete' obj.id %}" onclick="return confirm('确认删除此通讯资料?');">
+                            <button class="btn btn-danger p-2" type="button">
+                                删除{% bs_icon 'trash3' size='0.75em' %}
+                            </button>
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}
