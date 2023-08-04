@@ -6,10 +6,6 @@ $(function() {
     var content_height = $("body").height()-$("header").height()-$("footer").height();
     $("#content-wrap").css("min-height",content_height);
     $(".admin-main-content").css("min-height",content_height);
-    console.log("body:"+ $("body").height());
-    console.log("header:"+$("header").height());
-    console.log("footer:"+$("footer").height());
-     console.log(content_height);
 
     if(content_title){
         $(content_title).addClass("bg-dark text-white");
@@ -44,21 +40,20 @@ $(function() {
     }
 
    $(".admin-nav-link").click(function(){
-
         $(".navbar-nav-sub").attr('hidden',true);
         $(".admin-nav-link").removeClass("bg-dark text-white");
         $(".nav-link-sub").removeClass("bg-grey text-white");
         $(".admin-nav-link").css('pointer-events','');
-        $(this).next('ul').attr('hidden',false);
         $(this).next('ul').children('li').first().children('a').addClass("bg-grey text-white")
+        $(this).next('ul').attr('hidden',false);
         $(this).addClass("bg-dark text-white");
         $(this).css('pointer-events','none');
    });
 
    $(".nav-link-sub").click(function(){
+        $(this).addClass("bg-grey text-white");
         $(".nav-link-sub").removeClass("bg-grey text-white");
         $(".nav-link-sub").css('pointer-events','');
-        $(this).addClass("bg-grey text-white");
         $(this).css('pointer-events','none');
    });
 
