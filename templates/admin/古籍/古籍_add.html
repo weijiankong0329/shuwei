@@ -13,23 +13,23 @@
         <div class="col  pb-4 m-4 h-100 admin-main-content" id="content">
            <div class="row text-center">
                <div class="col p-2">
-                   <h3>书讯添加</h3>
+                   <h3>古籍添加</h3>
                </div>
                <div class="col-4 text-right pt-1">
-                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='书讯' task='content' %}">全部书讯 {% bs_icon 'list' size='0.75em' %}</a>
+                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='古籍' task='content' %}">全部古籍 {% bs_icon 'list' size='0.75em' %}</a>
                </div>
            </div>
             <div class="border row p-4 mt-3">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
               {% csrf_token %}
                 {{form.标题|as_crispy_field }}
-                {{form.简介|as_crispy_field }}
+                {{form.文档|as_crispy_field }}
                 <div class="form-row ">
                     <div class="form-group col">
-                        {{form.序号|as_crispy_field }}
+                    {{form.作者|as_crispy_field }}
                     </div>
                     <div class="form-group col">
-                        {{form.作者|as_crispy_field }}
+                   
                     </div>
                 </div>
                 <div class="form-row">
@@ -38,8 +38,8 @@
                         图片预览<br/>
                         <img src="#" id="img-preview" class="w-100 border m-2">
                     </div>
-                     <div class="form-group col mr-3" id="img-upload">
-                        {{form.图片|as_crispy_field }}
+                     <div class="form-group col mr-3">
+                     
                     </div>
                 </div>
                 <div class="form-row">

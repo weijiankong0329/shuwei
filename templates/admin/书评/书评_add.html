@@ -16,13 +16,13 @@
                    <h3>书评添加</h3>
                </div>
                <div class="col-4 text-right pt-1">
-                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:书评' %}">全部书评 {% bs_icon 'list' size='0.75em' %}</a>
+                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='书评' task='content' %}">全部书评 {% bs_icon 'list' size='0.75em' %}</a>
                </div>
            </div>
             <div class="border row p-4 mt-3">
             <form method="post">
               {% csrf_token %}
-                {{form.书籍标题|as_crispy_field }}
+                {{form.标题|as_crispy_field }}
                 <div class="form-row ">
                     <div class="form-group col">
                         {{form.书籍作者|as_crispy_field }}

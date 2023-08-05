@@ -56,11 +56,11 @@ class 译林_add_form(ModelForm):
         model = 译林
         exclude =['发布状态']
         widgets = {
-            '译文标题': forms.TextInput(attrs={'class': 'form-control'}),
-            '原文内容': forms.Textarea(attrs={'class': 'form-control'}),
+            '标题': forms.TextInput(attrs={'class': 'form-control'}),
+            '译文内容': forms.Textarea(attrs={'class': 'form-control'}),
             '译文作者': forms.TextInput(attrs={'class': 'form-control'}),
             '原文作者': forms.TextInput(attrs={'class': 'form-control'}),
-            '图片': forms.FileInput(attrs={'id':'image'})
+            '原文出版日期': forms.TextInput(attrs={'class': 'form-control', 'type': 'date'})
         }
 
 class 文摘_add_form(ModelForm):
@@ -71,8 +71,7 @@ class 文摘_add_form(ModelForm):
             '标题': forms.TextInput(attrs={'class': 'form-control'}),
             '内容': forms.Textarea(attrs={'class': 'form-control'}),
             '作者': forms.TextInput(attrs={'class': 'form-control'}),
-            '资源': forms.TextInput(attrs={'class': 'form-control'}),
-            '图片': forms.FileInput(attrs={'id':'image'})
+            '资源': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 

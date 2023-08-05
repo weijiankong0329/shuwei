@@ -26,17 +26,17 @@ class 书讯(models.Model):
         return self.标题
 
 class 书评(models.Model):
-    书籍标题 = models.CharField(max_length=150)
+    标题 = models.CharField(max_length=150)
     书籍作者 =models.CharField(max_length=200,null=True,blank=True)
     书籍出版日期 = models.DateField(null=True,blank=True)
     书评内容 = models.TextField()
     更新时间 = models.DateTimeField(auto_now=True)
     书评作者 = models.CharField(max_length=200,null=True,blank=True)
-    图片 = models.ImageField(upload_to='images/shuping/', default='null', null=True)
+    图片 = models.ImageField(upload_to='images/shuping/',blank=True,null=True)
     发布状态 = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.书籍标题
+        return self.标题
 
 class 评论_书评(models.Model):
     书评 = models.ForeignKey(书评,on_delete=models.CASCADE)
@@ -73,7 +73,7 @@ class 评论_文艺(models.Model):
     发布时间 = models.DateTimeField(auto_now=True)
 
 class 问答(models.Model):
-    问题 = models.CharField(max_length=150)
+    标题 = models.CharField(max_length=150)
     答案 = models.TextField()
     序号 = models.IntegerField()
     更新时间 = models.DateTimeField(auto_now=True)
@@ -86,13 +86,13 @@ class 评论_问答(models.Model):
     发布时间 = models.DateTimeField(auto_now=True)
 
 class 译林(models.Model):
-    译文标题 = models.CharField(max_length=150)
+    标题 = models.CharField(max_length=150)
     译文作者 = models.CharField(max_length=100, null=True, blank=True)
-    更新时间 = models.DateField(auto_now=True)
+    更新时间 = models.DateTimeField(auto_now=True)
     原文标题 = models.CharField(max_length=150)
-    原文内容 = models.TextField()
+    译文内容 = models.TextField()
     原文作者 = models.CharField(max_length=100, null=True, blank=True)
-    原文发布时间 = models.DateTimeField(auto_now=True)
+    原文出版日期 = models.DateField(null=True,blank=True)
     图片 = models.ImageField(upload_to='images/yiling/', blank=True, null=True)
     发布状态 = models.BooleanField(default=False)
 
@@ -101,7 +101,7 @@ class 文摘(models.Model):
     内容 = models.TextField()
     更新时间 = models.DateTimeField(auto_now=True)
     作者 = models.CharField(max_length=200, null=True, blank=True)
-    图片 = models.ImageField(upload_to='images/wenzhai/', default='null', null=True)
+    图片 = models.ImageField(upload_to='images/wenzhai/', blank=True, null=True)
     资源 = models.CharField(max_length=200, null=True, blank=True)
     发布状态 = models.BooleanField(default=False)
 
