@@ -16,7 +16,7 @@
                    <h3>通讯</h3>
                </div>
                <div class="col-2 text-right pt-1">
-                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:通讯_add' %}">添加 {% bs_icon 'plus-circle' size='0.75em' %}</a>
+                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:通讯_add' %}">添加 {% bs_icon 'plus-circle' size='1em' %}</a>
                </div>
            </div>
             <div class="row border p-2 mt-2">
@@ -30,7 +30,7 @@
                 </tr>
                 {% for obj in all_通讯 %}
                 <tr class="p-0">
-                    <td>{{obj.id}}</td>
+                    <td>{{ forloop.counter }}</td>
                     <td>{{obj.标题}}</td>
                     <td>{{obj.更新时间|date:'Y-m-d H:i' }}</td>
                     <td>
@@ -41,14 +41,49 @@
                     {% endif %}
                     </td>
                     <td>
-                        <button class="btn btn-info p-2" type="button"><a href="" class="text-white">查看{% bs_icon 'file-text' size='0.75em' %}</a></button>
-                        <button class="btn btn-success p-2" type="button"><a href="" class="text-white">编辑{% bs_icon 'pencil' size='0.75em' %}</a></button>
-                        <button class="btn btn-danger p-2" type="button"><a href="" class="text-white">删除{% bs_icon 'trash3' size='0.75em' %}</a></button>
+                        <a href="{% url 'admin_task:通讯_detail' obj.id %}" class="text-decoration-none">
+                            <button class="btn btn-info p-2" type="button">
+                                查看{% bs_icon 'file-text' size='1em' %}
+                            </button>
+                        </a>
+                        <a href="{% url 'admin_task:通讯_edit' obj.id %}" class="text-decoration-none">
+                            <button class="btn btn-success p-2" type="button">
+                                编辑{% bs_icon 'pencil' size='1em' %}
+                            </button>
+                        </a>
+                        <a href="{% url 'admin_task:通讯_delete' obj.id %}" onclick="return confirm('确认删除此通讯资料?');" class="text-decoration-none">
+                            <button class="btn btn-danger p-2" type="button">
+                                删除{% bs_icon 'trash3' size='1em' %}
+                            </button>
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}
             </table>
-                {{content}}
+
+            </div>
+            <div class="row">
+            {% if all_通讯.has_other_pages %}
+                <ul class="pagination w-100  justify-content-center">
+                {% if all_通讯.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ all_通讯.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                {% endif %}
+                {% for i in all_通讯.paginator.page_range %}
+                    {% if all_通讯.number == i %}
+                        <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if all_通讯.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ all_通讯.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                {% endif %}
+                </ul>
+            {% endif %}
             </div>
         </div>
     </div>

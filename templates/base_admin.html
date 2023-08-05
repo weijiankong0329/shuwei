@@ -21,13 +21,16 @@
   <body class="d-flex flex-column h-100">
     <div class="container-scroller" >
       <div class="main-panel" id="page-container">
-        {% if messages %}
-          <ul class="messages">
-          {% for message in messages %}
-            <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
-          {% endfor %}
-          </ul>
-        {% endif %}
+        {% for message in messages %}
+        <div class="container-fluid p-0">
+          <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            {{ message }}
+          </div>
+        </div>
+        {% endfor %}
         <header id="header">
           <div class="container">
             <!-- partial:partials/_navbar.html -->
@@ -35,7 +38,7 @@
               <div class="row align-items-center navbar-top">
 
                 <div class="col text-left">
-                  <a class="navbar-brand" href="#" ><img src="{% static 'images/logo_black.png' %}" class="header-logo" alt=""/></a>
+                  <a class="navbar-brand" href="#" ><img src="{% static 'images/logo_black.png' %}" class="w-50" alt=""/></a>
                 </div>
                 <div class="col text-center font-weight-medium">
                   <h3>
@@ -57,7 +60,7 @@
         </header>
         {% block content %}
         {% endblock %}
-        <footer class="bg-secondary text-light">
+        <footer class="bg-secondary text-light mt-auto">
       <div class="container">
         <div class="row">
               <div class="col-sm-4">

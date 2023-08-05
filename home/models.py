@@ -14,10 +14,11 @@ class 通讯(models.Model):
 class 书讯(models.Model):
     标题 = models.CharField(max_length=150)
     简介 = models.TextField()
-    发布时间 = models.DateTimeField(auto_now=True)
-    序号 = models.IntegerField(null=True, default='null')
-    作者 = models.CharField(max_length=200, null=True, default='null')
-    图片 = models.ImageField(upload_to='', default='null', null=True)
+    更新时间 = models.DateTimeField(auto_now=True)
+    发布状态 = models.BooleanField(default=False)
+    序号 = models.IntegerField(null=True,blank=True)
+    作者 = models.CharField(max_length=200,null=True,blank=True)
+    图片 = models.ImageField(upload_to='images/shuxun/',blank=True,null=True)
 
 class 书评(models.Model):
     书籍标题 = models.CharField(max_length=150)
@@ -73,21 +74,21 @@ class 评论_问答(models.Model):
 
 class 译林(models.Model):
     译文标题 = models.CharField(max_length=150)
-    译文作者 =models.CharField(max_length=200, null=True, default='null')
+    译文作者 = models.CharField(max_length=100,null=True,blank=True)
     译文发布日期 = models.DateField(auto_now=True)
     原文标题 = models.CharField(max_length=150)
     原文内容 = models.TextField()
-    原文作者 = models.CharField(max_length=200, null=True, default='null')
+    原文作者 = models.CharField(max_length=100,null=True,blank=True)
     原文发布时间 = models.DateTimeField(auto_now=True)
-    图片 = models.ImageField(upload_to='', default='null', null=True)
+    图片 = models.ImageField(upload_to='images/yiling/',blank=True,null=True)
 
 class 文摘(models.Model):
     标题 = models.CharField(max_length=150)
     内容 = models.TextField()
     发布时间 = models.DateTimeField(auto_now=True)
-    作者 = models.CharField(max_length=200, null=True, default='null')
-    图片 = models.ImageField(upload_to='', default='null', null=True)
-    资源 =models.CharField(max_length=200, null=True, default='null')
+    作者 = models.CharField(max_length=200,null=True,blank=True)
+    图片 = models.ImageField(upload_to='images/wenzhai/', default='null', null=True)
+    资源 =models.CharField(max_length=200,null=True,blank=True)
 
 class 评论_文摘(models.Model):
     文摘 = models.ForeignKey(文摘,on_delete=models.CASCADE)
@@ -97,9 +98,10 @@ class 评论_文摘(models.Model):
 
 class 论文(models.Model):
     标题 = models.CharField(max_length=150)
-    作者 =models.CharField(max_length=200, null=True, default='null')
+    作者 =models.CharField(max_length=200,null=True,blank=True)
     发布时间 =models.DateTimeField(auto_now=True)
-    文档 = models.FileField(upload_to='')
+    文档 = models.FileField(upload_to='pdf/lunwen/', default='null', null=True)
+    
 class 经训(models.Model):
     章节 = models.CharField(max_length=150)
     原文作者 = models.CharField(max_length=150)
@@ -110,15 +112,15 @@ class 经训(models.Model):
 
 class 古籍(models.Model):
     标题 = models.CharField(max_length=150)
-    作者 = models.CharField(max_length=200, null=True, default='null')
+    作者 = models.CharField(max_length=200,null=True,blank=True)
     发布时间 = models.DateTimeField(auto_now=True)
-    文档 = models.FileField(upload_to='')
+    文档 = models.FileField(upload_to='pdf/guji/')
 
 class 书库(models.Model):
     标题 = models.CharField(max_length=150)
-    作者 = models.CharField(max_length=200, null=True, default='null')
+    作者 = models.CharField(max_length=200, null=True, blank=True)
     发布时间 = models.DateTimeField(auto_now=True)
-    文档 = models.FileField(upload_to='')
+    文档 = models.FileField(upload_to='pdf/shuku/')
     简介 = models.TextField()
-    图片 = models.ImageField(upload_to='')
+    图片 = models.ImageField(upload_to='images/shuku/', default='null', null=True)
     序号 = models.IntegerField()

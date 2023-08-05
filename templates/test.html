@@ -1,0 +1,52 @@
+
+{% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% block title %}
+书味后台控制面板
+{% endblock %}
+{% block content %}
+<div class="container justify-content-center h-100" id="content-wrap">
+    <div class="row">
+        <div class="col-3 h-100 pb-4 m-2">
+            {% include 'admin/side-nav.html' %}
+        </div>
+        <div class="col text-center pb-4 m-4 h-100 admin-main-content" id="content">
+           <div class="row">
+               <div class="col p-2">
+                   <h3>论文</h3>
+               </div>
+           </div>
+            <div class="row border p-2 mt-2">
+            <table class="table">
+                <tr class="border-bottom">
+                   <th>序号</th>
+                    <th>项目</th>
+                    <th>更新日期</th>
+                    <th>发布状态</th>
+                    <th>操作</th>
+                </tr>
+                {% for lunwen in all_论文 %}
+                <tr class="p-0">
+                    <td>{{lunwen.id}}</td>
+                    <td>{{lunwen.标题}}</td>
+                    <td>{{lunwen.发布时间|date:'Y-m-d H:i' }}</td>
+                    <td>
+                        {% if lunwen.文档 %}
+                          <a href="{{ lunwen.文档.url }}" target="_blank">查看文档</a>
+                        {% else %}
+                          N/A
+                        {% endif %}
+                      </td>
+                </tr>
+                {% endfor %}
+            </table>
+                {{content}}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var content_title ="."+"{{content_title|escapejs }}";
+    var task = "."+"{{task|escapejs }}";
+</script>
+{% endblock %}
