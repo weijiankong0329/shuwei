@@ -1,10 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-
-from home.models import 通讯,译林,文摘,论文,经训,古籍,书库
-
-from home.models import 通讯
-from home.models import 书讯
+from home.models import 通讯,书讯,书评,译林,文摘,论文,经训,古籍,书库
 
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
@@ -38,7 +34,21 @@ class 书讯_add_form(ModelForm):
             '标题': forms.TextInput(attrs={'class': 'form-control'}),
             '简介': forms.Textarea(attrs={'class': 'form-control'}),
             '作者': forms.TextInput(attrs={'class': 'form-control'})
+        }
 
+class 书评_add_form(ModelForm):
+    class Meta:
+        model = 书评
+        fields ="__all__"
+        labels={
+            '发布状态':'确认发布'
+        }
+        widgets = {
+            '书籍标题': forms.TextInput(attrs={'class': 'form-control'}),
+            '书籍作者': forms.TextInput(attrs={'class': 'form-control'}),
+            '书籍出版日期': forms.TextInput(attrs={'class': 'form-control','type':'date'}),
+            '书评内容':forms.Textarea(attrs={'class': 'form-control'}),
+            '书评作者': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 class 译林_add_form(ModelForm):
@@ -51,7 +61,6 @@ class 译林_add_form(ModelForm):
             '译文作者': forms.TextInput(attrs={'class': 'form-control'}),
             '原文作者': forms.TextInput(attrs={'class': 'form-control'}),
             '图片': forms.FileInput(attrs={'id':'image'})
-
         }
 
 class 文摘_add_form(ModelForm):
