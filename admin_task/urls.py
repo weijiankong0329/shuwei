@@ -7,6 +7,7 @@ urlpatterns = [
     path('logout',auth_view.LogoutView.as_view(),name="logout"),
     path('main',views.tasklist,name='main'),
 <<<<<<< HEAD
+<<<<<<< HEAD
     path('main/通讯',views.tongxun,name='通讯'),
     path('main/通讯/add',views.addTongXunView.as_view(),name='通讯_add'),
     path('main/通讯/detail/<int:pk>',views.addTongXunView.as_view(),name='通讯_detail'),
@@ -30,6 +31,8 @@ urlpatterns = [
     path('main/书库',views.shuku,name='书库'),
     path('main/书库/add',views.addShuKuView.as_view(),name='书库_add'),
 =======
+=======
+>>>>>>> 5e35798edac67f9864d89dc1f29f7f793969771c
 
     path('main/通讯',views.TongXunListView,name='通讯'),
     path('main/通讯/add',views.TongXunAddView.as_view(),name='通讯_add'),

@@ -6,6 +6,9 @@ from .forms import 通讯_add_form,译林_add_form,文摘_add_form,论文_add_fo
 =======
 from .forms import 通讯_add_form
 from .forms import 书讯_add_form
+<<<<<<< HEAD
+>>>>>>> 5e35798edac67f9864d89dc1f29f7f793969771c
+=======
 >>>>>>> 5e35798edac67f9864d89dc1f29f7f793969771c
 from home.models import 通讯
 from home.models import 书讯
@@ -52,6 +55,7 @@ def TongXunListView(request):
     }
     return render(request,'admin/通讯.html', context)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 def shuxun(request):
     content_title='shuxun'
@@ -399,6 +403,9 @@ class addYiLingView(generic.TemplateView):
         
     
 class addTongXunView(generic.TemplateView):
+=======
+class TongXunAddView(generic.TemplateView):
+>>>>>>> 5e35798edac67f9864d89dc1f29f7f793969771c
 =======
 class TongXunAddView(generic.TemplateView):
 >>>>>>> 5e35798edac67f9864d89dc1f29f7f793969771c
