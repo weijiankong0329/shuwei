@@ -1,15 +1,12 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.views import LoginView
 from .forms import CustomLoginForm
-<<<<<<< HEAD
+
 from .forms import 通讯_add_form,译林_add_form,文摘_add_form,论文_add_form,经训_add_form,古籍_add_form,书库_add_form
-=======
+
 from .forms import 通讯_add_form
 from .forms import 书讯_add_form
-<<<<<<< HEAD
->>>>>>> 5e35798edac67f9864d89dc1f29f7f793969771c
-=======
->>>>>>> 5e35798edac67f9864d89dc1f29f7f793969771c
+
 from home.models import 通讯
 from home.models import 书讯
 from home.models import 书评
@@ -55,8 +52,6 @@ def TongXunListView(request):
     }
     return render(request,'admin/通讯.html', context)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 def shuxun(request):
     content_title='shuxun'
     context={
@@ -402,13 +397,9 @@ class addYiLingView(generic.TemplateView):
             return render(request, 'admin/译林_add.html', {'form': form,'content_title': 'yiling','task': 'content'})
         
     
-class addTongXunView(generic.TemplateView):
-=======
+
 class TongXunAddView(generic.TemplateView):
->>>>>>> 5e35798edac67f9864d89dc1f29f7f793969771c
-=======
-class TongXunAddView(generic.TemplateView):
->>>>>>> 5e35798edac67f9864d89dc1f29f7f793969771c
+
     template_name='admin/通讯_add.html'
 
     def get(self,request):

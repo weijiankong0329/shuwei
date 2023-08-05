@@ -1,14 +1,11 @@
 from django import forms
 from django.forms import ModelForm
-<<<<<<< HEAD
+
 from home.models import 通讯,译林,文摘,论文,经训,古籍,书库
-=======
+
 from home.models import 通讯
 from home.models import 书讯
-<<<<<<< HEAD
->>>>>>> 5e35798edac67f9864d89dc1f29f7f793969771c
-=======
->>>>>>> 5e35798edac67f9864d89dc1f29f7f793969771c
+
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
 class CustomLoginForm(AuthenticationForm):
@@ -41,7 +38,7 @@ class 书讯_add_form(ModelForm):
             '标题': forms.TextInput(attrs={'class': 'form-control'}),
             '简介': forms.Textarea(attrs={'class': 'form-control'}),
             '作者': forms.TextInput(attrs={'class': 'form-control'})
-<<<<<<< HEAD
+
         }
 
 class 译林_add_form(ModelForm):
@@ -54,8 +51,7 @@ class 译林_add_form(ModelForm):
             '译文作者': forms.TextInput(attrs={'class': 'form-control'}),
             '原文作者': forms.TextInput(attrs={'class': 'form-control'}),
             '图片': forms.FileInput(attrs={'id':'image'})
-=======
->>>>>>> 5e35798edac67f9864d89dc1f29f7f793969771c
+
         }
 
 class 文摘_add_form(ModelForm):
