@@ -1,10 +1,10 @@
 from django.db import models
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 # 通讯
 class 通讯(models.Model):
     标题 = models.CharField(max_length=150)
-    内容 = models.TextField()
+    内容 = RichTextField(blank=True,null=True)
     更新时间 = models.DateTimeField(auto_now=True)
     发布状态 = models.BooleanField(default=False)
     资源 = models.CharField(max_length=200,null=True,blank=True)
@@ -46,7 +46,7 @@ class 评论_书评(models.Model):
 
 class 观点(models.Model):
     标题 = models.CharField(max_length=150)
-    内容 = models.TextField()
+    内容 = RichTextField(blank=True,null=True)
     更新时间 = models.DateTimeField(auto_now=True)
     作者 = models.CharField(max_length=200, null=True, default='null')
     图片 = models.ImageField(upload_to='', default='null', null=True)
@@ -60,7 +60,7 @@ class 评论_观点(models.Model):
 
 class 文艺(models.Model):
     标题 = models.CharField(max_length=150)
-    内容 = models.TextField()
+    内容 = RichTextField(blank=True,null=True)
     更新时间 = models.DateTimeField(auto_now=True)
     作者 = models.CharField(max_length=200, null=True, default='null')
     图片 = models.ImageField(upload_to='', default='null', null=True)
@@ -90,7 +90,7 @@ class 译林(models.Model):
     译文作者 = models.CharField(max_length=100, null=True, blank=True)
     更新时间 = models.DateTimeField(auto_now=True)
     原文标题 = models.CharField(max_length=150)
-    译文内容 = models.TextField()
+    译文内容 = RichTextField(blank=True,null=True)
     原文作者 = models.CharField(max_length=100, null=True, blank=True)
     原文出版日期 = models.DateField(null=True,blank=True)
     图片 = models.ImageField(upload_to='images/yiling/', blank=True, null=True)
@@ -98,7 +98,8 @@ class 译林(models.Model):
 
 class 文摘(models.Model):
     标题 = models.CharField(max_length=150)
-    内容 = models.TextField()
+    内容 = RichTextField(blank=True, null=True)
+    #内容 = models.TextField()
     更新时间 = models.DateTimeField(auto_now=True)
     作者 = models.CharField(max_length=200, null=True, blank=True)
     图片 = models.ImageField(upload_to='images/wenzhai/', blank=True, null=True)

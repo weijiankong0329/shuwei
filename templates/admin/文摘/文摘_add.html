@@ -22,14 +22,15 @@
             <div class="border row p-4 mt-3">
             <form method="post">
               {% csrf_token %}
+              {{ form.media }} 
                {{form.标题|as_crispy_field }}
                 {{form.内容|as_crispy_field }}
                 <div class="form-row ">
                     <div class="form-group col">
-                        {{form.资源|as_crispy_field }}
+                        {{form.作者|as_crispy_field }}
                     </div>
                     <div class="form-group col">
-                        {{form.作者|as_crispy_field }}
+                        {{form.资源|as_crispy_field }}
                     </div>
                 </div>
                <div class="form-row">

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_bootstrap_icons',
     'crispy_forms',
     'crispy_bootstrap5',
+    'ckeditor',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -90,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shuwei',
         'USER': 'root',
-        'PASSWORD': '7556530@KwJ',
+        'PASSWORD': '112233',
         'HOST': 'localhost',
         'PORT': '3306',
     }

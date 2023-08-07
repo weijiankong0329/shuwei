@@ -281,7 +281,6 @@ class YiLingAddView(generic.TemplateView):
 
     def get(self, request):
         form = 译林_add_form()
-        print(form)
         译林_all = 译林.objects.all()
         args = {
             'form': form,
@@ -302,15 +301,17 @@ class YiLingAddView(generic.TemplateView):
                 yilingForm.发布状态 = True
             form.save()
             标题 = form.cleaned_data['标题']
-            译文内容 = form.cleaned_data['译文内容']
             译文作者 = form.cleaned_data['译文作者']
+            原文标题 = form.cleaned_data['原文标题']
+            译文内容 = form.cleaned_data['译文内容']
             原文作者 = form.cleaned_data['原文作者']
             图片 = form.cleaned_data['图片']
             args = {
                 'form': form,
                 '标题': 标题,
-                '译文内容': 译文内容,
                 '译文作者': 译文作者,
+                '原文标题': 原文标题,
+                '译文内容': 译文内容,
                 '原文作者': 原文作者,
                 '图片': 图片
             }
@@ -318,7 +319,34 @@ class YiLingAddView(generic.TemplateView):
             return HttpResponseRedirect(reverse('admin_task:content-item',kwargs={'content' : '译林','task' : 'content'}))
         else:
             messages.error(request, '译林添加失败请检查填表！')
-            return render(request, self.template_name, {'form': form, 'content_title': '译林', 'task': 'content'})
+            return render(request, 'admin/译林/译林_add.html', {'form': form, 'content_title': '译林', 'task': 'content'})
+
+class YiLingEditView(generic.TemplateView):
+    template_name = "admin/译林/译林_edit.html"
+
+    def get(self, request, pk):
+        yiling = 译林.objects.get(id=pk)
+        form = 译林_add_form(instance=yiling)
+        args = {
+            'form': form,
+            '译林': yiling,
+            'content_title': '译林',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request, pk):
+        yiling = 译林.objects.get(id=pk)
+        form = 译林_add_form(request.POST, request.FILES, instance=yiling)
+        print(form)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '译林内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content':'译林','id': pk}))
+        else:
+            messages.error(request, '译林内容修改错误，请更正错误后提交更改内容')
+            return HttpResponseRedirect(reverse('admin_task:译林_edit', kwargs={'pk': pk}))
+
 
 class WenZhaiAddView(generic.TemplateView):
     template_name = 'admin/文摘/文摘_add.html'
@@ -363,6 +391,33 @@ class WenZhaiAddView(generic.TemplateView):
             messages.error(request, '文摘添加失败请检查填表！')
             return render(request, self.template_name, {'form': form, 'content_title': '文摘', 'task': 'content'})
 
+class WenZhaiEditView(generic.TemplateView):
+    template_name = "admin/文摘/文摘_edit.html"
+
+    def get(self, request, pk):
+        wenzhai = 文摘.objects.get(id=pk)
+        form = 文摘_add_form(instance=wenzhai)
+        args = {
+            'form': form,
+            '文摘': wenzhai,
+            'content_title': '文摘',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request, pk):
+        wenzhai = 文摘.objects.get(id=pk)
+        form = 文摘_add_form(request.POST, request.FILES, instance=wenzhai)
+        print(form)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '文摘内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content':'文摘','id': pk}))
+        else:
+            messages.error(request, '文摘内容修改错误，请更正错误后提交更改内容')
+            return HttpResponseRedirect(reverse('admin_task:文摘_edit', kwargs={'pk': pk}))
+
+
 class LunWenAddView(generic.TemplateView):
     template_name = 'admin/论文/论文_add.html'
 
@@ -402,25 +457,31 @@ class LunWenAddView(generic.TemplateView):
             messages.error(request, '论文添加失败请检查填表！')
             return render(request, 'admin/论文_add.html', {'form': form, 'content_title': '论文', 'task': 'content'})
 
-def LunWenEditView(request, pk):
-    lunwen = get_object_or_404(论文, id=pk)
+class LunWenEditView(generic.TemplateView):
+    template_name = "admin/论文/论文_edit.html"
 
-    if request.method == 'POST':
+    def get(self, request, pk):
+        lunwen = 论文.objects.get(id=pk)
+        form = 论文_add_form(instance=lunwen)
+        args = {
+            'form': form,
+            '论文': lunwen,
+            'content_title': '论文',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request, pk):
+        lunwen = 论文.objects.get(id=pk)
         form = 论文_add_form(request.POST, request.FILES, instance=lunwen)
+        print(form)
         if form.is_valid():
-            # 如果表单有效，保存编辑后的论文
             form.save()
-            return HttpResponseRedirect(reverse('admin_task:content-item',kwargs={'content' : '论文','task' : 'content'}))
-          # 重定向到论文列表页面
-    else:
-        form = 论文_add_form(instance=lunwen)  # 使用现有的论文对象填充表单
-
-    context = {
-        'form': form,
-        'content_title': '论文',
-        'task': 'content',
-    }
-    return render(request, 'admin/论文/论文_edit.html', context)
+            messages.success(request, '论文内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content':'论文','id': pk}))
+        else:
+            messages.error(request, '论文内容修改错误，请更正错误后提交更改内容')
+            return HttpResponseRedirect(reverse('admin_task:论文_edit', kwargs={'pk': pk}))
 
 class JingXunAddView(generic.TemplateView):
     template_name = 'admin/经训/经训_add.html'
@@ -501,6 +562,34 @@ class GuJiAddView(generic.TemplateView):
         else:
             messages.error(request, '古籍添加失败请检查填表！')
             return render(request, self.template_name, {'form': form, 'content_title': '古籍', 'task': 'content'})
+
+class GuJiEditView(generic.TemplateView):
+    template_name = "admin/古籍/古籍_edit.html"
+
+    def get(self, request, pk):
+        guji = 古籍.objects.get(id=pk)
+        form = 古籍_add_form(instance=guji)
+        args = {
+            'form': form,
+            '古籍': guji,
+            'content_title': '古籍',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request, pk):
+        guji = 古籍.objects.get(id=pk)
+        form = 古籍_add_form(request.POST, request.FILES, instance=guji)
+        print(form)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '古籍内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content':'古籍','id': pk}))
+        else:
+            messages.error(request, '古籍内容修改错误，请更正错误后提交更改内容')
+            return HttpResponseRedirect(reverse('admin_task:古籍_edit', kwargs={'pk': pk}))
+
+
 class ShuKuAddView(generic.TemplateView):
     template_name = 'admin/书库/书库_add.html'
 
@@ -542,7 +631,31 @@ class ShuKuAddView(generic.TemplateView):
             messages.error(request, '书库添加失败请检查填表！')
             return render(request, self.template_name, {'form': form, 'content_title': '书库', 'task': 'content'})
 
+class ShuKuEditView(generic.TemplateView):
+    template_name = "admin/书库/书库_edit.html"
 
+    def get(self, request, pk):
+        shuku = 书库.objects.get(id=pk)
+        form = 书库_add_form(instance=shuku)
+        args = {
+            'form': form,
+            '书库': shuku,
+            'content_title': '书库',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request, pk):
+        shuku = 书库.objects.get(id=pk)
+        form = 书库_add_form(request.POST, request.FILES, instance=shuku)
+        print(form)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '书库内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content':'书库','id': pk}))
+        else:
+            messages.error(request, '书库内容修改错误，请更正错误后提交更改内容')
+            return HttpResponseRedirect(reverse('admin_task:书库_edit', kwargs={'pk': pk}))
 
 
 

@@ -17,20 +17,21 @@ urlpatterns = [
     path('main/书评/edit/<int:pk>', views.ShuPingEditView.as_view(), name='书评_edit'),
 
     path('main/译林/add', views.YiLingAddView.as_view(), name='译林_add'),
-    path('main/译林/edit/<int:pk>', views.ShuPingEditView.as_view(), name='译林_edit'),
+    path('main/译林/edit/<int:pk>', views.YiLingEditView.as_view(), name='译林_edit'),
 
     path('main/文摘/add', views.WenZhaiAddView.as_view(), name='文摘_add'),
-    path('main/文摘/edit/<int:pk>', views.ShuPingEditView.as_view(), name='文摘_edit'),
+    path('main/文摘/edit/<int:pk>', views.WenZhaiEditView.as_view(), name='文摘_edit'),
 
     path('main/论文/add', views.LunWenAddView.as_view(), name='论文_add'),
-    path('main/论文/edit/<int:pk>/', views.LunWenEditView, name='论文_edit'),
+    path('main/论文/edit/<int:pk>/', views.LunWenEditView.as_view(), name='论文_edit'),
 
     path('main/经训/add', views.JingXunAddView.as_view(), name='经训_add'),
 
     path('main/古籍/add', views.GuJiAddView.as_view(), name='古籍_add'),
-    path('main/古籍/edit/<int:pk>/', views.LunWenEditView, name='古籍_edit'),
+    path('main/古籍/edit/<int:pk>/', views.GuJiEditView.as_view(), name='古籍_edit'),
 
     path('main/书库/add', views.ShuKuAddView.as_view(), name='书库_add'),
+    path('main/书库/edit/<int:pk>/', views.ShuKuEditView.as_view(), name='书库_edit'),
 
     path('main/<str:content>/<str:task>', views.ContentItemList, name='content-item'),
     path('main/<str:content>/delete/<int:id>', views.ContentItemDeleteView, name='content-item-delete'),
