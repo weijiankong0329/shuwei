@@ -74,4 +74,18 @@ $(function() {
         }
     });
 
+    $(".comment-edit").click(function(){
+        $(this).next().removeAttr('hidden');
+        var comment_action_div = "#"+ this.value;
+        $(comment_action_div).removeAttr('hidden');
+        $(this).attr('hidden','true');
+    });
+
+     $(".comment-close").click(function(){
+         $(this).prev().removeAttr('hidden');
+        var comment_action_div = "#"+ this.value;
+        $(comment_action_div).attr('hidden','true');
+        $(this).attr('hidden','true');
+    });
+
 });

@@ -1,0 +1,124 @@
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% block title %}
+书味后台控制面板
+{% endblock %}
+{% block content %}
+<div class="container justify-content-center h-100" id="content-wrap">
+    <div class="row">
+        <div class="col-3 h-100 pb-4 m-2">
+            {% include 'admin/side-nav.html' %}
+        </div>
+        <div class="col text-center pb-4 m-4 h-100 admin-main-content" id="content">
+           <div class="row">
+               <div class="col p-2">
+                   <h3>{{content_title}}</h3>
+               </div>
+           </div>
+            <div class="row border p-2 mt-2">
+            <table class="table">
+                <tr class="border-bottom">
+                   <th>序号</th>
+                    <th>项目</th>
+                    <th>发布时间</th>
+                    <th>通过</th>
+                    <th>操作</th>
+                </tr>
+                {% for obj in all_content %}
+                <tr class="p-0">
+                    <td class="col-1">{{ forloop.counter }}</td>
+                    <td class="col-4 text-left">
+                        <strong>
+                            标题:
+                            {% if content_title == '书评' %}
+                                {{obj.书评.标题}}
+                            {% elif content_title == '观点' %}
+                                {{obj.观点.标题}}
+                            {% elif content_title == '文艺' %}
+                                {{obj.文艺.标题}}
+                            {% endif %}
+                        </strong>
+                        <br/>
+                        {{obj.评论}}
+                        <br/>
+                        <div class="mt-2 mb-2 comment-edit-div" id="{{obj.id}}" hidden>
+                            <form action="{% url 'admin_task:comment-approval' content=content_title content_id='0' type='comment-list' id=obj.id %}" method="post"
+                            onsubmit="return confirm('确认修改此评论状态?');">
+                                {% csrf_token %}
+                                {% if obj.通过 == "已拒绝" or obj.通过 == "审查中" %}
+                                <button class="border comment-edit-btn" name="approve" value="approve" type="submit">
+                                    通过
+                                </button>
+                                {% else %}
+                                <button class="border comment-edit-btn" name="approve" value="approve" type="submit" disabled>
+                                    通过
+                                </button>
+                                {% endif %}
+                                {% if obj.通过 == "已通过" or obj.通过 == "审查中" %}
+                                <button class="border comment-edit-btn"  name="approve" value="reject" type="submit">
+                                    拒绝
+                                </button>
+                                {% else %}
+                                <button class="border comment-edit-btn"  name="approve" value="reject" type="submit" disabled>
+                                    拒绝
+                                </button>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </td>
+
+                    <td class="col-2">{{obj.发布时间|date:'Y-m-d H:i' }}</td>
+                    <td class="col-2">{{obj.通过}}</td>
+                    <td class="col-2">
+                        {% if content_title == '书评' %}
+                         <a href="{% url 'admin_task:content-item-comment-detail' content=content_title content_id=obj.书评.id id=obj.id %}" class="text-decoration-none">
+                        {% elif content_title == '观点' %}
+                         <a href="{% url 'admin_task:content-item-comment-detail' content=content_title content_id=obj.观点.id id=obj.id %}" class="text-decoration-none">
+                        {% elif content_title == '文艺' %}
+                         <a href="{% url 'admin_task:content-item-comment-detail' content=content_title content_id=obj.文艺.id id=obj.id %}" class="text-decoration-none">
+                        {% endif %}
+                           <button class="btn btn-info p-2" type="button">
+                                查看{% bs_icon 'file-text' size='1em' %}
+                            </button>
+                        </a>
+                        <button class="btn comment-edit" value="{{obj.id}}">{% bs_icon 'pencil' size='1.25em' %}</button>
+                        <button class="btn comment-close" value="{{obj.id}}" hidden>{% bs_icon 'x-circle' size='1.25em' %}</button>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            </div>
+            <div class="row">
+            {% if all_content.has_other_pages %}
+                <ul class="pagination w-100  justify-content-center">
+                {% if all_content.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ all_content.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                {% endif %}
+                {% for i in all_content.paginator.page_range %}
+                    {% if all_content.number == i %}
+                        <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if all_content.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ all_content.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                {% endif %}
+                </ul>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var content_title ="."+"{{content_title|escapejs }}";
+    var task = "."+"{{task|escapejs }}";
+</script>
+{% endblock %}

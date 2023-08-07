@@ -1,0 +1,56 @@
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% block title %}
+书味后台控制面板
+{% endblock %}
+{% block content %}
+<div class="container justify-content-center h-100" id="content-wrap">
+    <div class="row">
+        <div class="col-3 h-100 pb-4 m-2">
+            {% include 'admin/side-nav.html' %}
+        </div>
+        <div class="col  pb-4 m-4 h-100 admin-main-content" id="content">
+           <div class="row text-center">
+               <div class="col p-2">
+                   <h3>观点添加</h3>
+               </div>
+               <div class="col-4 text-right pt-1">
+                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='观点' task='content' %}">全部观点 {% bs_icon 'list' size='0.75em' %}</a>
+               </div>
+           </div>
+            <div class="border row p-4 mt-3">
+            <form method="post">
+              {% csrf_token %}
+                {{form.标题|as_crispy_field }}
+                {{form.内容|as_crispy_field }}
+                {{form.作者|as_crispy_field }}
+
+                <div class="form-row">
+
+                    <div class="form-group col" id="img-preview-div" hidden>
+                        图片预览<br/>
+                        <img src="#" id="img-preview" class="w-100 border m-2">
+                    </div>
+                     <div class="form-group col mr-3" id="img-upload">
+                        {{form.图片|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <button type="submit" class="btn btn-primary w-100" name="submit-type" value="save">保存</button>
+                    </div>
+                    <div class="form-group col">
+                        <button type="submit" class="btn btn-primary w-100" name="submit-type" value="publish">发布</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var content_title ="."+"{{content_title|escapejs }}";
+    var task = "."+"{{task|escapejs }}";
+</script>
+{% endblock %}

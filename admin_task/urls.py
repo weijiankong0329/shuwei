@@ -16,6 +16,12 @@ urlpatterns = [
     path('main/书评/add',views.ShuPingAddView.as_view(),name='书评_add'),
     path('main/书评/edit/<int:pk>', views.ShuPingEditView.as_view(), name='书评_edit'),
 
+    path('main/观点/add',views.GuanDianAddView.as_view(),name='观点_add'),
+    path('main/观点/edit/<int:pk>', views.GuanDianEditView.as_view(), name='观点_edit'),
+
+    path('main/文艺/add',views.WenYiAddView.as_view(),name='文艺_add'),
+    path('main/文艺/edit/<int:pk>', views.WenYiEditView.as_view(), name='文艺_edit'),
+
     path('main/译林/add', views.YiLingAddView.as_view(), name='译林_add'),
     path('main/译林/edit/<int:pk>', views.ShuPingEditView.as_view(), name='译林_edit'),
 
@@ -35,4 +41,6 @@ urlpatterns = [
     path('main/<str:content>/<str:task>', views.ContentItemList, name='content-item'),
     path('main/<str:content>/delete/<int:id>', views.ContentItemDeleteView, name='content-item-delete'),
     path('main/<str:content>/detail/<int:id>',views.ContentItemDetailView,name='content-item-detail'),
+    path('main/<str:content>-<int:content_id>/comment-detail/<int:id>',views.ContentItemCommentDetailView,name='content-item-comment-detail'),
+    path('main/<str:content>-<int:content_id>/<str:type>/<int:id>/approval',views.CommentApprovalView,name='comment-approval')
 ]

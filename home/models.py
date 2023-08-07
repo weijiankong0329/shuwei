@@ -41,36 +41,69 @@ class 书评(models.Model):
 class 评论_书评(models.Model):
     书评 = models.ForeignKey(书评,on_delete=models.CASCADE)
     评论 = models.CharField(max_length=200)
-    通过 = models.BooleanField(default=False)
+    通过 = models.CharField(max_length=100,default='审查中')
     发布时间 = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.评论
 
 class 观点(models.Model):
     标题 = models.CharField(max_length=150)
     内容 = models.TextField()
     更新时间 = models.DateTimeField(auto_now=True)
-    作者 = models.CharField(max_length=200, null=True, default='null')
-    图片 = models.ImageField(upload_to='', default='null', null=True)
+    作者 = models.CharField(max_length=200, null=True,blank=True)
+    图片 = models.ImageField(upload_to='images/guandian/',blank=True,null=True)
     发布状态 = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.标题
 
 class 评论_观点(models.Model):
     观点 = models.ForeignKey(观点,on_delete=models.CASCADE)
     评论 = models.CharField(max_length=200)
-    通过 = models.BooleanField(default=False)
+    通过 = models.CharField(max_length=100,default='审查中')
     发布时间 = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.评论
 
 class 文艺(models.Model):
     标题 = models.CharField(max_length=150)
     内容 = models.TextField()
     更新时间 = models.DateTimeField(auto_now=True)
-    作者 = models.CharField(max_length=200, null=True, default='null')
-    图片 = models.ImageField(upload_to='', default='null', null=True)
+    作者 = models.CharField(max_length=200,  null=True,blank=True)
+    图片 = models.ImageField(upload_to='images/wenyi/',blank=True,null=True)
     发布状态 = models.BooleanField(default=False)
+    def __str__(self):
+        return self.标题
 
 class 评论_文艺(models.Model):
     文艺 = models.ForeignKey(文艺,on_delete=models.CASCADE)
     评论 = models.CharField(max_length=200)
-    通过 = models.BooleanField(default=False)
+    通过 = models.CharField(max_length=100, default='审查中')
     发布时间 = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.评论
+
+class 视频(models.Model):
+    标题 = models.CharField(max_length=150)
+    视频类型 = models.CharField(max_length=150,null=False,blank=False)
+    视频链接 = models.URLField()
+    视频档案 = models.FileField(upload_to='videos/',blank=True,null=True)
+    发布状态 = models.BooleanField(default=False)
+    更新时间 = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.标题
+
+class 评论_视频(models.Model):
+    视频 = models.ForeignKey(视频,on_delete=models.CASCADE)
+    评论 = models.CharField(max_length=200)
+    通过 = models.CharField(max_length=100, default='审查中')
+    发布时间 = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.评论
 
 class 问答(models.Model):
     标题 = models.CharField(max_length=150)

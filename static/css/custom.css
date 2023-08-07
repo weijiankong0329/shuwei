@@ -129,3 +129,36 @@ form{
 .status-tab{
     border-radius: 5px;
 }
+
+.comment-edit{
+   display: inline-block;
+   border: 1px solid transparent;
+   background-color:#FFF;
+}
+
+.comment-edit-btn:hover{
+    background-color:black;
+    color:white;
+}
+
+.comment-edit-btn{
+  display: inline-block;
+  font-weight: 400;
+  color: #000000;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 8px 20px;
+  font-size: 0.8rem;
+  line-height: 1;
+  border-radius: 0px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.comment-edit-btn:disabled,
+.comment-edit-btn[disabled]{
+    background-color: grey;
+    color:#FFF;
+}

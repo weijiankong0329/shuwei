@@ -34,26 +34,26 @@
     {% endif %}
     {% if  perms.home.change_观点 %}
     <li class="nav-item active ">
-        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">观点</a>
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link 观点" href="{% url 'admin_task:content-item' content='观点' task='content' %}">观点</a>
         <ul class="navbar-nav navbar-nav-sub" hidden>
             <li class="nav-item-sub active text-left mb-1 mt-1 ">
-                <a class="nav-link-sub active border" href="">内容编辑</a>
+                <a class="nav-link-sub active border content" href="{% url 'admin_task:content-item' content='观点' task='content' %}">内容编辑</a>
             </li>
             <li class="nav-item-sub active text-left mb-1 mt-1">
-                <a class="nav-link-sub active border" href="">评论审查</a>
+                <a class="nav-link-sub active border comment" href="{% url 'admin_task:content-item' content='观点' task='comment' %}">评论审查</a>
             </li>
         </ul>
     </li>
     {% endif %}
     {% if  perms.home.change_文艺 %}
     <li class="nav-item active ">
-        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">文艺</a>
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link 文艺" href="{% url 'admin_task:content-item' content='文艺' task='content' %}">文艺</a>
         <ul class="navbar-nav navbar-nav-sub" hidden>
             <li class="nav-item-sub active text-left mb-1 mt-1 ">
-                <a class="nav-link-sub active border" href="">内容编辑</a>
+                <a class="nav-link-sub active border content" href="{% url 'admin_task:content-item' content='文艺' task='content' %}">内容编辑</a>
             </li>
             <li class="nav-item-sub active text-left mb-1 mt-1">
-                <a class="nav-link-sub active border" href="">评论审查</a>
+                <a class="nav-link-sub active border comment" href="{% url 'admin_task:content-item' content='文艺' task='comment' %}">评论审查</a>
             </li>
         </ul>
     </li>
@@ -61,6 +61,19 @@
     {% if  perms.home.change_问答 %}
     <li class="nav-item active ">
         <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">问答</a>
+        <ul class="navbar-nav navbar-nav-sub" hidden>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border" href="">内容编辑</a>
+            </li>
+            <li class="nav-item-sub active text-left mb-1 mt-1">
+                <a class="nav-link-sub active border" href="">评论审查</a>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+    {% if  perms.home.change_视频 %}
+    <li class="nav-item active ">
+        <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link" href="">视频</a>
         <ul class="navbar-nav navbar-nav-sub" hidden>
             <li class="nav-item-sub active text-left mb-1 mt-1 ">
                 <a class="nav-link-sub active border" href="">内容编辑</a>

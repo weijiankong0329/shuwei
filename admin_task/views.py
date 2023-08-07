@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.views import LoginView
 from .forms import CustomLoginForm
-from .forms import 通讯_add_form,书讯_add_form,书评_add_form,译林_add_form,文摘_add_form,论文_add_form,古籍_add_form,经训_add_form,书库_add_form
+from .forms import 通讯_add_form,书讯_add_form,书评_add_form,译林_add_form,文摘_add_form,论文_add_form,\
+    古籍_add_form,经训_add_form,书库_add_form,观点_add_form,文艺_add_form
 from home.models import 通讯,书讯,书评,观点,文艺,问答,译林,文摘,论文,经训,古籍,书库
 from django.views import generic
 from django.http import HttpResponseRedirect
@@ -22,7 +23,34 @@ def tasklist(request):
     return render(request, 'admin/main.html', context)
 
 def ContentItemList(request, content, task):
-    model_name = apps.get_model('home', content)
+    if task == 'comment':
+        model_name = '评论_'+content
+        target_model = apps.get_model('home',model_name)
+    else:
+        target_model = apps.get_model('home', content)
+    content_all_list = target_model.objects.all().order_by('id')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(content_all_list, 20)
+    try:
+        all_content = paginator.page(page)
+    except PageNotAnInteger:
+        all_content = paginator.page(1)
+    except EmptyPage:
+        all_content = paginator.page(paginator.num_pages)
+
+    context ={
+        'all_content':all_content,
+        'content_title': content,
+        'task': task
+    }
+    if task == 'comment':
+        return render(request, 'admin/content-item-list-comment.html', context)
+    else:
+        return render(request, 'admin/content-item-list.html', context)
+
+def ContentItemCommentList(request, content, task):
+    content_item = '评论'+'_'+content
+    model_name = apps.get_model('home', content_item)
     content_all_list = model_name.objects.all().order_by('id')
     page = request.GET.get('page', 1)
     paginator = Paginator(content_all_list, 20)
@@ -39,7 +67,7 @@ def ContentItemList(request, content, task):
         'task': task
     }
 
-    return render(request, 'admin/content-item-list.html', context)
+    return render(request, 'admin/content-item-list-comment.html', context)
 
 def ContentItemDeleteView(request, content, id):
     model_name = apps.get_model('home', content)
@@ -59,6 +87,51 @@ def ContentItemDetailView(request, content, id):
         'task':'content'
     }
     return render(request, template_name, context)
+
+def ContentItemCommentDetailView(request, content, content_id, id):
+    model_name = apps.get_model('home', content)
+    content_item = model_name.objects.get(id=content_id)
+    comment_model_name = '评论_'+content
+    comment_model = apps.get_model('home',comment_model_name)
+    comment = comment_model.objects.get(id=id)
+    template_name = 'admin/'+content+'/评论_'+content+'_detail.html'
+    context={
+        'content_item':content_item,
+        'comment':comment,
+        'content_title' : content,
+        'task':'comment'
+    }
+    return render(request, template_name, context)
+
+#type
+#comment-detail:main module的页面
+#comment-list:comment list的页面
+#comment-list-detail:comment list detail的页面
+def CommentApprovalView(request,content,type,content_id,id):
+    approve = request.POST.get('approve')
+    comment_model_name = '评论' + '_' + content
+    comment_model = apps.get_model('home', comment_model_name)
+    comment = comment_model.objects.get(id=id)
+
+    if approve == "approve":
+        comment.通过 = '已通过'
+        comment.save()
+        msg = '选中评论已被通过'
+        messages.success(request, msg)
+
+    if approve == "reject":
+        comment.通过 = '已拒绝'
+        comment.save()
+        msg = '选中评论已被拒绝'
+        messages.success(request, msg)
+
+    if type =="comment-detail":
+        return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content': content, 'id': content_id}))
+    elif type=="comment-list-detail":
+        return HttpResponseRedirect(reverse('admin_task:content-item-comment-detail', kwargs={'content':  content,'content_id':content_id,'id': id}))
+    else:
+        return HttpResponseRedirect(reverse('admin_task:content-item', kwargs={'content': content, 'task': 'comment'}))
+
 
 class TongXunAddView(generic.TemplateView):
     template_name = 'admin/通讯/通讯_add.html'
@@ -274,6 +347,146 @@ class ShuPingEditView(generic.TemplateView):
                 'form': form
             }
             messages.error(request, '书评内容修改错误，请更正错误后提交更改内容')
+            return render(request, self.template_name, context)
+
+class GuanDianAddView(generic.TemplateView):
+    template_name = 'admin/观点/文艺_add.html'
+
+    def get(self, request):
+        form = 观点_add_form()
+        观点_all = 观点.objects.all()
+        args = {
+            'form': form,
+            '观点_all': 观点_all,
+            'content_title': '观点',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        action = request.POST.get('submit-type')
+        form = 观点_add_form(request.POST, request.FILES)
+        if form.is_valid():
+            guandianForm = form.save(commit=False)
+            if action == 'save':
+                guandianForm.发布状态 = False
+            else:
+                guandianForm.发布状态 = True
+            form.save()
+            标题 = form.cleaned_data['标题']
+            内容 = form.cleaned_data['内容']
+            作者 = form.cleaned_data['作者']
+            图片 = form.cleaned_data['图片']
+            args = {
+                'form': form,
+                '标题': 标题,
+                '内容': 内容,
+                '作者': 作者,
+                '图片': 图片
+            }
+            messages.success(request, '观点添加成功！')
+            return HttpResponseRedirect(reverse('admin_task:content-item',kwargs={'content' : '观点','task' : 'content'}))
+        else:
+            messages.error(request, '观点添加失败请检查填表！')
+            return render(request, self.template_name, {'form': form, 'content_title': '观点', 'task': 'content'})
+
+class GuanDianEditView(generic.TemplateView):
+    template_name = "admin/观点/文艺_edit.html"
+
+    def get(self, request, pk):
+        guandian = 观点.objects.get(id=pk)
+        form = 观点_add_form(instance=guandian)
+        args = {
+            'form': form,
+            '观点': guandian,
+            'content_title': '观点',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request, pk):
+        guandian = 观点.objects.get(id=pk)
+        form = 观点_add_form(request.POST, request.FILES, instance=guandian)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '观点内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content':'观点','id': pk}))
+        else:
+            context = {
+                'pk': pk,
+                'form': form
+            }
+            messages.error(request, '观点内容修改错误，请更正错误后提交更改内容')
+            return render(request, self.template_name, context)
+
+class WenYiAddView(generic.TemplateView):
+    template_name = 'admin/文艺/文艺_add.html'
+
+    def get(self, request):
+        form = 文艺_add_form()
+        文艺_all = 文艺.objects.all()
+        args = {
+            'form': form,
+            '文艺_all': 文艺_all,
+            'content_title': '文艺',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        action = request.POST.get('submit-type')
+        form = 文艺_add_form(request.POST, request.FILES)
+        if form.is_valid():
+            wenyiForm = form.save(commit=False)
+            if action == 'save':
+                wenyiForm.发布状态 = False
+            else:
+                wenyiForm.发布状态 = True
+            form.save()
+            标题 = form.cleaned_data['标题']
+            内容 = form.cleaned_data['内容']
+            作者 = form.cleaned_data['作者']
+            图片 = form.cleaned_data['图片']
+            args = {
+                'form': form,
+                '标题': 标题,
+                '内容': 内容,
+                '作者': 作者,
+                '图片': 图片
+            }
+            messages.success(request, '文艺添加成功！')
+            return HttpResponseRedirect(reverse('admin_task:content-item',kwargs={'content' : '文艺','task' : 'content'}))
+        else:
+            messages.error(request, '文艺添加失败请检查填表！')
+            return render(request, self.template_name, {'form': form, 'content_title': '文艺', 'task': 'content'})
+
+class WenYiEditView(generic.TemplateView):
+    template_name = "admin/文艺/文艺_edit.html"
+
+    def get(self, request, pk):
+        wenyi = 文艺.objects.get(id=pk)
+        form = 文艺_add_form(instance=wenyi)
+        args = {
+            'form': form,
+            '文艺': wenyi,
+            'content_title': '文艺',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request, pk):
+        wenyi = 文艺.objects.get(id=pk)
+        form = 文艺_add_form(request.POST, request.FILES, instance=wenyi)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '文艺内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content':'文艺','id': pk}))
+        else:
+            context = {
+                'pk': pk,
+                'form': form
+            }
+            messages.error(request, '文艺内容修改错误，请更正错误后提交更改内容')
             return render(request, self.template_name, context)
 
 class YiLingAddView(generic.TemplateView):

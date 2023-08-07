@@ -14,10 +14,10 @@
         <div class="col  pb-4 m-4 h-100 admin-main-content" id="content">
            <div class="row text-center">
                <div class="col p-2">
-                   <h3>书评详情</h3>
+                   <h3>文艺详情</h3>
                </div>
                <div class="col-4 text-right pt-1">
-                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='书评' task='content' %}">全部书评 {% bs_icon 'list' size='0.75em' %}</a>
+                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='文艺' task='content' %}">全部文艺 {% bs_icon 'list' size='0.75em' %}</a>
                </div>
            </div>
            <div class="border p-4 mt-3">
@@ -33,34 +33,20 @@
                         {% endif %}
                 </div>
                 <div class="row pl-3 pr-3 pt-3">
-                    <div class="col">
-                        <div class="row">
-                            <strong>书籍作者</strong>
-                        </div>
-                        <div class="row pt-2">
-                            {{content_item.书籍作者}}
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row pt-2">
-                            <strong>出版日期</strong>
-                        </div>
-                        <div class="row">
-                            {{content_item.书籍出版日期|date:'Y' }}年{{content_item.书籍出版日期|date:'m' }}月{{content_item.书籍出版日期|date:'d' }}日
-                        </div>
-                    </div>
-                </div>
-                <div class="row pl-3 pr-3 pt-3">
-                    <strong>书评作者</strong>
+                    <strong>内容</strong>
                 </div>
                 <div class="row px-3 pt-2">
-                    {{content_item.书评作者}}
+                    {{content_item.内容}}
                 </div>
                 <div class="row pl-3 pr-3 pt-3">
-                    <strong>书评内容</strong>
-                </div>
-                <div class="row px-3 pt-2">
-                    {{content_item.书评内容}}
+                    <div class="col">
+                        <div class="row">
+                            <strong>作者</strong>
+                        </div>
+                        <div class="row pt-2">
+                            {{content_item.作者}}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row pl-3 pr-3 pt-3">
@@ -75,14 +61,14 @@
                 </div>
                  <div class="row pt-3">
                      <div class="col">
-                         <a href="{% url 'admin_task:书评_edit' content_item.id %}" class="btn-text">
+                         <a href="{% url 'admin_task:文艺_edit' content_item.id %}" class="btn-text">
                             <button class="btn btn-success w-100" type="button">
                                 编辑{% bs_icon 'pencil' size='1.5em' %}
                             </button>
                         </a>
                      </div>
                      <div class="col">
-                         <a href="{% url 'admin_task:content-item-delete' content=content_title id=content_item.id %}" onclick="return confirm('确认删除此书讯资料?');">
+                         <a href="{% url 'admin_task:content-item-delete' content=content_title id=content_item.id %}" onclick="return confirm('确认删除此文艺资料?');">
                             <button class="btn btn-danger w-100" type="button">
                                  删除{% bs_icon 'trash3' size='1.5em' %}
                             </button>
@@ -92,12 +78,12 @@
             </div>
             <div class="border pl-4 pr-4 pb-4 mt-3">
                 <div class="row pt-3 m-1 mb-2">
-                    <div class="col text-left align-middle h-100"><strong>所有评论 &nbsp {{content_item.评论_书评_set.count}}</strong></div>
+                    <div class="col text-left align-middle h-100"><strong>所有评论 &nbsp {{content_item.评论_文艺_set.count}}</strong></div>
 
                 </div>
                 <div class="row m-2 align-items-center">
                     <table class="table">
-                    {% for comment in content_item.评论_书评_set.all %}
+                    {% for comment in content_item.评论_文艺_set.all %}
                         <tr>
                             <td class="col-1 ">
                                 <button class="btn comment-edit" value="{{comment.id}}">{% bs_icon 'pencil' size='1.25em' %}</button>
@@ -119,7 +105,7 @@
                                 <br/>
                                 <br/>
                                 <div class="text-right comment-edit-div" id="{{comment.id}}" hidden>
-                                    <form action="{% url 'admin_task:comment-approval' content='书评' content_id=content_item.id type='comment-detail' id=comment.id %}" method="post">
+                                    <form action="{% url 'admin_task:comment-approval' content='文艺' content_id=content_item.id type='comment-detail' id=comment.id %}" method="post">
                                         {% csrf_token %}
                                     {% if comment.通过 == "已拒绝" or comment.通过 == "审查中" %}
                                         <button class="border comment-edit-btn" name="approve" value="approve" type="submit">

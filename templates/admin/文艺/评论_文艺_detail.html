@@ -1,0 +1,145 @@
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% load static %}
+{% block title %}
+书味后台控制面板
+{% endblock %}
+{% block content %}
+<div class="container justify-content-center h-100" id="content-wrap">
+    <div class="row">
+        <div class="col-3 h-100 pb-4 m-2">
+            {% include 'admin/side-nav.html' %}
+        </div>
+        <div class="col  pb-4 m-4 h-100 admin-main-content" id="content">
+           <div class="row text-center">
+               <div class="col p-2">
+                   <h3>文艺详情-评论</h3>
+               </div>
+               <div class="col-4 text-right pt-1">
+                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='文艺' task='comment' %}">全部文艺评论 {% bs_icon 'list' size='0.75em' %}</a>
+               </div>
+           </div>
+           <div class="border p-4 mt-3">
+               <div class="row">
+                   <div class="col bold text-right"> 更新时间:{{content_item.更新时间|date:'Y' }}年{{content_item.更新时间|date:'m' }}月{{content_item.更新时间|date:'d' }}日 {{content_item.更新时间|date:'h:i:s' }} </div>
+               </div>
+               <div class="row px-3 align-items-center">
+                        <div class="strong display-2">{{content_item.标题}}</div>
+                        {% if content_item.发布状态 %}
+                            <div class="border h-50 p-1 btn-success status-tab mx-4 small">已发布</div>
+                        {% else %}
+                            <div class="border h-50 p-1 btn-secondary status-tab mx-4 small">未发布</div>
+                        {% endif %}
+                </div>
+                <div class="row pl-3 pr-3 pt-3">
+                    <strong>内容</strong>
+                </div>
+                <div class="row px-3 pt-2">
+                    {{content_item.内容}}
+                </div>
+                <div class="row pl-3 pr-3 pt-3">
+                    <div class="col">
+                        <div class="row">
+                            <strong>作者</strong>
+                        </div>
+                        <div class="row pt-2">
+                            {{content_item.作者}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row pl-3 pr-3 pt-3">
+                    <strong>上载图片</strong>
+                </div>
+                <div class="row px-3 pt-2">
+                    {% if content_item.图片 %}
+                        <img src="{{ MEDIA_URL }}{{ content_item.图片}}" class="w-100 border">
+                    {% else %}
+                        暂无上传照片
+                    {% endif %}
+                </div>
+            </div>
+            <div class="border pl-4 pr-4 pb-4 mt-3">
+                <div class="row pt-3 m-1 mb-2">
+                    <strong>选中评论</strong>
+                </div>
+                <div class="p-3 border-top">
+                    {{comment.评论}}
+                </div>
+                <div class="row p-2">
+                    <div class="col-9">
+                        <strong>发布时间:</strong>
+                        {{comment.发布时间|date:'Y-m-d h:i:s'}}
+                    </div>
+                    <div class="col-2">
+                        <strong>状态:</strong>
+                        {{comment.通过}}
+                    </div>
+                </div>
+                <div class="row p-2 text-right">
+                    <form action="{% url 'admin_task:comment-approval' content=content_title content_id=content_item.id type='comment-list-detail' id=comment.id %}" class="w-100" method="post">
+                        {% csrf_token %}
+                        {% if comment.通过 == "已拒绝" or comment.通过 == "审查中" %}
+                        <button class="border comment-edit-btn w-25" name="approve" value="approve" type="submit">
+                            通过
+                        </button>
+                        {% else %}
+                        <button class="border comment-edit-btn w-25" name="approve" value="approve" type="submit" disabled>
+                            通过
+                        </button>
+                        {% endif %}
+                        {% if comment.通过 == "已通过" or comment.通过 == "审查中" %}
+                        <button class="border comment-edit-btn w-25"  name="approve" value="reject" type="submit">
+                            拒绝
+                        </button>
+                        {% else %}
+                        <button class="border comment-edit-btn w-25"  name="approve" value="reject" type="submit" disabled>
+                            拒绝
+                        </button>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+            <div class="border pl-4 pr-4 pb-4 mt-3">
+                <div class="row pt-3 m-1 mb-2">
+                    <strong>其他评论 &nbsp {{content_item.评论_文艺_set.count|add:-1}}</strong>
+
+                </div>
+                <div class="row m-2 align-items-center">
+                    <table class="table">
+                    {% for obj in content_item.评论_文艺_set.all %}
+                        {% if obj.id != comment.id %}
+                        <tr>
+                            <td class="col-2">
+                                {% if obj.通过 == "审查中" %}
+                                <div class="status-tab border text-center p-1 bg-grey text-white">{{obj.通过}}</div>
+                                {% endif %}
+                                {% if obj.通过 == "已通过" %}
+                                <div class="status-tab border text-center p-1 bg-success text-white">{{obj.通过}}</div>
+                                {% endif %}
+                                {% if obj.通过 == "已拒绝" %}
+                                <div class="status-tab border text-center p-1 bg-danger text-white">{{obj.通过}}</div>
+                                {% endif %}
+                            </td>
+                            <td class="col-3 text-center align-middle">{{obj.发布时间|date:'Y-m-d h:i:s'}}</td>
+                            <td class="col-7 p-2 align-middle">{{obj.评论}}</td>
+                            <td class="col-1">
+                                <a href="{% url 'admin_task:content-item-comment-detail' content=content_title content_id=content_item.id id=obj.id %}" class="text-decoration-none"><button class="btn">{% bs_icon 'pencil' size='1.25em' %}</button></a>
+                            </td>
+                        </tr>
+
+                        {% endif %}
+
+                    {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var content_title ="."+"{{content_title|escapejs }}";
+    var task = "."+"{{task|escapejs }}";
+</script>
+{% endblock %}
