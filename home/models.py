@@ -16,7 +16,7 @@ class 通讯(models.Model):
 
 class 书讯(models.Model):
     标题 = models.CharField(max_length=150)
-    简介 = models.TextField()
+    简介 = RichTextField()
     更新时间 = models.DateTimeField(auto_now=True)
     发布状态 = models.BooleanField(default=False)
     序号 = models.IntegerField(null=True,blank=True)
@@ -29,7 +29,7 @@ class 书评(models.Model):
     标题 = models.CharField(max_length=150)
     书籍作者 =models.CharField(max_length=200,null=True,blank=True)
     书籍出版日期 = models.DateField(null=True,blank=True)
-    书评内容 = models.TextField()
+    书评内容 = RichTextField()
     更新时间 = models.DateTimeField(auto_now=True)
     书评作者 = models.CharField(max_length=200,null=True,blank=True)
     图片 = models.ImageField(upload_to='images/shuping/',blank=True,null=True)
@@ -86,11 +86,10 @@ class 评论_文艺(models.Model):
     def __str__(self):
         return self.评论
 
+
 class 视频(models.Model):
     标题 = models.CharField(max_length=150)
-    视频类型 = models.CharField(max_length=150,null=False,blank=False)
-    视频链接 = models.URLField()
-    视频档案 = models.FileField(upload_to='videos/',blank=True,null=True)
+    视频文件 = models.FileField(upload_to='videos/',blank=True,null=True)
     发布状态 = models.BooleanField(default=False)
     更新时间 = models.DateTimeField(auto_now=True)
     def __str__(self):

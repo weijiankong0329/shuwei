@@ -23,6 +23,7 @@
 
             <form method="post" enctype="multipart/form-data">
               {% csrf_token %}
+                {{ form.media }}
                 {{form.标题|as_crispy_field }}
                 <div class="form-row ">
                     <div class="form-group col">

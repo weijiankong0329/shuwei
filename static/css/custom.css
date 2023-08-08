@@ -162,3 +162,10 @@ form{
     background-color: grey;
     color:#FFF;
 }
+
+.form-check-custom {
+    position: relative;
+    display: block;
+    padding-left: 1.25rem;
+    border: 1px solid;
+}

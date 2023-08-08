@@ -75,6 +75,9 @@ $(function() {
     });
 
     $(".comment-edit").click(function(){
+        var delete_element = "#delete-"+ this.value;
+        $(delete_element).removeAttr('hidden');
+        $(delete_element).prev().attr('hidden','true');
         $(this).next().removeAttr('hidden');
         var comment_action_div = "#"+ this.value;
         $(comment_action_div).removeAttr('hidden');
@@ -83,9 +86,19 @@ $(function() {
 
      $(".comment-close").click(function(){
          $(this).prev().removeAttr('hidden');
+         var delete_element = "#delete-"+ this.value;
         var comment_action_div = "#"+ this.value;
         $(comment_action_div).attr('hidden','true');
         $(this).attr('hidden','true');
+        $(delete_element).attr('hidden','true');
+        $(delete_element).prev().removeAttr('hidden');
+    });
+
+    $("#id_视频文件").change(function (event) {
+        $("#video-preview-div").removeAttr('hidden');
+        let file = event.target.files[0];
+        let blobURL = URL.createObjectURL(file);
+        $("#video-preview").attr("src", blobURL);
     });
 
 });

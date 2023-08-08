@@ -7,6 +7,8 @@ from .models import 观点
 from .models import 评论_观点
 from .models import 文艺
 from .models import 评论_文艺
+from .models import 视频
+from .models import 评论_视频
 from .models import 问答
 from .models import 评论_问答
 from .models import 译林
@@ -26,6 +28,8 @@ admin.site.register(观点)
 admin.site.register(评论_观点)
 admin.site.register(文艺)
 admin.site.register(评论_文艺)
+admin.site.register(视频)
+admin.site.register(评论_视频)
 admin.site.register(问答)
 admin.site.register(评论_问答)
 admin.site.register(译林)

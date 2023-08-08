@@ -112,6 +112,9 @@
                             拒绝
                         </button>
                         {% endif %}
+                        <a href="{% url 'admin_task:content-item-delete' content='书评' id=comment.id task='comment' %}" onclick="return confirm('确认删除此评论?');" class="text-decoration-none small text-danger">
+                            {% bs_icon 'trash3' size='1em' %}
+                        </a>
                     </form>
                 </div>
             </div>

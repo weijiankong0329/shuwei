@@ -98,6 +98,9 @@
                             拒绝
                         </button>
                         {% endif %}
+                         <a href="{% url 'admin_task:content-item-delete' content='文艺' id=comment.id task='comment' %}" onclick="return confirm('确认删除此评论?');" class="text-decoration-none small text-danger">
+                            {% bs_icon 'trash3' size='1em' %}
+                        </a>
                     </form>
                 </div>
             </div>
@@ -121,6 +124,7 @@
                                 {% if obj.通过 == "已拒绝" %}
                                 <div class="status-tab border text-center p-1 bg-danger text-white">{{obj.通过}}</div>
                                 {% endif %}
+
                             </td>
                             <td class="col-3 text-center align-middle">{{obj.发布时间|date:'Y-m-d h:i:s'}}</td>
                             <td class="col-7 p-2 align-middle">{{obj.评论}}</td>

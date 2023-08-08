@@ -70,7 +70,7 @@
                         </a>
                      </div>
                      <div class="col">
-                         <a href="{% url 'admin_task:content-item-delete' content=content_title id=content_item.id %}" onclick="return confirm('确认删除此通讯资料?');">
+                         <a href="{% url 'admin_task:content-item-delete' content=content_title id=content_item.id task='content' %}" onclick="return confirm('确认删除此通讯资料?');">
                             <button class="btn btn-danger w-100" type="button">
                                  删除{% bs_icon 'trash3' size='1.5em' %}
                             </button>

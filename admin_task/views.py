@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.views import LoginView
 from .forms import CustomLoginForm
 from .forms import 通讯_add_form,书讯_add_form,书评_add_form,译林_add_form,文摘_add_form,论文_add_form,\
-    古籍_add_form,经训_add_form,书库_add_form,观点_add_form,文艺_add_form
-from home.models import 通讯,书讯,书评,观点,文艺,问答,译林,文摘,论文,经训,古籍,书库
+    古籍_add_form,经训_add_form,书库_add_form,观点_add_form,文艺_add_form,视频_add_form
+from home.models import 通讯,书讯,书评,观点,文艺,问答,视频,译林,文摘,论文,经训,古籍,书库
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -48,34 +48,45 @@ def ContentItemList(request, content, task):
     else:
         return render(request, 'admin/content-item-list.html', context)
 
-def ContentItemCommentList(request, content, task):
-    content_item = '评论'+'_'+content
-    model_name = apps.get_model('home', content_item)
-    content_all_list = model_name.objects.all().order_by('id')
-    page = request.GET.get('page', 1)
-    paginator = Paginator(content_all_list, 20)
-    try:
-        all_content = paginator.page(page)
-    except PageNotAnInteger:
-        all_content = paginator.page(1)
-    except EmptyPage:
-        all_content = paginator.page(paginator.num_pages)
+def ContentItemDeleteView(request,content,task,id):
+    print(content)
+    if task =='comment':
+        comment_name = '评论_' + content
+        model_name = apps.get_model('home', comment_name)
+        delete_item = model_name.objects.get(id=id)
+        delete_item.delete()
+        msg = '选中' + content + '项目已被删除'
+        messages.success(request, msg)
+        return HttpResponseRedirect(reverse('admin_task:content-item', kwargs={'content': content, 'task': task}))
 
-    context ={
-        'all_content':all_content,
-        'content_title': content,
-        'task': task
-    }
+    elif task == 'content-detail-comment':
+        comment_name = '评论_' + content
+        model_name = apps.get_model('home', comment_name)
+        delete_item = model_name.objects.get(id=id)
+        if content=='书评':
+            content_id = delete_item.书评.id
+        if content=='观点':
+            content_id = delete_item.观点.id
+        if content == '文摘':
+            content_id = delete_item.文摘.id
+        if content == '文艺':
+            content_id = delete_item.文艺.id
+        if content == '视频':
+            content_id = delete_item.视频.id
+        if content == '问答':
+            content_id = delete_item.问答.id
+        delete_item.delete()
+        msg = '选中' + content + '评论已被删除'
+        messages.success(request, msg)
+        return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content': content, 'id': content_id}))
+    else:
+        model_name = apps.get_model('home', content)
+        delete_item = model_name.objects.get(id=id)
+        delete_item.delete()
+        msg = '选中' + content + '项目已被删除'
+        messages.success(request, msg)
+        return HttpResponseRedirect(reverse('admin_task:content-item', kwargs={'content': content, 'task': task}))
 
-    return render(request, 'admin/content-item-list-comment.html', context)
-
-def ContentItemDeleteView(request, content, id):
-    model_name = apps.get_model('home', content)
-    delete_item = model_name.objects.get(id=id)
-    delete_item.delete()
-    msg='选中'+ content + '项目已被删除'
-    messages.success(request, msg )
-    return HttpResponseRedirect(reverse('admin_task:content-item',kwargs={'content':content,'task':'content'}))
 
 def ContentItemDetailView(request, content, id):
     model_name = apps.get_model('home', content)
@@ -174,7 +185,7 @@ class TongXunAddView(generic.TemplateView):
             return HttpResponseRedirect(reverse('admin_task:content-item',kwargs={'content' : '通讯','task' : 'content'}))
         else:
             messages.error(request, '通讯添加失败请检查填表！')
-            return render(request, 'admin/通讯_add.html', {'form': form, 'content_title': '通讯', 'task': 'content'})
+            return render(request, self.template_name, {'form': form, 'content_title': '通讯', 'task': 'content'})
 
 class TongXunEditView(generic.TemplateView):
     template_name = "admin/通讯/通讯_edit.html"
@@ -318,7 +329,7 @@ class ShuPingAddView(generic.TemplateView):
             return HttpResponseRedirect(reverse('admin_task:content-item',kwargs={'content' : '书评','task' : 'content'}))
         else:
             messages.error(request, '书评添加失败请检查填表！')
-            return render(request, 'admin/书评_add.html', {'form': form, 'content_title': '书评', 'task': 'content'})
+            return render(request, self.template_name, {'form': form, 'content_title': '书评', 'task': 'content'})
 
 class ShuPingEditView(generic.TemplateView):
     template_name = "admin/书评/书评_edit.html"
@@ -350,7 +361,7 @@ class ShuPingEditView(generic.TemplateView):
             return render(request, self.template_name, context)
 
 class GuanDianAddView(generic.TemplateView):
-    template_name = 'admin/观点/文艺_add.html'
+    template_name = 'admin/观点/观点_add.html'
 
     def get(self, request):
         form = 观点_add_form()
@@ -489,6 +500,71 @@ class WenYiEditView(generic.TemplateView):
             messages.error(request, '文艺内容修改错误，请更正错误后提交更改内容')
             return render(request, self.template_name, context)
 
+class ShiPingAddView(generic.TemplateView):
+    template_name = 'admin/视频/视频_add.html'
+
+    def get(self, request):
+        form = 视频_add_form()
+        视频_all = 视频.objects.all()
+        args = {
+            'form': form,
+            '视频_all': 视频_all,
+            'content_title': '视频',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        action = request.POST.get('submit-type')
+        form = 视频_add_form(request.POST, request.FILES)
+        if form.is_valid():
+            shipinForm = form.save(commit=False)
+            if action == 'save':
+                shipinForm.发布状态 = False
+            else:
+                shipinForm.发布状态 = True
+            form.save()
+            标题 = form.cleaned_data['标题']
+            视频文件 = form.cleaned_data['视频文件']
+            args = {
+                'form': form,
+                '标题': 标题,
+                '视频文件': 视频文件
+            }
+            messages.success(request, '视频添加成功！')
+            return HttpResponseRedirect(reverse('admin_task:content-item',kwargs={'content' : '视频','task' : 'content'}))
+        else:
+            messages.error(request, '视频添加失败请检查填表！')
+            return render(request, self.template_name, {'form': form, 'content_title': '视频', 'task': 'content'})
+
+class ShiPingEditView(generic.TemplateView):
+    template_name = "admin/视频/视频_edit.html"
+
+    def get(self, request, pk):
+        shipin = 视频.objects.get(id=pk)
+        form = 视频_add_form(instance=shipin)
+        args = {
+            'form': form,
+            '视频': shipin,
+            'content_title': '视频',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request, pk):
+        shipin = 视频.objects.get(id=pk)
+        form = 视频_add_form(request.POST, request.FILES, instance=shipin)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '视频内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content':'视频','id': pk}))
+        else:
+            context = {
+                'pk': pk,
+                'form': form
+            }
+            messages.error(request, '视频内容修改错误，请更正错误后提交更改内容')
+            return render(request, self.template_name, context)
 class YiLingAddView(generic.TemplateView):
     template_name = 'admin/译林/译林_add.html'
 
