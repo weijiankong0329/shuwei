@@ -165,7 +165,6 @@ class 评论_文摘(models.Model):
     通过 = models.BooleanField(default=False)
     发布时间 = models.DateTimeField(auto_now=True)
 
-
 class 论文(models.Model):
     标题 = models.CharField(max_length=150)
     作者 = models.CharField(max_length=200, null=True, blank=True)
@@ -174,13 +173,15 @@ class 论文(models.Model):
     发布状态 = models.BooleanField(default=False)
 
 class 经训(models.Model):
-    章节 = models.CharField(max_length=150)
-    原文作者 = models.CharField(max_length=150)
-    译文作者 = models.CharField(max_length=150)
     标题 = models.CharField(max_length=150)
-    内容 = models.TextField()
+    图片 = models.ImageField(upload_to='images/jingxun/', blank=True, null=True)
     更新时间 = models.DateTimeField(auto_now=True)
     发布状态 = models.BooleanField(default=False)
+
+class 章节_经训(models.Model):
+    经训 = models.ForeignKey(经训, on_delete=models.CASCADE)
+    章节 = models.CharField(max_length=150)
+    内容 = models.TextField()
 
 class 古籍(models.Model):
     标题 = models.CharField(max_length=150)

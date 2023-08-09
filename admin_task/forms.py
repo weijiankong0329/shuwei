@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from home.models import 通讯,书讯,书评,译林,文摘,论文,经训,古籍,书库,观点,文艺,视频,问答
+from home.models import 通讯,书讯,书评,译林,文摘,论文,经训,古籍,书库,观点,文艺,视频,问答,章节_经训
 
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
@@ -175,6 +175,14 @@ class 经训_add_form(ModelForm):
         }
         widgets = {
             '标题': forms.TextInput(attrs={'class': 'form-control'}),
+            '更新时间': forms.TextInput(attrs={'class': 'form-control', 'type': 'date'}),
+        }
+
+class 章节_经训_Form(ModelForm):
+    class Meta:
+        model = 章节_经训
+        fields ="__all__"
+        widgets = {
             '章节': forms.TextInput(attrs={'class': 'form-control'}),
             '内容': forms.Textarea(attrs={'class': 'form-control'}),
         }

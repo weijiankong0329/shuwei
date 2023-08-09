@@ -1,0 +1,33 @@
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% load static %}
+{% block title %}
+书味后台控制面板
+{% endblock %}
+{% block content %}
+<div class="container justify-content-center h-100" id="content-wrap">
+    <div class="row">
+        <div class="col-3 h-100 pb-4 m-2">
+            {% include 'admin/side-nav.html' %}
+        </div>
+        <div class="col pb-4 m-4 h-100 admin-main-content" id="content">
+            <div class="border p-4 mt-3">
+                <h3>编辑经训章节</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ 章节_formset.management_form }}
+                    {% for form in 章节_formset %}
+                        {{ form.as_table }}
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">保存章节</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var content_title = "." + "{{content_title|escapejs }}";
+    var task = "." + "{{task|escapejs }}";
+</script>
+{% endblock %}

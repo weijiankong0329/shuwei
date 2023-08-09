@@ -38,6 +38,9 @@ urlpatterns = [
     path('main/论文/edit/<int:pk>/', views.LunWenEditView.as_view(), name='论文_edit'),
 
     path('main/经训/add', views.JingXunAddView.as_view(), name='经训_add'),
+    path('main/经训/edit/<int:pk>/', views.JingXunEditView.as_view(), name='经训_edit'),
+    path('main/经训/<int:pk>/chapter_edit/', views.JingXunChapterEditView.as_view(), name='经训_chapter_edit'),
+
 
     path('main/古籍/add', views.GuJiAddView.as_view(), name='古籍_add'),
     path('main/古籍/edit/<int:pk>/', views.GuJiEditView.as_view(), name='古籍_edit'),
