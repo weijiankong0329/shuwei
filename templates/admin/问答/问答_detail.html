@@ -1,0 +1,143 @@
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% load static %}
+{% block title %}
+书味后台控制面板
+{% endblock %}
+{% block content %}
+<div class="container justify-content-center h-100" id="content-wrap">
+    <div class="row">
+        <div class="col-3 h-100 pb-4 m-2">
+            {% include 'admin/side-nav.html' %}
+        </div>
+        <div class="col  pb-4 m-4 h-100 admin-main-content" id="content">
+           <div class="row text-center">
+               <div class="col p-2">
+                   <h3>问答详情</h3>
+               </div>
+               <div class="col-4 text-right pt-1">
+                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='问答' task='content' %}">全部问答 {% bs_icon 'list' size='0.75em' %}</a>
+               </div>
+           </div>
+            <div class="border p-4 mt-3">
+                <div class="row">
+                    <div class="col bold text-right"> 更新时间: {{content_item.更新时间|date:'Y' }}年{{content_item.更新时间|date:'m' }}月{{content_item.更新时间|date:'d' }}日 {{content_item.更新时间|date:'h:i:s' }} </div>
+                </div>
+                <div class="row px-4 align-items-center">
+                        <div class="strong display-2">{{content_item.标题}}</div>
+                        {% if content_item.发布状态 %}
+                            <div class="border h-50 p-1 btn-success status-tab mx-4 small">已发布</div>
+                        {% else %}
+                            <div class="border h-50 p-1 btn-secondary status-tab mx-4 small">未发布</div>
+                        {% endif %}
+                </div>
+                 <div class="row pl-4 pr-4 pt-3 pb-2">
+                    <strong>答案</strong>
+                </div>
+                {% if content_item.参考问答 %}
+                    <div class="border p-3 mr-2 ml-2">
+                       <h3 class="m-2"><strong>参考问答</strong></h3>
+                        <div class="row pt-2 m-2">
+                            问题
+                        </div>
+                        <div class="row m-2">
+                           <h3>{{content_item.参考问答项目.序号}}&nbsp;{{content_item.参考问答项目.标题}}</h3>
+
+                        </div>
+                        <div class="row pt-2 m-2">
+                            答案
+                        </div>
+                        <div class="row m-2">
+                            <h4>{{content_item.参考问答项目.答案|safe}}</h4>
+                        </div>
+                        <div class="row m-2">
+                            <a href="{% url 'admin_task:content-item-detail' content=content_title id=content_item.参考问答项目.id %}" class="btn-text">
+                                <button class="btn btn-info" type="button">
+                                    详情
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="row pt-2 m-2">
+                        {{content_item.答案|safe}}
+                    </div>
+                    {% endif %}
+                 <div class="row pt-3">
+                     <div class="col">
+                         <a href="{% url 'admin_task:问答_edit' content_item.id %}" class="btn-text">
+                            <button class="btn btn-success w-100" type="button">
+                                编辑{% bs_icon 'pencil' size='1.5em' %}
+                            </button>
+                        </a>
+                     </div>
+                     <div class="col">
+                         <a href="{% url 'admin_task:content-item-delete' content=content_title id=content_item.id task='content' %}" onclick="return confirm('确认删除此通讯资料?');">
+                            <button class="btn btn-danger w-100" type="button">
+                                 删除{% bs_icon 'trash3' size='1.5em' %}
+                            </button>
+                         </a>
+                     </div>
+                </div>
+            </div>
+            <div class="border pl-4 pr-4 pb-4 mt-3">
+                <div class="row pt-3 m-1 mb-2">
+                    <div class="col text-left align-middle h-100"><strong>所有评论 &nbsp {{content_item.评论_问答_set.count}}</strong></div>
+
+                </div>
+                <div class="row m-2 align-items-center">
+                    <table class="table">
+                    {% for comment in content_item.评论_问答_set.all %}
+                        <tr>
+                            <td class="col-1 ">
+                                <button class="btn comment-edit" value="{{comment.id}}">{% bs_icon 'pencil' size='1.25em' %}</button>
+                                <button class="btn comment-close" value="{{comment.id}}" hidden>{% bs_icon 'x-circle' size='1.25em' %}</button>
+                            </td>
+                            <td class="col-2 ">
+                                {% if comment.通过 == "审查中" %}
+                                <div class="status-tab border text-center p-1 bg-grey text-white">{{comment.通过}}</div>
+                                {% endif %}
+                                {% if comment.通过 == "已通过" %}
+                                <div class="status-tab border text-center p-1 bg-success text-white">{{comment.通过}}</div>
+                                {% endif %}
+                                {% if comment.通过 == "已拒绝" %}
+                                <div class="status-tab border text-center p-1 bg-danger text-white">{{comment.通过}}</div>
+                                {% endif %}
+                            </td>
+                            <td class="col-3 text-center align-top">{{comment.发布时间|date:'Y-m-d h:i:s'}}</td>
+                            <td class="col-7 p-2 align-top">{{comment.评论}}
+                                <br/>
+                                <br/>
+                                <div class="text-right comment-edit-div" id="{{comment.id}}" hidden>
+                                    <form action="{% url 'admin_task:comment-approval' content='书评' content_id=content_item.id type='comment-detail' id=comment.id %}" method="post">
+                                        {% csrf_token %}
+                                    {% if comment.通过 == "已拒绝" or comment.通过 == "审查中" %}
+                                        <button class="border comment-edit-btn" name="approve" value="approve" type="submit">
+                                            通过
+                                        </button>
+                                    {% endif %}
+                                    {% if comment.通过 == "已通过" or comment.通过 == "审查中" %}
+                                        <button class="border comment-edit-btn"  name="approve" value="reject" type="submit">
+                                            拒绝
+                                        </button>
+                                    {% endif %}
+                                    <a href="{% url 'admin_task:content-item-delete' content='书评' id=comment.id task='content-detail-comment' %}" onclick="return confirm('确认删除此评论?');" class="text-decoration-none small text-danger">
+                                        {% bs_icon 'trash3' size='1em' %}
+                                    </a>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var content_title ="."+"{{content_title|escapejs }}";
+    var task = "."+"{{task|escapejs }}";
+</script>
+{% endblock %}

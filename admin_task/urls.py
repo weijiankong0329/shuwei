@@ -22,6 +22,9 @@ urlpatterns = [
     path('main/文艺/add',views.WenYiAddView.as_view(),name='文艺_add'),
     path('main/文艺/edit/<int:pk>', views.WenYiEditView.as_view(), name='文艺_edit'),
 
+    path('main/问答/add',views.WenDaAddView.as_view(),name='问答_add'),
+    path('main/问答/edit/<int:pk>', views.WenDaEditView.as_view(), name='问答_edit'),
+
     path('main/视频/add',views.ShiPingAddView.as_view(),name='视频_add'),
     path('main/视频/edit/<int:pk>', views.ShiPingEditView.as_view(), name='视频_edit'),
 
@@ -46,5 +49,6 @@ urlpatterns = [
     path('main/<str:content>/<str:task>/delete/<int:id>', views.ContentItemDeleteView, name='content-item-delete'),
     path('main/<str:content>/detail/<int:id>',views.ContentItemDetailView,name='content-item-detail'),
     path('main/<str:content>-<int:content_id>/comment-detail/<int:id>',views.ContentItemCommentDetailView,name='content-item-comment-detail'),
-    path('main/<str:content>-<int:content_id>/<str:type>/<int:id>/approval',views.CommentApprovalView,name='comment-approval')
+    path('main/<str:content>-<int:content_id>/<str:type>/<int:id>/approval',views.CommentApprovalView,name='comment-approval'),
+    path('main/<str:content>/question/<int:id>/approve',views.QuestionApprovalView,name='question-approval')
 ]

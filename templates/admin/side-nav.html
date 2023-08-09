@@ -63,10 +63,13 @@
         <a class="nav-link active border text-center mb-1 mt-1 admin-nav-link 问答" href="{% url 'admin_task:content-item' content='问答' task='content' %}">问答</a>
         <ul class="navbar-nav navbar-nav-sub" hidden>
             <li class="nav-item-sub active text-left mb-1 mt-1 ">
-                <a class="nav-link-sub active border" href="{% url 'admin_task:content-item' content='问答' task='content' %}">内容编辑</a>
+                <a class="nav-link-sub active border content" href="{% url 'admin_task:content-item' content='问答' task='content' %}">问答编辑</a>
+            </li>
+            <li class="nav-item-sub active text-left mb-1 mt-1 ">
+                <a class="nav-link-sub active border question" href="{% url 'admin_task:content-item' content='问答' task='question' %}">提问审查</a>
             </li>
             <li class="nav-item-sub active text-left mb-1 mt-1">
-                <a class="nav-link-sub active border" href="{% url 'admin_task:content-item' content='问答' task='comment' %}">评论审查</a>
+                <a class="nav-link-sub active border comment" href="{% url 'admin_task:content-item' content='问答' task='comment' %}">评论审查</a>
             </li>
         </ul>
     </li>

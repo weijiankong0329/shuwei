@@ -10,6 +10,7 @@ from .models import 评论_文艺
 from .models import 视频
 from .models import 评论_视频
 from .models import 问答
+from .models import 提问_问答
 from .models import 评论_问答
 from .models import 译林
 from .models import 文摘
@@ -31,6 +32,7 @@ admin.site.register(评论_文艺)
 admin.site.register(视频)
 admin.site.register(评论_视频)
 admin.site.register(问答)
+admin.site.register(提问_问答)
 admin.site.register(评论_问答)
 admin.site.register(译林)
 admin.site.register(文摘)

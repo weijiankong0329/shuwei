@@ -6,10 +6,14 @@ $(function() {
     var content_height = $("body").height()-$("header").height()-$("footer").height();
     $("#content-wrap").css("min-height",content_height);
     $(".admin-main-content").css("min-height",content_height);
-    console.log("body:"+ $("body").height());
-    console.log("header:"+$("header").height());
-    console.log("footer:"+$("footer").height());
-     console.log(content_height);
+    if($("#id_参考问答").prop('checked')){
+        $("#参考问答项目-div").removeAttr("hidden");
+        $("#答案-div").attr("hidden","true");
+    }else{
+        $("#答案-div").removeAttr("hidden");
+        $("#参考问答项目-div").attr("hidden","true");
+    }
+
     if(content_title){
         $(content_title).addClass("bg-dark text-white");
         $(task).addClass("bg-grey text-white");
@@ -100,5 +104,19 @@ $(function() {
         let blobURL = URL.createObjectURL(file);
         $("#video-preview").attr("src", blobURL);
     });
+
+    $("#id_参考问答").click(function(){
+        if(this.checked){
+            $("#参考问答项目-div").removeAttr("hidden");
+            $("#答案-div").attr("hidden","true");
+
+        }else{
+            $("#答案-div").removeAttr("hidden");
+            $("#参考问答项目-div").attr("hidden","true");
+            $("#id_参考问答项目").val('');
+        }
+    });
+
+
 
 });

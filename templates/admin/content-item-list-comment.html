@@ -47,6 +47,8 @@
                                 {{obj.文艺.标题}}
                             {% elif content_title == '视频' %}
                                 {{obj.视频.标题}}
+                            {% elif content_title == '问答' %}
+                                {{obj.问答.标题}}
                             {% endif %}
                         </strong>
                         <br/>
@@ -89,6 +91,8 @@
                          <a href="{% url 'admin_task:content-item-comment-detail' content=content_title content_id=obj.文艺.id id=obj.id %}" class="text-decoration-none">
                         {% elif content_title == '视频' %}
                          <a href="{% url 'admin_task:content-item-comment-detail' content=content_title content_id=obj.视频.id id=obj.id %}" class="text-decoration-none">
+                         {% elif content_title == '问答' %}
+                         <a href="{% url 'admin_task:content-item-comment-detail' content=content_title content_id=obj.问答.id id=obj.id %}" class="text-decoration-none">
                         {% endif %}
                            <button class="btn btn-info p-2" type="button">
                                 查看{% bs_icon 'file-text' size='1em' %}

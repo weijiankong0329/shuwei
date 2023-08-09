@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from home.models import 通讯,书讯,书评,译林,文摘,论文,经训,古籍,书库,观点,文艺,视频
+from home.models import 通讯,书讯,书评,译林,文摘,论文,经训,古籍,书库,观点,文艺,视频,问答
 
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
@@ -79,6 +79,22 @@ class 文艺_add_form(ModelForm):
             '作者': forms.TextInput(attrs={'class': 'form-control'})
         }
 
+class 问答_add_form(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(问答_add_form, self).__init__(*args, **kwargs)
+        self.fields['参考问答项目'].queryset = self.fields['参考问答项目'].queryset.exclude(参考问答=True)
+
+    class Meta:
+        model = 问答
+        fields ="__all__"
+        labels ={
+            '发布状态': '确认发布'
+        }
+        widgets = {
+            '标题': forms.TextInput(attrs={'class': 'form-control'}),
+            '答案': forms.Textarea(attrs={'class': 'form-control'}),
+            '参考问答项目': forms.Select(attrs={'class': 'form-control'})
+        }
 
 class 视频_add_form(ModelForm):
     class Meta:

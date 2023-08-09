@@ -106,16 +106,37 @@ class 评论_视频(models.Model):
 
 class 问答(models.Model):
     标题 = models.CharField(max_length=150)
-    答案 = models.TextField()
-    序号 = models.IntegerField()
+    答案 = RichTextField(blank=True)
+    序号 = models.CharField(max_length=4,blank=True)
+    参考问答 = models.BooleanField(default=False)
+    参考问答项目= models.ForeignKey('self',null=True,blank=True,default=None,on_delete=models.CASCADE)
     更新时间 = models.DateTimeField(auto_now=True)
     发布状态 = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if(self.参考问答==True):
+            self.答案=''
+        super().save(*args, **kwargs)
+        self.序号='{0:04d}'.format(self.id)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        title = self.序号 +" - "+ self.标题 +"\n" +self.答案
+        return title
+
+class 提问_问答(models.Model):
+    标题 = models.CharField(max_length=150)
+    通过 = models.BooleanField(default=False)
+    发布时间 = models.DateTimeField(auto_now=True)
 
 class 评论_问答(models.Model):
     问答 = models.ForeignKey(问答,on_delete=models.CASCADE)
     评论 = models.CharField(max_length=200)
-    通过 = models.BooleanField(default=False)
+    通过 = models.CharField(max_length=100, default='审查中')
     发布时间 = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.评论
 
 class 译林(models.Model):
     标题 = models.CharField(max_length=150)

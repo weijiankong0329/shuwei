@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.views import LoginView
 from .forms import CustomLoginForm
 from .forms import 通讯_add_form,书讯_add_form,书评_add_form,译林_add_form,文摘_add_form,论文_add_form,\
-    古籍_add_form,经训_add_form,书库_add_form,观点_add_form,文艺_add_form,视频_add_form
+    古籍_add_form,经训_add_form,书库_add_form,观点_add_form,文艺_add_form,视频_add_form,问答_add_form
 from home.models import 通讯,书讯,书评,观点,文艺,问答,视频,译林,文摘,论文,经训,古籍,书库
 from django.views import generic
 from django.http import HttpResponseRedirect
@@ -26,6 +26,9 @@ def ContentItemList(request, content, task):
     if task == 'comment':
         model_name = '评论_'+content
         target_model = apps.get_model('home',model_name)
+    elif task == 'question':
+        model_name = '提问_'+content
+        target_model = apps.get_model('home',model_name)
     else:
         target_model = apps.get_model('home', content)
     content_all_list = target_model.objects.all().order_by('id')
@@ -45,6 +48,8 @@ def ContentItemList(request, content, task):
     }
     if task == 'comment':
         return render(request, 'admin/content-item-list-comment.html', context)
+    elif task == 'question':
+        return render(request, 'admin/question-list.html', context)
     else:
         return render(request, 'admin/content-item-list.html', context)
 
@@ -79,6 +84,15 @@ def ContentItemDeleteView(request,content,task,id):
         msg = '选中' + content + '评论已被删除'
         messages.success(request, msg)
         return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content': content, 'id': content_id}))
+
+    elif task == 'question':
+        question_name = '提问_' + content
+        model_name = apps.get_model('home', question_name)
+        delete_item = model_name.objects.get(id=id)
+        delete_item.delete()
+        msg = '选中' + content + '项目已被删除'
+        messages.success(request, msg)
+        return HttpResponseRedirect(reverse('admin_task:content-item', kwargs={'content': content, 'task': task}))
     else:
         model_name = apps.get_model('home', content)
         delete_item = model_name.objects.get(id=id)
@@ -142,6 +156,16 @@ def CommentApprovalView(request,content,type,content_id,id):
         return HttpResponseRedirect(reverse('admin_task:content-item-comment-detail', kwargs={'content':  content,'content_id':content_id,'id': id}))
     else:
         return HttpResponseRedirect(reverse('admin_task:content-item', kwargs={'content': content, 'task': 'comment'}))
+
+def QuestionApprovalView(request,content,id):
+    question_model_name = '提问' + '_' + content
+    question_model = apps.get_model('home', question_model_name)
+    question = question_model.objects.get(id=id)
+    content_model = apps.get_model('home', content)
+    question_new = content_model(标题=question.标题)
+    question_new.save()
+    question.delete()
+    return HttpResponseRedirect(reverse('admin_task:content-item', kwargs={'content': content, 'task': 'question'}))
 
 
 class TongXunAddView(generic.TemplateView):
@@ -500,6 +524,77 @@ class WenYiEditView(generic.TemplateView):
             messages.error(request, '文艺内容修改错误，请更正错误后提交更改内容')
             return render(request, self.template_name, context)
 
+class WenDaAddView(generic.TemplateView):
+    template_name = 'admin/问答/问答_add.html'
+
+    def get(self, request):
+        form = 问答_add_form()
+        问答_all = 问答.objects.all()
+        args = {
+            'form': form,
+            '问答_all': 问答_all,
+            'content_title': '问答',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        action = request.POST.get('submit-type')
+        form = 问答_add_form(request.POST, request.FILES)
+        if form.is_valid():
+            wendaForm = form.save(commit=False)
+            if action == 'save':
+                wendaForm.发布状态 = False
+            else:
+                wendaForm.发布状态 = True
+            if wendaForm.参考问答==True:
+                wendaForm.回答=''
+            form.save()
+            标题 = form.cleaned_data['标题']
+            答案 = form.cleaned_data['答案']
+            参考问答 = form.cleaned_data['参考问答']
+            参考问答项目 = form.cleaned_data['参考问答项目']
+            args = {
+                'form': form,
+                '答案': 答案,
+                '参考问答': 参考问答,
+                '参考问答项目': 参考问答项目
+            }
+            messages.success(request, '问答添加成功！')
+            return HttpResponseRedirect(reverse('admin_task:content-item',kwargs={'content' : '问答','task' : 'content'}))
+        else:
+            messages.error(request, '问答添加失败请检查填表！')
+            return render(request, self.template_name, {'form': form, 'content_title': '问答', 'task': 'content'})
+
+class WenDaEditView(generic.TemplateView):
+    template_name = "admin/问答/问答_edit.html"
+
+    def get(self, request, pk):
+        wenda = 问答.objects.get(id=pk)
+        form = 问答_add_form(instance=wenda)
+        args = {
+            'form': form,
+            '问答': wenda,
+            'content_title': '问答',
+            'task': 'content'
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request, pk):
+        wenda = 问答.objects.get(id=pk)
+        form = 问答_add_form(request.POST, request.FILES, instance=wenda)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '问答内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content': '问答', 'id': pk}))
+        else:
+            context = {
+                'pk': pk,
+                'form': form
+            }
+            messages.error(request, '问答内容修改错误，请更正错误后提交更改内容')
+            return render(request, self.template_name, context)
+
 class ShiPingAddView(generic.TemplateView):
     template_name = 'admin/视频/视频_add.html'
 
@@ -565,6 +660,7 @@ class ShiPingEditView(generic.TemplateView):
             }
             messages.error(request, '视频内容修改错误，请更正错误后提交更改内容')
             return render(request, self.template_name, context)
+
 class YiLingAddView(generic.TemplateView):
     template_name = 'admin/译林/译林_add.html'
 
