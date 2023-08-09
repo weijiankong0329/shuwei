@@ -1,0 +1,32 @@
+{% extends 'admin/经训/经训_detail.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% block chapter %}
+<div class="border p-4 mt-3">
+    <div class="row p-2 ml-2 mr-2">
+        <h3>章节: <strong>{{chapter.章节}}</strong></h3>
+    </div>
+    <div class="row p-2 ml-2 mr-2">
+        内容
+    </div>
+    <div class="row p-2 ml-2 mr-2">
+    {{chapter.内容|safe}}
+    </div>
+    <div class="row pt-3">
+        <div class="col">
+            <a href="{% url 'admin_task:经训_章节_edit' pk=content_item.id chp_id=chapter.id %}" class="btn-text">
+                <button class="btn btn-success w-100" type="button">
+                    编辑{% bs_icon 'pencil' size='1.5em' %}
+                </button>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{% url 'admin_task:content-item-delete' content='经训' id=chapter.id task='chapter' %}" onclick="return confirm('确认删除此章节?');">
+                <button class="btn btn-danger w-100" type="button">
+                    删除{% bs_icon 'trash3' size='1.5em' %}
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

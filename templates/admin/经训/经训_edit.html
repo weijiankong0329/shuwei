@@ -19,26 +19,65 @@
                    <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='经训' task='content' %}">全部经训 {% bs_icon 'list' size='0.75em' %}</a>
                </div>
            </div>
+
             <div class="border row p-4 mt-3">
-            <form method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-              {{ form.media }}
-                {{form.标题|as_crispy_field }}
-                {{form.发布状态|as_crispy_field}}
-                <div class="form-row">
-                    <div class="form-group col" id="img-preview-div" hidden>
-                        图片预览<br/>
-                        <img src="{{ MEDIA_URL }}{{ 经训.图片}}" id="img-preview" class="w-100 border m-2">
+
+                <form method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ form.media }}
+                    {{ 经训_form.标题|as_crispy_field }}
+                    {{ 经训_form.发布状态|as_crispy_field}}
+                    <div class="form-row">
+                        <div class="form-group col" id="img-preview-div" hidden>
+                            图片预览<br/>
+                            <img src="{{ MEDIA_URL }}{{ 经训.图片}}" id="img-preview" class="w-100 border m-2">
+                        </div>
+                         <div class="form-group col mr-3" id="img-upload">
+                            {{ 经训_form.图片|as_crispy_field }}
+                        </div>
                     </div>
-                     <div class="form-group col mr-3" id="img-upload">
-                        {{form.图片|as_crispy_field }}
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <button type="submit" class="btn btn-primary w-100" name="submit-type" value="save-main">保存更改</button>
+                        </div>
+                        <div class="form-group col-1">
+                            <a href="{% url 'admin_task:content-item-delete' content='经训' id=经训_item.id task='content' %}" onclick="return confirm('确认删除此经训?');">
+                                {% bs_icon 'trash3' size='1.5em' color='red' %}
+                            </a>
+                        </div>
                     </div>
-                </div>                             
-                <div class="form-row">
-                    <button type="submit" class="btn btn-primary w-100" name="submit-type" value="save">保存更改</button>
-                </div>
-            </form>
+                </form>
+
             </div>
+            <div class="row mt-3 mb-2">
+                <div class="col">
+                    <strong>章节:</strong>
+                </div>
+                <a href="{% url 'admin_task:经训_章节_edit_add' 经训_item.id %}"class="text-decoration-none">
+                    <div class="col text-right">
+                        {% bs_icon 'plus-circle' size='1em' color='green' %}
+                    </div>
+                </a>
+            </div>
+            <div class="border row p-4 mt-3">
+                {% if 经训_item.章节_经训_set.count > 0 %}
+                    {% for obj in 经训_item.章节_经训_set.all %}
+                        {% if chapter %}
+                            {% if obj.id == chapter.id %}
+                                <button class="btn btn-info mb-2 mr-1" disabled>{{obj.章节}}</button>
+                            {% else %}
+                                <a href="{% url 'admin_task:经训_章节_edit' chp_id=obj.id pk=经训_item.id %}"><button class="btn btn-info mb-2 mr-1">{{obj.章节}}</button></a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{% url 'admin_task:经训_章节_edit' chp_id=obj.id pk=经训_item.id %}"><button class="btn btn-info mb-2 mr-1">{{obj.章节}}</button></a>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    暂无任何添加章节
+                {% endif %}
+            </div>
+            {% block chapter %}
+            {% endblock %}
         </div>
     </div>
 </div>

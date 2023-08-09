@@ -55,7 +55,6 @@ def ContentItemList(request, content, task):
         return render(request, 'admin/content-item-list.html', context)
 
 def ContentItemDeleteView(request,content,task,id):
-    print(content)
     if task =='comment':
         comment_name = '评论_' + content
         model_name = apps.get_model('home', comment_name)
@@ -64,6 +63,16 @@ def ContentItemDeleteView(request,content,task,id):
         msg = '选中' + content + '项目已被删除'
         messages.success(request, msg)
         return HttpResponseRedirect(reverse('admin_task:content-item', kwargs={'content': content, 'task': task}))
+
+    elif task =='chapter':
+        chapter_name='章节_'+content
+        model_name = apps.get_model('home', chapter_name)
+        delete_item = model_name.objects.get(id=id)
+        content_id = delete_item.经训.id
+        delete_item.delete()
+        msg = '选中' + content + '章节已被删除'
+        messages.success(request, msg)
+        return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content': content, 'id': content_id}))
 
     elif task == 'content-detail-comment':
         comment_name = '评论_' + content
@@ -870,11 +879,6 @@ class LunWenEditView(generic.TemplateView):
             return HttpResponseRedirect(reverse('admin_task:论文_edit', kwargs={'pk': pk}))
 
 
-
-
-经训_章节_Form_Set = modelformset_factory(章节_经训, form=经训_add_form, extra=1)
-
-
 class JingXunAddView(generic.TemplateView):
     template_name = 'admin/经训/经训_add.html'
 
@@ -892,14 +896,73 @@ class JingXunAddView(generic.TemplateView):
         
         if 经训_form.is_valid():
             jingxunForm = 经训_form.save(commit=False)
-            经训_form.save()  
-            
-            return HttpResponseRedirect(reverse('admin_task:经训_edit', kwargs={'pk': jingxunForm.id}))
+            经训_form.save()
+            return HttpResponseRedirect(reverse('admin_task:经训_章节_add', kwargs={'pk': jingxunForm.id,'chp_id':0}))
         else:
             messages.error(request, '经训添加失败请检查填表！')
             return render(request, self.template_name, {'经训_form': 经训_form, 'content_title': '经训', 'task': 'content'})
 
 
+class JingXunChapterAddView(generic.TemplateView):
+    template_name = 'admin/经训/经训_chapter_add.html'
+
+    def get(self,request,pk,chp_id):
+        if chp_id > 0:
+            chapter = 章节_经训.objects.get(id=chp_id)
+            章节_form = 章节_经训_Form(instance=chapter)
+            经训_item = 经训.objects.get(id=pk)
+            context = {
+                '章节_form': 章节_form,
+                '经训_item': 经训_item,
+                'chp_id':chp_id,
+                'content_title': '经训',
+                'task': 'content'
+            }
+        else:
+            章节_form = 章节_经训_Form()
+            经训_item = 经训.objects.get(id=pk)
+            context={
+                '章节_form':章节_form,
+                '经训_item':经训_item,
+                'content_title': '经训',
+                'task': 'content'
+            }
+        return render(request,self.template_name,context)
+
+    def post(self,request,pk,chp_id):
+        action = request.POST.get("submit-type")
+        if chp_id > 0:
+            chapter = 章节_经训.objects.get(id=chp_id)
+            章节_form = 章节_经训_Form(request.POST,instance=chapter)
+        else:
+            章节_form = 章节_经训_Form(request.POST)
+
+
+        if 章节_form.is_valid():
+            jingxun_item = 经训.objects.get(id=pk)
+            if chp_id > 0:
+                章节_form.save()
+            else:
+                chapterForm = 章节_form.save(commit=False)
+                chapterForm.经训 = jingxun_item
+                chapterForm.save()
+
+            if action == 'publish':
+                jingxun_item.发布状态 = True
+            else:
+                jingxun_item.发布状态 = False
+
+            jingxun_item.save()
+
+            if action == 'save_add':
+                messages.success(request, '经训章节已添加，继续添加章节')
+                return HttpResponseRedirect(reverse('admin_task:经训_章节_add', kwargs={'pk': pk,'chp_id':0}))
+            else:
+                messages.success(request, '经训章节已添加')
+                return HttpResponseRedirect(reverse('admin_task:content-item', kwargs={'content': '经训', 'task': 'content'}))
+        else:
+            messages.error(request, '经训章节添加失败请检查填表！')
+            return render(request, self.template_name, {'章节_form': 章节_form, 'pk': pk})
 
 
 
@@ -910,10 +973,8 @@ class JingXunEditView(generic.TemplateView):
     def get(self, request, pk):
         经训_item = get_object_or_404(经训, id=pk)
         form = 经训_add_form(instance=经训_item)
-        章节_formset = 经训_章节_Form_Set(queryset=章节_经训.objects.filter(经训=经训_item))
         args = {
-            'form': form,
-            '章节_formset': 章节_formset,
+            '经训_form': form,
             '经训_item': 经训_item,
             'content_title': '经训',
             'task': 'content'
@@ -921,66 +982,98 @@ class JingXunEditView(generic.TemplateView):
         return render(request, self.template_name, args)
 
     def post(self, request, pk):
-        经训_item = get_object_or_404(经训, id=pk)
-        form = 经训_add_form(request.POST, request.FILES, instance=经训_item)
-        章节_formset = 经训_章节_Form_Set(request.POST, request.FILES, queryset=章节_经训.objects.filter(经训=经训_item))
-
-        if form.is_valid() and 章节_formset.is_valid():
-            jingxunForm = form.save(commit=False)
-            jingxunForm.save()
-
-            章节_formset.instance = 经训_item
-            章节_formset.save()
-
-            action = request.POST.get('submit-type')
-            if action == 'save':
-                jingxunForm.发布状态 = False
-            else:
-                jingxunForm.发布状态 = True
+        jingxun = 经训.objects.get(id=pk)
+        form = 经训_add_form(request.POST, request.FILES, instance=jingxun)
+        if form.is_valid():
             form.save()
-
-            标题 = form.cleaned_data['标题']
-            图片 = form.cleaned_data['图片']
-          
-            args = {
-                'form': form,
-                '标题': 标题,
-                '图片': 图片,
-            }
-            messages.success(request, '经训添加成功！')
-            return HttpResponseRedirect(reverse('admin_task:content-item', kwargs={'content': '经训', 'task': 'content'}))
+            messages.success(request, '经训内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content': '经训', 'id': pk}))
         else:
-            messages.error(request, '经训添加失败请检查填表！')
-            return render(request, self.template_name, {'form': form, '章节_formset': 章节_formset, '经训_item': 经训_item, 'content_title': '经训', 'task': 'content'})
+            messages.error(request, '经训内容修改错误，请更正错误后提交更改内容')
+            return HttpResponseRedirect(reverse('admin_task:经训_edit', kwargs={'pk': pk}))
+
 
 class JingXunChapterEditView(generic.TemplateView):
     template_name = 'admin/经训/经训_chapter_edit.html'
 
-    def get(self, request, pk):
-        经训_item = get_object_or_404(经训, id=pk)
-        章节_formset = 经训_章节_Form_Set(queryset=章节_经训.objects.filter(经训=经训_item))
-
+    def get(self, request, pk, chp_id):
+        经训_item = 经训.objects.get(id=pk)
+        chapter = 章节_经训.objects.get(id=chp_id)
+        章节_form = 章节_经训_Form(instance=chapter)
+        经训_form = 经训_add_form(instance=经训_item)
         args = {
             '经训_item': 经训_item,
-            '章节_formset': 章节_formset,
+            '经训_form': 经训_form,
+            '章节_form': 章节_form,
             'content_title': '经训',
-            'task': 'content'
+            'task': 'content',
+            'chapter':chapter
         }
         return render(request, self.template_name, args)
 
-    def post(self, request, pk):
-        经训_item = get_object_or_404(经训, id=pk)
-        章节_formset = 经训_章节_Form_Set(request.POST, instance=经训_item)
-
-        if 章节_formset.is_valid():
-            章节_formset.save()
-            messages.success(request, '经训章节修改成功')
+    def post(self, request, pk, chp_id):
+        chapter = 章节_经训.objects.get(id=chp_id)
+        jingxun = 经训.objects.get(id=pk)
+        submit_type = request.POST.get("submit-type")
+        if submit_type=="save-main":
+            form = 经训_add_form(request.POST, request.FILES, instance=jingxun)
         else:
-            messages.error(request, '经训章节修改错误，请更正错误后提交更改内容')
+            form = 章节_经训_Form(request.POST, request.FILES, instance=chapter)
+        if form.is_valid():
+            form.save()
+            if submit_type == "save-main":
+                messages.success(request, '经训内容修改成功')
+            else:
+                messages.success(request, '经训章节内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:经训_章节_detail', kwargs={'pk':pk,'chp_id':chp_id}))
+        else:
+            messages.error(request, '经训章节内容修改错误，请更正错误后提交更改内容')
+            return HttpResponseRedirect(reverse('admin_task:经训_章节_edit', kwargs={'pk':pk,'chp_id':chp_id}))
 
-        return HttpResponseRedirect(reverse('admin_task:经训_chapter_edit', kwargs={'pk': pk}))
+def JingXunChapterDetailView(request, pk, chp_id):
+    template_name = 'admin/经训/经训_chapter_detail.html'
+    jingxun = 经训.objects.get(id=pk)
+    chapter = 章节_经训.objects.get(id=chp_id)
+    context = {
+        'content_item': jingxun,
+        'chapter': chapter,
+        'content_title':'经训',
+        'task':'content',
+        'id':pk
+    }
+    return render(request,template_name,context)
 
+class JingXunChapterEditNewView(generic.TemplateView):
+    template_name = 'admin/经训/经训_chapter_edit_add.html'
 
+    def get(self,request,pk):
+        章节_form = 章节_经训_Form()
+        经训_item = 经训.objects.get(id=pk)
+        经训_form = 经训_add_form(instance=经训_item)
+        context = {
+            '经训_form':经训_form,
+            '章节_form': 章节_form,
+            '经训_item': 经训_item,
+            'content_title': '经训',
+            'task': 'content'
+        }
+
+        return render(request,self.template_name,context)
+
+    def post(self,request,pk):
+        章节_form = 章节_经训_Form(request.POST)
+
+        if 章节_form.is_valid():
+            jingxun_item = 经训.objects.get(id=pk)
+            chapterForm = 章节_form.save(commit=False)
+            chapterForm.经训 = jingxun_item
+            chapterForm.save()
+
+            messages.success(request, '经训章节已添加，继续添加章节')
+            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content': '经训', 'id': pk}))
+        else:
+            messages.error(request, '经训章节添加失败请检查填表！')
+            return render(request, self.template_name, {'章节_form': 章节_form, 'pk': pk})
 
 
 class GuJiAddView(generic.TemplateView):
@@ -1091,6 +1184,7 @@ class ShuKuAddView(generic.TemplateView):
         else:
             messages.error(request, '书库添加失败请检查填表！')
             return render(request, self.template_name, {'form': form, 'content_title': '书库', 'task': 'content'})
+
 
 class ShuKuEditView(generic.TemplateView):
     template_name = "admin/书库/书库_edit.html"

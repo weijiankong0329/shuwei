@@ -1,0 +1,21 @@
+{% extends 'admin/经训/经训_edit.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% block chapter %}
+<div class="row mt-3 mb-2">
+<strong>添加章节</strong>
+</div>
+<div class="border row p-4 mt-3">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ 章节_form.章节|as_crispy_field }}
+        {{ 章节_form.内容|as_crispy_field}}
+
+        <div class="form-row">
+            <button type="submit" class="btn btn-primary w-100" name="submit-type" value="save">保存更改</button>
+
+        </div>
+    </form>
+</div>
+{% endblock %}

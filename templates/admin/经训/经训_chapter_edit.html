@@ -1,33 +1,25 @@
-{% extends 'base_admin.html' %}
+{% extends 'admin/经训/经训_edit.html' %}
 {% load crispy_forms_tags %}
 {% load bootstrap_icons %}
-{% load static %}
-{% block title %}
-书味后台控制面板
-{% endblock %}
-{% block content %}
-<div class="container justify-content-center h-100" id="content-wrap">
-    <div class="row">
-        <div class="col-3 h-100 pb-4 m-2">
-            {% include 'admin/side-nav.html' %}
-        </div>
-        <div class="col pb-4 m-4 h-100 admin-main-content" id="content">
-            <div class="border p-4 mt-3">
-                <h3>编辑经训章节</h3>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ 章节_formset.management_form }}
-                    {% for form in 章节_formset %}
-                        {{ form.as_table }}
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary">保存章节</button>
-                </form>
+{% block chapter %}
+<div class="border row p-4 mt-3">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ 章节_form.章节|as_crispy_field }}
+        {{ 章节_form.内容|as_crispy_field}}
+
+        <div class="form-row">
+            <div class="form-group col">
+                <button type="submit" class="btn btn-primary w-100" name="submit-type" value="save">保存更改</button>
+            </div>
+
+            <div class="form-group col-1">
+                <a href="{% url 'admin_task:content-item-delete' content='经训' id=chapter.id task='chapter' %}" onclick="return confirm('确认删除此经训章节?');">
+                    {% bs_icon 'trash3' size='1.5em' color='red' %}
+                </a>
             </div>
         </div>
-    </div>
+    </form>
 </div>
-<script>
-    var content_title = "." + "{{content_title|escapejs }}";
-    var task = "." + "{{task|escapejs }}";
-</script>
 {% endblock %}

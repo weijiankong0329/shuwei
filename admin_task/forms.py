@@ -181,7 +181,7 @@ class 经训_add_form(ModelForm):
 class 章节_经训_Form(ModelForm):
     class Meta:
         model = 章节_经训
-        fields ="__all__"
+        exclude = ['经训']
         widgets = {
             '章节': forms.TextInput(attrs={'class': 'form-control'}),
             '内容': forms.Textarea(attrs={'class': 'form-control'}),

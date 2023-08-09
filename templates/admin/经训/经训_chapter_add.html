@@ -1,0 +1,80 @@
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% block title %}
+书味后台控制面板
+{% endblock %}
+{% block content %}
+<div class="container justify-content-center h-100" id="content-wrap">
+    <div class="row">
+        <div class="col-3 h-100 pb-4 m-2">
+            {% include 'admin/side-nav.html' %}
+        </div>
+        <div class="col pb-4 m-4 h-100 admin-main-content" id="content">
+            <div class="row text-center">
+                <div class="col p-2">
+                    <h3>经训添加</h3>
+                </div>
+                <div class="col-4 text-right pt-1">
+                    <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='经训' task='content' %}">全部经训 {% bs_icon 'list' size='0.75em' %}</a>
+                </div>
+            </div>
+            <div class="border row p-4 mt-3">
+                <div class="container">
+                    <div class="row ml-1">
+                        <h2><strong>{{经训_item.标题}}</strong></h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            {% if 经训_item.图片 %}
+                                <img src="{{ MEDIA_URL }}{{ 经训_item.图片}}" class="border w-100" >
+                            {% else %}
+                                暂无上传照片
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            <strong>章节</strong>&nbsp;{{经训_item.章节_经训_set.count}}
+                            <p class="mt-1">
+                            {% if 经训_item.章节_经训_set.count > 0 %}
+                                {% for chapter in 经训_item.章节_经训_set.all %}
+                                    {% if chapter.id == chp_id %}
+                                    <button class="btn btn-info mb-2" disabled>{{chapter.章节}}</button>
+                                    {% else %}
+                                    <a href="{% url 'admin_task:经训_章节_add' pk=经训_item.id chp_id=chapter.id %}"><button class="btn btn-info mb-2">{{chapter.章节}}</button></a>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                            暂无任何添加章节
+                            {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border row p-4 mt-3">
+                <h3>章节添加</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {{章节_form|crispy}}
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <button type="submit" class="btn btn-primary w-100" name="submit-type" value="save">保存</button>
+                        </div>
+                        <div class="form-group col">
+                            <button type="submit" class="btn btn-primary w-100" name="submit-type" value="save_add">保存并继续添加</button>
+                        </div>
+                        <div class="form-group col">
+                            <button type="submit" class="btn btn-primary w-100" name="submit-type" value="publish">发布</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    var content_title = "." + "{{content_title|escapejs }}";
+    var task = "." + "{{task|escapejs }}";
+</script>
+{% endblock %}
