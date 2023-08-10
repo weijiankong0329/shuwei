@@ -181,7 +181,7 @@ class 经训(models.Model):
 class 章节_经训(models.Model):
     经训 = models.ForeignKey(经训, on_delete=models.CASCADE)
     章节 = models.CharField(max_length=150)
-    内容 = models.TextField()
+    内容 = RichTextField()
 
 class 古籍(models.Model):
     标题 = models.CharField(max_length=150)

@@ -907,6 +907,7 @@ class JingXunChapterAddView(generic.TemplateView):
     template_name = 'admin/经训/经训_chapter_add.html'
 
     def get(self,request,pk,chp_id):
+        #chp_id > 0 for chapter content edit purpose since there is not existing chapter id is 0 in db
         if chp_id > 0:
             chapter = 章节_经训.objects.get(id=chp_id)
             章节_form = 章节_经训_Form(instance=chapter)
@@ -919,6 +920,7 @@ class JingXunChapterAddView(generic.TemplateView):
                 'task': 'content'
             }
         else:
+            # chp_id = 0 for chapter content creation purpose
             章节_form = 章节_经训_Form()
             经训_item = 经训.objects.get(id=pk)
             context={

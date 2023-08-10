@@ -55,6 +55,7 @@
                 <h3>章节添加</h3>
                 <form method="post">
                     {% csrf_token %}
+                    {{章节_form.media}}
                     {{章节_form|crispy}}
                     <div class="form-row">
                         <div class="form-group col">
