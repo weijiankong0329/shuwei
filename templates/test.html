@@ -1,58 +1,65 @@
-{% extends 'base_admin.html' %}
-{% load crispy_forms_tags %}
-{% load bootstrap_icons %}
-{% block content %}
-<div class="container justify-content-center h-100" id="content-wrap">
-    <div class="row">
-        <div class="col-3 h-100 p-2 bg-light d-none d-md-block mt-4 ">
-            {% include 'frontend/经训/sidebar.html' %}
-        </div>
-
-        <div class="col-md-9">
-            <!-- Main content goes here -->
-            <div class="p-2">
-
-                {% include 'frontend/经训/searching.html' %}
-
+<div class="navbar-bottom-menu">
+    <button class="navbar-toggler"
+      type="button"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="true"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse justify-content-center collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav d-lg-flex justify-content-between align-items-center">
+        <li><a class="nav-item" href="#" ><img class="p-2" src="{% static 'images/logo_black.png' %}" id ="menu-logo" alt="" style ="width:100px;" hidden="true"/></a></li>
+        <li class="nav-item active">
+          <a class="nav-link active" href="index.html">首页</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/world.html">通讯</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/author.html">书讯</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/news-post.html">书评</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/business.html">观点</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/sports.html">文艺</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/art.html">问答</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/politics.html">视频</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/real-estate.html">译林</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/travel.html">文摘</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/travel.html">论文</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home:jingxun' %}">经训</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pages/travel.html">古籍</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home:shuku' %}">书库</a>
+        </li>
+        <li>
+          <form class="form-inline" id="search-form" method="get" hidden="true">
+            <div class="search-bar">
+              <input class="search-input ml-3" type="text" placeholder="关键词..."/>
+              <button class="search-button" type="submit">{% bs_icon 'search' size='0.75em' %}</button>
             </div>
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-                <div class="col mb-3">
-                    <div class="card">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex align-items-center " style="background-color: #DDDDDD;">
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="currentColor"
-                                        class="bi bi-folder" viewBox="0 0 16 16">
-                                        <path
-                                            d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" />
-                                    </svg>
-                                </div>
-                                <div class="ml-2">
-                                    <p class="h5 dark font-weight-bold">{{ 经训.标题 }}</p>
-                                </div>
-                            </li>
-                            <ul class="list-group list-group-flush ml-3">
-                                {% for 章节 in 章节_list %}
-                                <li class="list-group-item">
-                                    <a class="nav-link chapter-link custom-nav-link "
-                                        href="{% url 'home:content' 章节.id %}" data-章节="{{ 章节.章节 }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
-                                            <path
-                                                d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
-                                            <path
-                                                d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
-                                        </svg>
-                                        {{ 章节.章节 }}
-                                    </a>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+          </form>
+        </li>
+      </ul>
     </div>
-</div>
-{% endblock %}
+  </div>

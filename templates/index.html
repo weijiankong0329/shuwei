@@ -1,236 +1,186 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
 {% load static %}
-{% load bootstrap_icons %}
 {% block content %}
-<html lang="zxx">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>書味</title>
-    <!-- plugin css for this page -->
-    <link rel="stylesheet" href="{% static 'css/materialdesignicons.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/aos.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}"/>
-
-    <!-- End plugin css for this page -->
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo-icon-white.png' %}" />
-    <!-- inject:css -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- endinject -->
-  </head>
-
-  <body class="d-flex flex-column h-100">
-    <div class="container-scroller">
-      <div class="main-panel" id="page-container">
-        
-
-        <div class="container" id="content-wrap">
-
-          <div class="row">
-            <div class="col-lg-8">
-              <div class="owl-carousel owl-theme" id="main-banner-carousel">
-                <div class="item">
-                  <div class="carousel-content-wrapper mb-2">
-                    <div class="carousel-content">
-                      <h1 class="font-weight-bold">
-                        标题
-                      </h1>
-                      <h5 class="font-weight-normal  m-0">
-                        内容
-                      </h5>
-                      <p class="text-color m-0 pt-2 d-flex align-items-center">
-                        <span class="fs-10 mr-1">更新时间</span>
-                        <i class="mdi mdi-bookmark-outline mr-3"></i>
-                      </p>
-                    </div>
-                    <div class="main-page-banner carousel-image img-fluid">
-                      <img src="{% static 'images/default-placeholder.png' %}" alt="" />
-                    </div>
+<body class="d-flex flex-column h-100">
+  <div class="container-scroller">
+    <div class="main-panel" id="page-container">
+      <div class="container" id="content-wrap">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="owl-carousel owl-theme" id="main-banner-carousel">
+              <div class="item">
+                <div class="carousel-content-wrapper mb-2">
+                  <div class="carousel-content">
+                    <h1 class="font-weight-bold">
+                      标题
+                    </h1>
+                    <h5 class="font-weight-normal  m-0">
+                      内容
+                    </h5>
+                    <p class="text-color m-0 pt-2 d-flex align-items-center">
+                      <span class="fs-10 mr-1">更新时间</span>
+                      <i class="mdi mdi-bookmark-outline mr-3"></i>
+                    </p>
                   </div>
-                </div>
-                <div class="item">
-                  <div class="carousel-content-wrapper mb-2">
-                    <div class="carousel-content">
-                      <h1 class="font-weight-bold">
-                        If you wanted to get rich, how would you do it?
-                      </h1>
-                      <h5 class="font-weight-normal  m-0">
-                        Lorem Ipsum has been the industry's standard
-                      </h5>
-                      <p class="text-color m-0 pt-2 d-flex align-items-center">
-                        <span class="fs-10 mr-1">2 hours ago</span>
-                        <i class="mdi mdi-bookmark-outline mr-3"></i>
-                        <span class="fs-10 mr-1">126</span>
-                        <i class="mdi mdi-comment-outline"></i>
-                      </p>
-                    </div>
-                    <div class="carousel-image">
-                      <img src="assets/images/dashboard/banner_1.jpg" alt="" />
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="carousel-content-wrapper mb-2">
-                    <div class="carousel-content">
-                      <h1 class="font-weight-bold">
-                        If you wanted to get rich, how would you do it?
-                      </h1>
-                      <h5 class="font-weight-normal  m-0">
-                        Lorem Ipsum has been the industry's standard
-                      </h5>
-                      <p class="text-color m-0 pt-2 d-flex align-items-center">
-                        <span class="fs-10 mr-1">2 hours ago</span>
-                        <i class="mdi mdi-bookmark-outline mr-3"></i>
-                        <span class="fs-10 mr-1">126</span>
-                        <i class="mdi mdi-comment-outline"></i>
-                      </p>
-                    </div>
-                    <div class="carousel-image">
-                      <img src="assets/images/dashboard/banner_2.jpg" alt="" />
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="carousel-content-wrapper mb-2">
-                    <div class="carousel-content">
-                      <h1 class="font-weight-bold">
-                        If you wanted to get rich, how would you do it?
-                      </h1>
-                      <h5 class="font-weight-normal  m-0">
-                        Lorem Ipsum has been the industry's standard
-                      </h5>
-                      <p class="text-color m-0 pt-2 d-flex align-items-center">
-                        <span class="fs-10 mr-1">2 hours ago</span>
-                        <i class="mdi mdi-bookmark-outline mr-3"></i>
-                        <span class="fs-10 mr-1">126</span>
-                        <i class="mdi mdi-comment-outline"></i>
-                      </p>
-                    </div>
-                    <div class="carousel-image">
-                      <img src="assets/images/dashboard/banner_3.jpg" alt="" />
-                    </div>
+                  <div class="main-page-banner carousel-image img-fluid">
+                    <img src="{% static 'images/default-placeholder.png' %}" alt="" />
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="row">
-              <div class="d-flex position-relative  float-left">
-                  <h3 class="section-title">通讯</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="py-3 border-bottom">
-                    <div class="d-flex align-items-center pb-2">
-                      <img
-                        src="assets/images/dashboard/Profile_1.jpg"
-                        class="img-xs img-rounded mr-2"
-                        alt="thumb"
-                      />
-                      <span class="fs-12 text-muted">Henry Itondo</span>
-                    </div>
-                    <p class="fs-14 m-0 font-weight-medium line-height-sm">
-                      The Most And Least Visited Countries In The World
+              <div class="item">
+                <div class="carousel-content-wrapper mb-2">
+                  <div class="carousel-content">
+                    <h1 class="font-weight-bold">
+                      If you wanted to get rich, how would you do it?
+                    </h1>
+                    <h5 class="font-weight-normal  m-0">
+                      Lorem Ipsum has been the industry's standard
+                    </h5>
+                    <p class="text-color m-0 pt-2 d-flex align-items-center">
+                      <span class="fs-10 mr-1">2 hours ago</span>
+                      <i class="mdi mdi-bookmark-outline mr-3"></i>
+                      <span class="fs-10 mr-1">126</span>
+                      <i class="mdi mdi-comment-outline"></i>
                     </p>
                   </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="py-3 border-bottom">
-                    <div class="d-flex align-items-center pb-2">
-                      <img
-                        src="assets/images/dashboard/Profile_2.jpg"
-                        class="img-xs img-rounded mr-2"
-                        alt="thumb"
-                      />
-                      <span class="fs-12 text-muted">Oka Tomoaki</span>
-                    </div>
-                    <p class="fs-14 m-0 font-weight-medium line-height-sm">
-                      The Best Places to Travel in month August
-                    </p>
+                  <div class="carousel-image">
+                    <img src="assets/images/dashboard/banner_1.jpg" alt="" />
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="pt-4 pb-4 border-bottom">
-                    <div class="d-flex align-items-center pb-2">
-                      <img
-                        src="assets/images/dashboard/Profile_2.jpg"
-                        class="img-xs img-rounded mr-2"
-                        alt="thumb"
-                      />
-                      <span class="fs-12 text-muted">Joana Leite</span>
-                    </div>
-                    <p class="fs-14 m-0 font-weight-medium line-height-sm">
-                      Focus On Fun And Challenging Lifetime Activities
+              <div class="item">
+                <div class="carousel-content-wrapper mb-2">
+                  <div class="carousel-content">
+                    <h1 class="font-weight-bold">
+                      If you wanted to get rich, how would you do it?
+                    </h1>
+                    <h5 class="font-weight-normal  m-0">
+                      Lorem Ipsum has been the industry's standard
+                    </h5>
+                    <p class="text-color m-0 pt-2 d-flex align-items-center">
+                      <span class="fs-10 mr-1">2 hours ago</span>
+                      <i class="mdi mdi-bookmark-outline mr-3"></i>
+                      <span class="fs-10 mr-1">126</span>
+                      <i class="mdi mdi-comment-outline"></i>
                     </p>
                   </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="pt-3 pb-4 border-bottom">
-                    <div class="d-flex align-items-center pb-2">
-                      <img
-                        src="assets/images/dashboard/Profile_4.jpg"
-                        class="img-xs img-rounded mr-2"
-                        alt="thumb"
-                      />
-                      <span class="fs-12 text-muted">Rita Leite</span>
-                    </div>
-                    <p class="fs-14 m-0 font-weight-medium line-height-sm">
-                      Bread Is The Most Widely Consumed Food In The World
-                    </p>
+                  <div class="carousel-image">
+                    <img src="assets/images/dashboard/banner_2.jpg" alt="" />
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="pt-4 pb-4">
-                    <div class="d-flex align-items-center pb-2">
-                      <img
-                        src="assets/images/dashboard/Profile_5.jpg"
-                        class="img-xs img-rounded mr-2"
-                        alt="thumb"
-                      />
-                      <span class="fs-12 text-muted">Jurrien Oldhof</span>
-                    </div>
-                    <p class="fs-14 m-0 font-weight-medium line-height-sm">
-                      What Is Music, And What Does It Mean To Us
+              <div class="item">
+                <div class="carousel-content-wrapper mb-2">
+                  <div class="carousel-content">
+                    <h1 class="font-weight-bold">
+                      If you wanted to get rich, how would you do it?
+                    </h1>
+                    <h5 class="font-weight-normal  m-0">
+                      Lorem Ipsum has been the industry's standard
+                    </h5>
+                    <p class="text-color m-0 pt-2 d-flex align-items-center">
+                      <span class="fs-10 mr-1">2 hours ago</span>
+                      <i class="mdi mdi-bookmark-outline mr-3"></i>
+                      <span class="fs-10 mr-1">126</span>
+                      <i class="mdi mdi-comment-outline"></i>
                     </p>
                   </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="pt-3 pb-4">
-                    <div class="d-flex align-items-center pb-2">
-                      <img
-                        src="assets/images/dashboard/Profile_6.jpg"
-                        class="img-xs img-rounded mr-2"
-                        alt="thumb"
-                      />
-                      <span class="fs-12 text-muted">Yamaha Toshinobu</span>
-                    </div>
-                    <p class="fs-14 m-0 font-weight-medium line-height-sm">
-                      Is Breakfast The Most Important Meal Of The Day
-                    </p>
+                  <div class="carousel-image">
+                    <img src="assets/images/dashboard/banner_3.jpg" alt="" />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="world-news">
+          <div class="col-lg-4">
             <div class="row">
-              <div class="col-sm-12">
-                <div class="d-flex position-relative  float-left">
-                  <h3 class="section-title">World News</h3>
+              <div class="d-flex position-relative  float-left">
+                <h3 class="section-title">通讯</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="py-3 border-bottom">
+                  <div class="d-flex align-items-center pb-2">
+                    <img src="assets/images/dashboard/Profile_1.jpg" class="img-xs img-rounded mr-2" alt="thumb" />
+                    <span class="fs-12 text-muted">Henry Itondo</span>
+                  </div>
+                  <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                    The Most And Least Visited Countries In The World
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="py-3 border-bottom">
+                  <div class="d-flex align-items-center pb-2">
+                    <img src="assets/images/dashboard/Profile_2.jpg" class="img-xs img-rounded mr-2" alt="thumb" />
+                    <span class="fs-12 text-muted">Oka Tomoaki</span>
+                  </div>
+                  <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                    The Best Places to Travel in month August
+                  </p>
                 </div>
               </div>
             </div>
             <div class="row">
+              <div class="col-sm-6">
+                <div class="pt-4 pb-4 border-bottom">
+                  <div class="d-flex align-items-center pb-2">
+                    <img src="assets/images/dashboard/Profile_2.jpg" class="img-xs img-rounded mr-2" alt="thumb" />
+                    <span class="fs-12 text-muted">Joana Leite</span>
+                  </div>
+                  <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                    Focus On Fun And Challenging Lifetime Activities
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="pt-3 pb-4 border-bottom">
+                  <div class="d-flex align-items-center pb-2">
+                    <img src="assets/images/dashboard/Profile_4.jpg" class="img-xs img-rounded mr-2" alt="thumb" />
+                    <span class="fs-12 text-muted">Rita Leite</span>
+                  </div>
+                  <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                    Bread Is The Most Widely Consumed Food In The World
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="pt-4 pb-4">
+                  <div class="d-flex align-items-center pb-2">
+                    <img src="assets/images/dashboard/Profile_5.jpg" class="img-xs img-rounded mr-2" alt="thumb" />
+                    <span class="fs-12 text-muted">Jurrien Oldhof</span>
+                  </div>
+                  <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                    What Is Music, And What Does It Mean To Us
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="pt-3 pb-4">
+                  <div class="d-flex align-items-center pb-2">
+                    <img src="assets/images/dashboard/Profile_6.jpg" class="img-xs img-rounded mr-2" alt="thumb" />
+                    <span class="fs-12 text-muted">Yamaha Toshinobu</span>
+                  </div>
+                  <p class="fs-14 m-0 font-weight-medium line-height-sm">
+                    Is Breakfast The Most Important Meal Of The Day
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="world-news">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="d-flex position-relative  float-left">
+                <h3 class="section-title">World News</h3>
+              </div>
+            </div>
+          </div>
+          <div class="row">
 
 
           </div>
@@ -245,11 +195,7 @@
             <div class="row">
               <div class="col-lg-6  mb-5 mb-sm-2">
                 <div class="position-relative image-hover">
-                  <img
-                    src="assets/images/dashboard/glob.jpg"
-                    class="img-fluid"
-                    alt="world-news"
-                  />
+                  <img src="assets/images/dashboard/glob.jpg" class="img-fluid" alt="world-news" />
                   <span class="thumb-title">NEWS</span>
                 </div>
                 <h1 class="font-weight-600 mt-3">
@@ -265,11 +211,7 @@
                 <div class="row">
                   <div class="col-sm-6  mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
-                      <img
-                        src="assets/images/dashboard/star-magazine-5.jpg"
-                        class="img-fluid"
-                        alt="world-news"
-                      />
+                      <img src="assets/images/dashboard/star-magazine-5.jpg" class="img-fluid" alt="world-news" />
                       <span class="thumb-title">POLITICS</span>
                     </div>
                     <h5 class="font-weight-600 mt-3">
@@ -281,11 +223,7 @@
                   </div>
                   <div class="col-sm-6  mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
-                      <img
-                        src="assets/images/dashboard/star-magazine-6.jpg"
-                        class="img-fluid"
-                        alt="world-news"
-                      />
+                      <img src="assets/images/dashboard/star-magazine-6.jpg" class="img-fluid" alt="world-news" />
                       <span class="thumb-title">TRAVEL</span>
                     </div>
                     <h5 class="font-weight-600 mt-3">
@@ -299,11 +237,7 @@
                 <div class="row mt-3">
                   <div class="col-sm-6  mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
-                      <img
-                        src="assets/images/dashboard/star-magazine-7.jpg"
-                        class="img-fluid"
-                        alt="world-news"
-                      />
+                      <img src="assets/images/dashboard/star-magazine-7.jpg" class="img-fluid" alt="world-news" />
                       <span class="thumb-title">POLITICS</span>
                     </div>
                     <h5 class="font-weight-600 mt-3">
@@ -315,11 +249,7 @@
                   </div>
                   <div class="col-sm-6">
                     <div class="position-relative image-hover">
-                      <img
-                        src="assets/images/dashboard/star-magazine-8.jpg"
-                        class="img-fluid"
-                        alt="world-news"
-                      />
+                      <img src="assets/images/dashboard/star-magazine-8.jpg" class="img-fluid" alt="world-news" />
                       <span class="thumb-title">TRAVEL</span>
                     </div>
                     <h5 class="font-weight-600 mt-3">
@@ -346,11 +276,7 @@
                 <div class="row">
                   <div class="col-sm-4  mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
-                      <img
-                        src="assets/images/dashboard/star-magazine-9.jpg"
-                        class="img-fluid"
-                        alt="world-news"
-                      />
+                      <img src="assets/images/dashboard/star-magazine-9.jpg" class="img-fluid" alt="world-news" />
                       <span class="thumb-title">LIFESTYLE</span>
                     </div>
                     <h5 class="font-weight-600 mt-3">
@@ -359,11 +285,7 @@
                   </div>
                   <div class="col-sm-4 mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
-                      <img
-                        src="assets/images/dashboard/star-magazine-10.jpg"
-                        class="img-fluid"
-                        alt="world-news"
-                      />
+                      <img src="assets/images/dashboard/star-magazine-10.jpg" class="img-fluid" alt="world-news" />
                       <span class="thumb-title">SPORTS</span>
                     </div>
                     <h5 class="font-weight-600 mt-3">
@@ -372,11 +294,7 @@
                   </div>
                   <div class="col-sm-4 mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
-                      <img
-                        src="assets/images/dashboard/star-magazine-11.jpg"
-                        class="img-fluid"
-                        alt="world-news"
-                      />
+                      <img src="assets/images/dashboard/star-magazine-11.jpg" class="img-fluid" alt="world-news" />
                       <span class="thumb-title">INTERNET</span>
                     </div>
                     <h5 class="font-weight-600 mt-3">
@@ -387,11 +305,7 @@
                 <div class="row mt-3">
                   <div class="col-sm-4 mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
-                      <img
-                        src="assets/images/dashboard/star-magazine-12.jpg"
-                        class="img-fluid"
-                        alt="world-news"
-                      />
+                      <img src="assets/images/dashboard/star-magazine-12.jpg" class="img-fluid" alt="world-news" />
                       <span class="thumb-title">NEWS</span>
                     </div>
                     <h5 class="font-weight-600 mt-3">
@@ -400,11 +314,7 @@
                   </div>
                   <div class="col-sm-4 mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
-                      <img
-                        src="assets/images/dashboard/star-magazine-13.jpg"
-                        class="img-fluid"
-                        alt="world-news"
-                      />
+                      <img src="assets/images/dashboard/star-magazine-13.jpg" class="img-fluid" alt="world-news" />
                       <span class="thumb-title">NEWS</span>
                     </div>
                     <h5 class="font-weight-600 mt-3">
@@ -413,11 +323,7 @@
                   </div>
                   <div class="col-sm-4 mb-5 mb-sm-2">
                     <div class="position-relative image-hover">
-                      <img
-                        src="assets/images/dashboard/star-magazine-14.jpg"
-                        class="img-fluid"
-                        alt="world-news"
-                      />
+                      <img src="assets/images/dashboard/star-magazine-14.jpg" class="img-fluid" alt="world-news" />
                       <span class="thumb-title">TOURISM</span>
                     </div>
                     <h5 class="font-weight-600 mt-3">
@@ -428,11 +334,7 @@
               </div>
               <div class="col-lg-3">
                 <div class="position-relative mb-3">
-                  <img
-                    src="assets/images/dashboard/star-magazine-15.jpg"
-                    class="img-fluid"
-                    alt="world-news"
-                  />
+                  <img src="assets/images/dashboard/star-magazine-15.jpg" class="img-fluid" alt="world-news" />
                   <div class="video-thumb text-muted">
                     <span><i class="mdi mdi-menu-right"></i></span>LIVE
                   </div>
@@ -502,26 +404,13 @@
 
         </div>
         <!-- main-panel ends -->
-        </div>
-        <!-- container-scroller ends -->
-
       </div>
+      <!-- container-scroller ends -->
+
     </div>
+  </div>
 
-
-        <!-- partial -->
-
-    <!-- inject:js -->
-    <script src="{% static 'js/vendor.bundle.base.js' %}"></script>
-    <!-- endinject -->
-    <!-- plugin js for this page -->
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <!-- End plugin js for this page -->
-    <!-- Custom js for this page-->
-    <script src="{% static 'js/demo.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
-    <!-- End custom js for this page-->
-  </body>
+</body>
 
 </html>
 {% endblock %}

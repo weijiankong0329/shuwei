@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container justify-content-center h-100 ">
+    <div class="row d-flex flex-wrap">
+        {% for shuku in all_书库 %}
+        <div class="col-md-4 mb-4 mt-3 ">
+            <div class="card border bg-light" style="width: 18rem;">
+                <div class="card-img-top-zoom">
+                    <a href="{% url 'home:detail' shuku.id %}">
+                        <img src="{{ shuku.图片.url }}" class="card-img-top" alt="..." width="500" height="200"></a>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title font-weight-bold">{{ shuku.标题 }}</h4>
+                    <div class="row">
+                        <div class="col-4 font-weight-bold">简介:</div>
+                        <div class="col-12">{{ shuku.简介 |truncatechars:50 }}</div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-4 font-weight-bold">作者:</div>
+                        <div class="col-10">{{ shuku.作者 }}</div>
+                    </div>
+                    <div class="mt-3"><a href="{% url 'home:detail' shuku.id %}" class="text-dark ">阅读详细信息</a></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<style>
+    .card-img-top-zoom {
+        overflow: hidden;
+        transition: transform 0.5s ease;
+    }
+
+    .card-img-top-zoom img:hover {
+        transform: scale(1.1);
+    }
+</style>
+{% endblock %}
