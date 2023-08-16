@@ -20,6 +20,7 @@ from .models import 经训
 from .models import 古籍
 from .models import 书库
 
+
 # Register your models here.
 admin.site.register(通讯)
 admin.site.register(书讯)

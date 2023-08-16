@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap_icons %}
+{% load custom_filters %}
+{% block content %}
+<div class="d-flex flex-column justify-content-between min-vh-100" id="content-wrap">
+    <div class="container mt-4">
+        <div class="row">
+            <div class=" col-md-3 h-100 p-2 bg-light">
+                {% include 'frontend/经训/sidebar.html' %}
+            </div>
+            <div class="col-12 col-md-9">
+                <div class="p-2">
+                    {% include 'frontend/经训/searching.html' %}
+                </div>
+                {% for 章节 in 章节_results %}
+                <div class="container mt-4">
+                    <h2><a href="{% url 'home:content' 章节.id %}">{{ 章节.章节 }}</a></h2>
+                    <p>{% if 章节.内容|lower|find:keyword|default:-1 != -1 %}
+                        {{ 章节.内容|highlight:keyword|safe }}
+                    {% else %}
+                        {{ 章节.内容|truncatechars_html:100|safe }}
+                    {% endif %}</p>
+                </div>
+            </div>
+            {% empty %}
+            <p class="h1">No results found.</p>
+        {% endfor %}
+        </div>
+    </div>
+
+</div>
+<style>
+    .highlight {
+        background-color: rgba(105, 70, 70, 0.288) !important;
+        font-weight: bold !important;
+    }
+    </style>
+{% endblock %}

@@ -158,12 +158,17 @@ class 文摘(models.Model):
     图片 = models.ImageField(upload_to='images/wenzhai/', blank=True, null=True)
     资源 = models.CharField(max_length=200, null=True, blank=True)
     发布状态 = models.BooleanField(default=False)
-
+    def __str__(self):
+        return self.标题
+    
 class 评论_文摘(models.Model):
     文摘 = models.ForeignKey(文摘, on_delete=models.CASCADE)
     评论 = models.CharField(max_length=200)
-    通过 = models.BooleanField(default=False)
+    通过 = models.CharField(max_length=100, default='审查中')
     发布时间 = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.评论
+
 
 class 论文(models.Model):
     标题 = models.CharField(max_length=150)
@@ -198,4 +203,4 @@ class 书库(models.Model):
     简介 = models.TextField()
     图片 = models.ImageField(upload_to='images/shuku/', default='null', null=True)
     序号 = models.IntegerField()
-    发布状态 = models.BooleanField(default=False)
+    发布状态 = models.BooleanField(default=False)    
