@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row mt-4 mb-4">
+        <div class="col-12">
+            <h2><strong>{{ lunwen.标题 }}</strong></h2>
+        </div>
+        <div class="col-12 text-right mt-3">
+            <h5>{{ lunwen.更新时间|date:"Y年m月d日 " }}</h5>
+        </div>
+        {% if lunwen.文档 %}
+        <div class="col-12 mt-3">
+            <div class="_df_book border" height="500" width="100%" webgl="true" backgroundcolor="dark"
+                source="{{ lunwen.文档.url }}" id="df_manual_book" style="width:100%">
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 mt-3">
+            暂无上传文档
+        </div>
+        {% endif %}
+    </div>
+    <div class="mb-4">
+        <div class="mb-3">
+            <h3>相关推荐</h3>
+        </div>
+        <div class="d-flex flex-wrap">
+            {% for lunwen in all_论文|slice:":3" %}
+            <div class="col-12 col-md-4 mb-4">
+                <a href="{% url 'home:lunwendetail' lunwen.id %}">
+                    <h4 class="font-weight-bold">{{ lunwen.标题 }}</h4>
+                </a>
+                <div>{{ lunwen.更新时间|date:"Y年m月d日" }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

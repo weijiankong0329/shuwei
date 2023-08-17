@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row mb-4 mt-4">
+        {% for yiling in all_译林 %}
+        <div class="col-12 mb-3 ">
+            <div class="card border bg-light h-100 rounded">
+                <div class="card-body p-4">
+                    <a href="{% url 'home:yilingdetail' yiling.id %}">
+                        <h4 class="card-title font-weight-bold">{{yiling.标题 }}</h4>
+                    </a>
+                    <div>
+                        <h5><strong>作者:</strong> {{ yiling.原文作者 }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

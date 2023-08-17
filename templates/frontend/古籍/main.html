@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row mb-4 mt-4">
+         {% for guji in all_古籍 %}
+        <div class="col-6 col-md-4 col-lg-3 mb-3 ">
+
+                <div class="card-sm border bg-light p-2 text-center">
+                    <a href="{% url 'home:gujidetail' guji.id %}">
+                        <h4 class="card-title font-weight-bold">{{ guji.标题 }}</h4>
+                    </a>
+                    <div ><p><strong>作者:</strong> {{ guji.作者 }}</div></p>
+                </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

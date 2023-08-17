@@ -74,18 +74,64 @@ def ShuKu(request):
 
 def ShuKucontent(request, shuku_id):
     shuku = 书库.objects.get(id=shuku_id)
+    all_书库 = 书库.objects.all()
     context = {
         'shuku': shuku,
+        'all_书库': all_书库,
     }
     return render(request, 'frontend/书库/detail.html', context)
 
-# from django.shortcuts import render, get_object_or_404
-# from .models import 书库
 
-# def shuku_detail(request, shuku_id):
-#     shuku = get_object_or_404(书库, id=shuku_id)
-#     context = {
-#         'shuku': shuku,
-#     }
-#     return render(request, 'frontend/书库/detail.html', context)
+def GuJi(request):
+    all_古籍 = 古籍.objects.all()
+    context = {
+        'all_古籍': all_古籍,
+        'content_title': 'guji',
+        'task': 'content'
+    }
+    return render(request, 'frontend/古籍/main.html', context)
 
+def GuJicontent(request, guji_id):
+    guji = 古籍.objects.get(id=guji_id)
+    all_古籍 = 古籍.objects.all()
+    context = {
+        'guji': guji,
+        'all_古籍': all_古籍,
+    }
+    return render(request, 'frontend/古籍/detail.html', context)
+
+def LunWen(request):
+    all_论文 = 论文.objects.all()
+    context = {
+        'all_论文': all_论文,
+        'content_title': 'lunwen',
+        'task': 'content'
+    }
+    return render(request, 'frontend/论文/main.html', context)
+
+def LunWencontent(request, lunwen_id):
+    lunwen = 论文.objects.get(id=lunwen_id)
+    all_论文 = 论文.objects.all()
+    context = {
+        'lunwen': lunwen,
+        'all_论文':all_论文
+    }
+    return render(request, 'frontend/论文/detail.html', context)
+
+def YiLing(request):
+    all_译林 = 译林.objects.all()
+    context = {
+        'all_译林': all_译林,
+        'content_title': 'lunwen',
+        'task': 'content'
+    }
+    return render(request, 'frontend/译林/main.html', context)
+
+def YiLingcontent(request, yiling_id):
+    yiling = 译林.objects.get(id=yiling_id)
+    all_译林 = 译林.objects.all()
+    context = {
+        'yiling': yiling,
+        'all_译林':all_译林
+    }
+    return render(request, 'frontend/译林/detail.html', context)

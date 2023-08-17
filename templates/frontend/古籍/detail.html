@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row mt-4 mb-4">
+        <div class="col-md-12 bg-muted rounded p-3 border-botomme">
+            <div class="d-flex justify-content-between">
+                <h2><strong>{{ guji.标题 }}</strong></h2>
+                <h4><strong>作者:</strong>{{ guji.作者 }}</h4>
+            </div>
+            <div class="text-right">
+                <h5>{{ guji.更新时间|date:"Y年m月d日 " }}</h5>
+            </div>
+        </div>
+        {% if guji.文档 %}
+        <div class="col-md-12 mt-3">
+            <div class="_df_book border" height="500" width="100%" webgl="true" backgroundcolor="dark"
+                source="{{ guji.文档.url }}" id="df_manual_book" style="width:100%">
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 mt-3">
+            暂无上传文档
+        </div>
+        {% endif %}
+    </div>
+    <div class="mb-4">
+        <div class="mb-3">
+            <h3>相关推荐</h3>
+        </div>
+        <div class="d-flex flex-wrap">
+            {% for guji in all_古籍|slice:":4" %}
+            <div class="col-md-3 mb-4 ">
+                <div class="card border bg-light rounded p-3">
+                    <a href="{% url 'home:gujidetail' guji.id %}">
+                        <h4 class="font-weight-bold">{{ guji.标题 }}</h4>
+                    </a>
+                    <div>{{ guji.更新时间|date:"Y年m月d日" }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

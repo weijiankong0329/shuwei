@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row mb-4 mt-4">
+         {% for lunwen in all_论文 %}
+        <div class="col-12 mb-3 ">
+            <div class="card border bg-light h-100 rounded">
+                <div class="card-body p-4">
+                    <a href="{% url 'home:lunwendetail' lunwen.id %}">
+                        <h4 class="card-title font-weight-bold">{{lunwen.标题 }}</h4>
+                    </a>
+                    <div><h5><strong>作者:</strong> {{ lunwen.作者 }}</h5></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

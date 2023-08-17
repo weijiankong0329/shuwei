@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row mt-4 mb-4">
+        <div class="col-12">
+            <h2><strong>{{ yiling.标题 }}</strong></h2>
+        </div>
+        <div class="col-12 text-right mt-3">
+            <h5>{{ yiling.更新时间|date:"Y年m月d日 "}}</h5>
+        </div>
+        <div class="col-12 card border bg-light rounded p-4">
+            <h5>
+               <strong>译文作者：</strong>{{yiling.译文作者}}
+            </h5>
+            <h5>
+                <strong>原文标题：</strong>{{yiling.原文标题 }}
+            </h5>
+            <h5>
+                <strong>原文作者：</strong>{{yiling.原文作者 }}
+            </h5>
+            <h5>
+                <strong>原文出版日期：</strong>{{yiling.原文出版日期|date:"Y年m月d日"  }}
+            </h5>
+        </div>
+        <div>
+            <p>
+                {{yiling.译文内容 |safe}}
+            </p>
+        </div>
+    </div>
+    <div class="mb-4">
+        <div class="mb-3">
+            <h3>相关推荐</h3>
+        </div>
+        <div class="d-flex flex-wrap">
+            {% for yiling in all_译林|slice:":3" %}
+            <div class="col-12 col-md-4 mb-4">
+                <a href="{% url 'home:yilingdetail' yiling.id %}">
+                    <h4 class="font-weight-bold">{{ yiling.标题 }}</h4>
+                </a>
+                <div>{{ yiling.更新时间|date:"Y年m月d日" }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

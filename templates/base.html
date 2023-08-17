@@ -85,19 +85,19 @@
               <a class="nav-link" href="pages/politics.html">视频</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/real-estate.html">译林</a>
+              <a class="nav-link" href="{% url 'home:yiling' %}">译林</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="pages/travel.html">文摘</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/travel.html">论文</a>
+              <a class="nav-link" href="{% url 'home:lunwen' %}">论文</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'home:jingxun' %}">经训</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/travel.html">古籍</a>
+              <a class="nav-link" href="{% url 'home:guji' %}">古籍</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'home:shuku' %}">书库</a>
@@ -124,8 +124,8 @@
       <div class="col-md-4 col-sm-12">
         <p class="font-weight-bold">其他讯息</p>
         <ul class="list-unstyled">
-          <li class="mb-1">关于书味</li>
-          <li class="mb-1">联系我们</li>
+          <li class="mb-1"><a href="{% url 'home:about_us' %}" class="text-light">关于书味</a></li>
+          <li class="mb-1"><a href="{% url 'home:contact_us' %}" class="text-light">联系我们</a></li>
           <li class="mb-1">条款与隐私权限</li>
           <li class="mb-1"><a href="{% url 'admin_task:login' %}">管理员</a></li>
         </ul>
