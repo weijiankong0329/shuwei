@@ -1,7 +1,12 @@
 from django.shortcuts import render,get_object_or_404
 from django.utils import timezone
-
-from home.models import 通讯, 书讯, 书评, 观点, 文艺, 问答, 视频, 译林, 文摘, 论文, 经训, 古籍, 书库, 章节_经训
+from django.views import generic
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from home.models import 通讯, 书讯, 书评, 观点, 文艺, 问答, 视频, 译林, 文摘, 论文, 经训, 古籍, 书库, 章节_经训,评论_视频
+from .forms import 视频_comment_form
+from django.contrib import messages
+from django.db.models import Count,Q
 
 # Create your views here.
 
@@ -25,11 +30,43 @@ def MainView(request):
     return render(request,'frontend/首页/index.html',context)
 
 def ShiPing(request):
-    all_视频 = 视频.objects.all()
+    all_视频 = 视频.objects.all().annotate(comment_no=Count("评论_视频",filter=Q(评论_视频__通过='已通过')))
     context = {
         'all_视频': all_视频,
     }
     return render(request, 'frontend/视频/main.html', context)
+
+class ShiPingDetail(generic.TemplateView):
+    template_name = "frontend/视频/detail.html"
+
+    def get(self, request, shiping_id):
+        form = 视频_comment_form
+        all_视频 = 视频.objects.all()
+        shiping = 视频.objects.get(id=shiping_id)
+        comments = shiping.评论_视频_set.filter(通过='已通过')
+        context = {
+            'all_视频': all_视频,
+            'shiping':shiping,
+            'form':form,
+            'comments':comments
+        }
+        return render(request, self.template_name, context)
+
+    def post(self,request,shiping_id):
+        form = 视频_comment_form(request.POST)
+        if form.is_valid():
+            commentForm = form.save(commit=False)
+            commentForm.视频 = 视频.objects.get(id=shiping_id)
+            commentForm.save()
+            comment = form.cleaned_data['评论']
+            args = {
+                'form': form,
+                'comment': comment
+            }
+            msg = '评论已提交，待审核'
+            messages.success(request, msg)
+            return HttpResponseRedirect(reverse('home:shipingdetail', kwargs={'shiping_id': shiping_id}))
+
 
 def JingXun(request):
     all_经训 = 经训.objects.all()

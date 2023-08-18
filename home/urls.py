@@ -7,6 +7,7 @@ urlpatterns = [
     path('联系我们/', TemplateView.as_view(template_name='contact_us.html'), name='contact_us'),
     path('',views.MainView,name="homepage"),
     path('视频/',views.ShiPing,name="shiping"),
+    path('视频/<int:shiping_id>',views.ShiPingDetail.as_view(),name="shipingdetail"),
     path('经训/', views.JingXun, name='jingxun'),
     path('经训/所有章节/<int:经训_id>/', views.show_all_chapters, name='show_all_chapters'),
     path('经训/内容/<int:章节_id>/', views.JingXuncontent, name='content'), 

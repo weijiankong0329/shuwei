@@ -203,4 +203,4 @@ class 书库(models.Model):
     简介 = models.TextField()
     图片 = models.ImageField(upload_to='images/shuku/', default='null', null=True)
     序号 = models.IntegerField()
-    发布状态 = models.BooleanField(default=False)    
+    发布状态 = models.BooleanField(default=False)

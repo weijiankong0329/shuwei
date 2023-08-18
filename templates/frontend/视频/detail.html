@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load bootstrap_icons %}
+{% block content %}
+<div class="container">
+
+    <div class="row mb-4 mt-4">
+      <video class="card-img-top" src="{{ MEDIA_URL }}{{ shiping.视频文件}}" controls autoplay></video>
+    </div>
+    <div class="row mb-4 mt-4">
+        <div class="col-8 mt-2">
+            <div class="row">
+                <div class="col">
+                    <h2><strong>{{shiping.标题}}</strong></h2>
+                </div>
+                <div class="col text-right">
+                    {{shiping.更新时间|date:'Y' }}年{{shiping.更新时间|date:'m' }}月{{shiping.更新时间|date:'d' }}日 {{shiping.更新时间|date:'h:i:s' }}
+                </div>
+            </div>
+             <div class="row mt-3 mb-3 border-bottom">
+                 <div class="col mt-3 mb-3">
+                     <h4><strong>评论区</strong></h4>
+                 </div>
+                 <div class="col mt-3 mb-3 text-right">
+                     {% bs_icon 'chat-right-dots' %}{{comments.count}}
+                 </div>
+            </div>
+            {% for comment in comments %}
+            <div class="row border mt-3 mb-3 p-3">
+                <div class="col">{{comment.评论}}</div>
+                <div class="col text-right text-muted">{{comment.发布时间|date:'Y' }}年{{comment.发布时间|date:'m' }}月{{comment.发布时间|date:'d' }}日 {{comment.发布时间|date:'h:i:s' }}</div>
+
+            </div>
+            {% endfor %}
+            <div class="row">
+                <form method="POST" >
+                    <div class="form-floating">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn btn-outline-dark" type="submit">发表</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col border rounded ml-2">
+            <div class="row p-2 bg-light mb-2">
+                <h4>其他视频</h4>
+            </div>
+            {% for obj in all_视频 %}
+            {% if obj.id != shiping.id %}
+            <a href ="{% url 'home:shipingdetail' obj.id %}" >
+                <div class="card border rounded mb-2" style="flex-direction:row;">
+                    <video class="card-img-top w-50" src="{{ MEDIA_URL }}{{ obj.视频文件}}"></video>
+                    <div class="card-body p-2">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <small class="text-muted">更新时间:{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
+
+                    </div>
+                </div>
+
+            </a>
+            {% endif %}
+
+        {% endfor %}
+            <a class="nav-link" href="{% url 'home:shiping' %}">
+                <div class=" w-100 btn btn-outline-dark bg-light mb-2">
+                    更多视频
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,18 +1,28 @@
 {% extends 'base.html' %}
+{% load bootstrap_icons %}
 {% block content %}
 <div class="container">
     <div class="row mb-4 mt-4">
-         {% for video in all_视频 %}
-        <div class="col-12 mb-3 ">
-            <div class="card border bg-light h-100 rounded">
-                <div class="card-body p-4">
-                    <img src="{{}}{{}}">
-                    <a href="#">
-                        <h4 class="card-title font-weight-bold">{{lunwen.标题 }}</h4>
-                    </a>
-                    <div><h5><strong>作者:</strong> {{ lunwen.作者 }}</h5></div>
+        <h2>
+            <strong>视频列表</strong>
+        </h2>
+    </div>
+    <div class="row mb-4 mt-4">
+         {% for obj in all_视频 %}
+        <div class="col-3 mb-3 ">
+            <a href ="{% url 'home:shipingdetail' obj.id %}" >
+                <div class="card border bg-light h-100 rounded">
+                    <video class="card-img-top" src="{{ MEDIA_URL }}{{ obj.视频文件}}"></video>
+                    <div class="card-body p-4">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <small class="text-muted">更新时间</small>
+                        <h5> {{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</h5>
+                        <div class="text-right mt-3">{% bs_icon 'chat-right-dots' %}{{obj.comment_no}}</div>
+
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         {% endfor %}
     </div>
