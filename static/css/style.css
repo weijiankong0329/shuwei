@@ -437,7 +437,7 @@ hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
   border: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 0.25px solid rgba(0, 0, 0, 0.1);
 }
 
 small,
@@ -4031,7 +4031,7 @@ input[type="button"].btn-block {
 
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
-  background-color:grey;
+  background-color:none;
   color:white;
 }
 
@@ -10570,18 +10570,18 @@ h6, .h6 {
   font-style: normal;
   line-height: 1.14;
   letter-spacing: normal;
-  color: #3e8177;
   margin-bottom: 22px;
 }
 
 .section-title:after {
   content: "";
-  width: 50px;
+  width: 180px;
   height: 2px;
-  background: #3e8177;
+  background: grey;
   position: absolute;
-  right: -60px;
+  margin-left:30px;
   top: 14px;
+
 }
 
 .thumb-title {

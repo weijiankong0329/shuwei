@@ -7,17 +7,29 @@ from home.models import 通讯, 书讯, 书评, 观点, 文艺, 问答, 视频, 
 
 
 def MainView(request):
-    context = {
-        'all_通讯': 通讯.objects.all().order_by("-更新时间")[:10],
-        'all_通讯': 书讯.objects.all().order_by("-更新时间")[:3],
-        'all_通讯': 书评.objects.all().order_by("-更新时间")[:3],
-        'all_通讯': 观点.objects.all().order_by("-更新时间")[:3],
-        'all_通讯': 文艺.objects.all().order_by("-更新时间")[:3],
-        'all_通讯': 问答.objects.all().order_by("-更新时间")[:3],
-        'all_通讯': 视频.objects.all().order_by("-更新时间")[:4]
+    context ={
+        'all_通讯':通讯.objects.all().order_by("-更新时间")[:10],
+        'all_书讯': 书讯.objects.all().order_by("-更新时间")[:4],
+        'all_书评': 书评.objects.all().order_by("-更新时间")[:4],
+        'all_观点': 观点.objects.all().order_by("-更新时间")[:4],
+        'all_文艺': 文艺.objects.all().order_by("-更新时间")[:4],
+        'all_问答': 问答.objects.all().order_by("-更新时间")[:5],
+        'all_视频': 视频.objects.all().order_by("-更新时间")[:4],
+        'all_论文': 论文.objects.all().order_by("-更新时间")[:3],
+        'all_古籍': 古籍.objects.all().order_by("-更新时间")[:3],
+        'all_书库': 书库.objects.all().order_by("-更新时间")[:3],
+        'all_译林': 译林.objects.all().order_by("-更新时间")[:4],
+        'all_文摘': 文摘.objects.all().order_by("-更新时间")[:4],
+        'all_经训': 经训.objects.all().order_by("-更新时间")[:4],
     }
-    return render(request, 'index.html', {'time': timezone.now})
+    return render(request,'frontend/首页/index.html',context)
 
+def ShiPing(request):
+    all_视频 = 视频.objects.all()
+    context = {
+        'all_视频': all_视频,
+    }
+    return render(request, 'frontend/视频/main.html', context)
 
 def JingXun(request):
     all_经训 = 经训.objects.all()

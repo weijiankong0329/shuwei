@@ -169,9 +169,87 @@ form{
     padding-left: 1.25rem;
     border: 1px solid;
 }
+.main-page-banner .main-page-banner-img{
+    height: 400px;
+}
 
-.main-page-banner>img{
-    width: 100%;
-    height:100%;
+.main-page-banner-img > img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.content-list-img >img{
+    width:100%;
+    height:75px;
     object-fit:cover;
+}
+
+.content-list-date {
+    position: absolute;
+    bottom:0;
+    right:2px;
+}
+
+
+.main-video .title {
+    margin-top: 1rem;
+}
+
+
+.videos .video {
+    position: relative;
+    width: 100%;
+    height: 4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 1rem;
+    margin-top: .1rem;
+    cursor: pointer;
+
+    border-radius: .5rem;
+}
+
+.videos .video:hover {
+    background-color: #0003;
+    color: white;
+}
+
+.videos .active {
+    background-color: #0003;
+    color: white;
+    border: 0.5px solid;
+}
+
+.videos .hidden {
+  display: none !important;
+}
+
+.main-video video {
+    width: 100%;
+    border-radius: .5rem;
+
+}
+
+
+.video p {
+   margin-left: 2.5rem;
+}
+
+.video h3 {
+    width: 23rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font: 100 1rem sans-serif;
+    padding: 0 .5rem;
+}
+
+.pdf-section {
+     border:0.25px solid;
+     border-color:#dddddd;
 }

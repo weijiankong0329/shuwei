@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row mb-4 mt-4">
+         {% for video in all_视频 %}
+        <div class="col-12 mb-3 ">
+            <div class="card border bg-light h-100 rounded">
+                <div class="card-body p-4">
+                    <img src="{{}}{{}}">
+                    <a href="#">
+                        <h4 class="card-title font-weight-bold">{{lunwen.标题 }}</h4>
+                    </a>
+                    <div><h5><strong>作者:</strong> {{ lunwen.作者 }}</h5></div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
