@@ -46,6 +46,8 @@ $(function() {
         return n < 10 ? "0" + n : n + "";
     }
 
+
+
    $(".admin-nav-link").click(function(){
         $(".navbar-nav-sub").attr('hidden',true);
         $(".admin-nav-link").removeClass("bg-dark text-white");
@@ -117,6 +119,9 @@ $(function() {
         }
     });
 
-
+    $('.add-question-btn').click(function(){
+        $(this).attr('hidden','true');
+        $('.add-question-section').attr('hidden','');
+    });
 
 });

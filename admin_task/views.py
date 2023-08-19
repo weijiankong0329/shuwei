@@ -436,7 +436,7 @@ class GuanDianAddView(generic.TemplateView):
             return render(request, self.template_name, {'form': form, 'content_title': '观点', 'task': 'content'})
 
 class GuanDianEditView(generic.TemplateView):
-    template_name = "admin/观点/文艺_edit.html"
+    template_name = "admin/观点/观点_edit.html"
 
     def get(self, request, pk):
         guandian = 观点.objects.get(id=pk)

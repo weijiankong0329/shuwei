@@ -1,14 +1,11 @@
-
-
+$(function() {
+    const main_video = document.querySelector('.main-video video');
 
     let videos = document.querySelectorAll('.video');
     videos[0].classList.add('active');
     videos[0].querySelector('.date').classList.remove('text-muted');
     videos[0].querySelector('.pause').classList.remove('hidden');
     videos[0].querySelector('.play').classList.add('hidden');
-
-$(function() {
-    const main_video = document.querySelector('.main-video video');
 
     $(".video").click(function(){
         $(".video").removeClass('active');

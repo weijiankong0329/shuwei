@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load bootstrap_icons %}
+{% block content %}
+<div class="container">
+    <div class="row mb-4 mt-4">
+        <div class="col-2">
+            <h2>
+                <strong>问答列表</strong>
+            </h2>
+        </div>
+        <div class="col-1">
+            <h2 class="text-success add-question-btn">{% bs_icon 'plus-circle' size='0.25em' %}</h2>
+        </div>
+        <div class="col">
+            <form action="{% url 'home:wendasearch' %}" class="form-inline justify-content-end" method="GET">
+                <input class="form-control ml-3" name="keyword" type="text" placeholder="题目关键词"/>
+                <button class="ml-2 search-button" type="submit">{% bs_icon 'search' size='0.25em' %}</button>
+            </form>
+        </div>
+
+
+    </div>
+    <div class="row add-question-section mt-4 mb-4 ml-4 mr-4 p-4 border border-2" hidden>
+        <div class="col-1 text-right"><h3>{% bs_icon 'x-circle' size='0.5em' extra_classes='text-warning close-question-btn' %}</h3></div>
+        <div class="col-2 text-right"><h3><strong>提出问题</strong></h3></div>
+        <div class="col">
+            <form action="{% url 'home:wendaaddquestion' %}" class="form-inline w-100" method="POST">
+                 {% csrf_token %}
+                <input class="form-control w-75" id="question" name="question" type="text" placeholder="问题"/>
+                <button class="form-control btn btn-secondary" type="submit">提交</button>
+            </form>
+        </div>
+
+
+    </div>
+    <hr class="mt-2 mb-4"/>
+    {% if keyword %}
+    <div class="row ml-2">
+        <div class="col"><h3>搜索结果: {{keyword}}</h3></div>
+        <div class="col-2 text-right">
+            <a href="{% url 'home:wenda' %}">
+                <div class="text-center text-white bg-secondary p-1 mx-auto status-tab ">显示全部</div>
+            </a>
+        </div>
+    </div>
+
+    {% endif %}
+    {% for obj in all_问答 %}
+    <div class="row mb-4 mt-4">
+        <a href ="{% url 'home:wendadetail' obj.id %}" >
+            <div class="card border bg-light h-100 rounded">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-1">
+                            <div class="text-center text-white bg-secondary p-1 mx-auto status-tab ">
+                                {{obj.序号}}
+                            </div>
+                        </div>
+                        <div class="col">
+                              <h4> {{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</h4>
+
+                        </div>
+                        <div class="col">
+                            <h4 class="card-title font-weight-bold">问题: {{obj.标题 }}</h4>
+                        </div>
+                        <div class="col">
+                            <div class="text-right ">{% bs_icon 'chat-right-dots' %}{{obj.comment_no}}</div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
