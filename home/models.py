@@ -7,8 +7,8 @@ class 通讯(models.Model):
     内容 = RichTextField(blank=True,null=True)
     更新时间 = models.DateTimeField(auto_now=True)
     发布状态 = models.BooleanField(default=False)
-    资源 = models.CharField(max_length=200,null=True,blank=True)
-    作者 = models.CharField(max_length=200,null=True,blank=True)
+    资源 = models.CharField(max_length=200,null=True,blank=True,default="无资源信息")
+    作者 = models.CharField(max_length=200,null=True,blank=True,default="无作者信息")
     图片 = models.ImageField(upload_to='images/tongxun/',blank=True,null=True)
 
     def __str__(self):
@@ -20,7 +20,7 @@ class 书讯(models.Model):
     更新时间 = models.DateTimeField(auto_now=True)
     发布状态 = models.BooleanField(default=False)
     序号 = models.IntegerField(null=True,blank=True)
-    作者 = models.CharField(max_length=200,null=True,blank=True)
+    作者 = models.CharField(max_length=200,null=True,blank=True,default="无作者信息")
     图片 = models.ImageField(upload_to='images/shuxun/',blank=True,null=True)
     def __str__(self):
         return self.标题

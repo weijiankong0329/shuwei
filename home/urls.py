@@ -8,6 +8,21 @@ urlpatterns = [
 
     path('',views.MainView,name="homepage"),
 
+    path('通讯/',views.TongXun,name="tongxun"),
+    path('通讯/<int:tongxun_id>',views.TongXunDetail,name="tongxundetail"),
+
+    path('书讯/',views.ShuXun,name="shuxun"),
+    path('书讯/<int:shuxun_id>',views.ShuXunDetail,name="shuxundetail"),
+
+    path('书评/',views.ShuPing,name="shuping"),
+    path('书评/<int:shuping_id>',views.ShuPingDetail.as_view(),name="shupingdetail"),
+
+    path('观点/',views.GuanDian,name="guandian"),
+    path('观点/<int:guandian_id>',views.GuanDianDetail.as_view(),name="guandiandetail"),
+
+    path('文艺/',views.WenYi,name="wenyi"),
+    path('文艺/<int:wenyi_id>',views.WenYiDetail.as_view(),name="wenyidetail"),
+
     path('视频/',views.ShiPing,name="shiping"),
     path('视频/<int:shiping_id>',views.ShiPingDetail.as_view(),name="shipingdetail"),
 

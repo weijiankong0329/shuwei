@@ -20,7 +20,7 @@
                </div>
            </div>
             <div class="border row p-4 mt-3">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
               {% csrf_token %}
               {{ form.media }}
                 {{form.标题|as_crispy_field }}

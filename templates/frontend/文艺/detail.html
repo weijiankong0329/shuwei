@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load bootstrap_icons %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row mb-4 mt-4">
+        <div class="col">
+            <h2>
+                <strong>{{wenyi.标题}}</strong>
+            </h2>
+        </div>
+        <div class="col-2 text-right text-muted">
+            更新时间<br/>
+            {{wenyi.更新时间|date:'Y' }}年{{wenyi.更新时间|date:'m' }}月{{wenyi.更新时间|date:'d' }}日 {{wenyi.更新时间|date:'h:i:s' }}
+
+        </div>
+    </div>
+    <hr>
+    <div class="row mb-4 mt-4">
+        {% if wenyi.图片 %}
+        <img class="w-100" src="{{ MEDIA_URL }}{{ wenyi.图片 }}">
+        {% else %}
+        <img class="w-100" src="{% static 'images/default-placeholder.png' %}">
+        {% endif %}
+    </div>
+    <div class="row mb-4 mt-4 pb-4">
+        <div class="col">
+            <div class="row">
+                {{wenyi.内容|safe}}
+            </div>
+            <div class="row mt-4">
+                <p>
+                作者:&nbsp{{wenyi.作者}}<br/>
+                </p>
+            </div>
+          <div class="row mt-3 mb-3 border-bottom">
+                 <div class="col mt-3 mb-3">
+                     <h4><strong>评论区</strong></h4>
+                 </div>
+                 <div class="col mt-3 mb-3 text-right">
+                     {% bs_icon 'chat-right-dots' %}{{comments.count}}
+                 </div>
+            </div>
+            {% for comment in comments %}
+            <div class="row border mt-3 mb-3 p-3">
+                <div class="col">{{comment.评论}}</div>
+                <div class="col text-right text-muted">{{comment.发布时间|date:'Y' }}年{{comment.发布时间|date:'m' }}月{{comment.发布时间|date:'d' }}日 {{comment.发布时间|date:'h:i:s' }}</div>
+
+            </div>
+            {% endfor %}
+            <div class="row">
+                <form method="POST" >
+                    <div class="form-floating">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn btn-outline-dark" type="submit">发表</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-4 ml-2">
+          <div class="row border rounded pb-2">
+            <div class="row no-gutters p-2 bg-light align-items-stretch mb-2">
+                <h4>其他文艺 </h4>
+            </div>
+            {% for obj in all_文艺 %}
+            <a href ="{% url 'home:wenyidetail' obj.id %}" >
+                <div class="card card-img-horizontal border rounded mb-2" style="flex-direction:row;">
+                    {% if obj.图片 %}
+                    <img class="w-100 align-middle" src="{{ MEDIA_URL }}{{ obj.图片 }}">
+                    {% else %}
+                    <img class="w-100 align-middle" src="{% static 'images/default-placeholder.png' %}">
+                    {% endif %}
+                    <div class="card-body p-2">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <small class="text-muted card-date">{{obj.更新时间|date:'Y-m-d h:i:s' }}</small>
+                    </div>
+                </div>
+            </a>
+          {% endfor %}
+            <a class="nav-link" href="{% url 'home:wenyi' %}">
+                <div class=" w-100 btn btn-outline-dark bg-light mb-2">
+                    更多文艺
+                </div>
+            </a>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

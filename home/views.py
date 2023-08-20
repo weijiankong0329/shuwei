@@ -3,8 +3,8 @@ from django.utils import timezone
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from home.models import 通讯, 书讯, 书评, 观点, 文艺, 问答, 视频, 译林, 文摘, 论文, 经训, 古籍, 书库, 章节_经训,评论_视频,提问_问答
-from .forms import 视频_comment_form,问答_comment_form
+from home.models import 通讯, 书讯, 书评, 观点, 文艺, 问答, 视频, 译林, 文摘, 论文, 经训, 古籍, 书库, 章节_经训, 提问_问答
+from .forms import 视频_comment_form,问答_comment_form,书评_comment_form,观点_comment_form,文艺_comment_form
 from django.contrib import messages
 from django.db.models import Count,Q
 
@@ -28,6 +28,152 @@ def MainView(request):
         'all_经训': 经训.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],
     }
     return render(request,'frontend/首页/index.html',context)
+
+def TongXun(request):
+    all_通讯 = 通讯.objects.all().filter(发布状态=True)
+    context = {
+        'all_通讯': all_通讯,
+    }
+    return render(request, 'frontend/通讯/main.html', context)
+
+def TongXunDetail(request,tongxun_id):
+    tongxun = 通讯.objects.all().get(id=tongxun_id)
+    all_通讯 = 通讯.objects.all().filter(发布状态=True).exclude(id=tongxun_id)[:5]
+    context = {
+        'all_通讯': all_通讯,
+        'tongxun': tongxun
+    }
+    return render(request, 'frontend/通讯/detail.html', context)
+
+def ShuXun(request):
+    all_书讯 = 书讯.objects.all().filter(发布状态=True)
+    context = {
+        'all_书讯': all_书讯,
+    }
+    return render(request, 'frontend/书讯/main.html', context)
+
+def ShuXunDetail(request,shuxun_id):
+    shuxun = 书讯.objects.all().get(id=shuxun_id)
+    all_书讯 = 书讯.objects.all().filter(发布状态=True).exclude(id=shuxun_id)[:5]
+    context = {
+        'all_书讯': all_书讯,
+        'shuxun': shuxun
+    }
+    return render(request, 'frontend/书讯/detail.html', context)
+
+def ShuPing(request):
+    all_书评 = 书评.objects.all().filter(发布状态=True)
+    context = {
+        'all_书评': all_书评,
+    }
+    return render(request, 'frontend/书评/main.html', context)
+
+class ShuPingDetail(generic.TemplateView):
+    template_name = "frontend/书评/detail.html"
+    def get(self,request,shuping_id):
+        shuping = 书评.objects.all().get(id=shuping_id)
+        all_书评 = 书评.objects.all().filter(发布状态=True).exclude(id=shuping_id)[:5]
+        form = 书评_comment_form
+        comments = shuping.评论_书评_set.filter(通过='已通过')
+        context = {
+            'all_书评': all_书评,
+            'shuping': shuping,
+            'form':form,
+            'comments':comments
+        }
+        return render(request, self.template_name, context)
+
+    def post(self,request,shuping_id):
+        form = 书评_comment_form(request.POST)
+        if form.is_valid():
+            commentForm = form.save(commit=False)
+            commentForm.书评 = 书评.objects.get(id=shuping_id)
+            commentForm.save()
+            comment = form.cleaned_data['评论']
+            args = {
+                'form': form,
+                'comment': comment
+            }
+            msg = '评论已提交，待审核'
+            messages.success(request, msg)
+            return HttpResponseRedirect(reverse('home:shupingdetail', kwargs={'shuping_id': shuping_id}))
+
+def GuanDian(request):
+    all_观点 = 观点.objects.all().filter(发布状态=True)
+    context = {
+        'all_观点': all_观点,
+    }
+    return render(request, 'frontend/观点/main.html', context)
+
+class GuanDianDetail(generic.TemplateView):
+    template_name = "frontend/观点/detail.html"
+
+    def get(self, request, guandian_id):
+        form = 观点_comment_form
+        all_观点 = 观点.objects.all().filter(发布状态=True).exclude(id=guandian_id).annotate(comment_no=Count("评论_观点", filter=Q(评论_观点__通过='已通过')))[:5]
+        guandian = 观点.objects.get(id=guandian_id)
+        comments = guandian.评论_观点_set.filter(通过='已通过')
+        context = {
+            'all_观点': all_观点,
+            'guandian':guandian,
+            'form':form,
+            'comments':comments
+        }
+        return render(request, self.template_name, context)
+
+    def post(self,request,guandian_id):
+        form = 观点_comment_form(request.POST)
+        if form.is_valid():
+            commentForm = form.save(commit=False)
+            commentForm.观点 = 观点.objects.get(id=guandian_id)
+            commentForm.save()
+            comment = form.cleaned_data['评论']
+            args = {
+                'form': form,
+                'comment': comment
+            }
+            msg = '评论已提交，待审核'
+            messages.success(request, msg)
+            return HttpResponseRedirect(reverse('home:guandiandetail', kwargs={'guandian_id': guandian_id}))
+def WenYi(request):
+    all_文艺 = 文艺.objects.all().filter(发布状态=True)
+    context = {
+        'all_文艺': all_文艺,
+    }
+    return render(request, 'frontend/文艺/main.html', context)
+
+
+
+class WenYiDetail(generic.TemplateView):
+    template_name = "frontend/文艺/detail.html"
+
+    def get(self, request, wenyi_id):
+        form = 文艺_comment_form
+        all_文艺 = 文艺.objects.all().filter(发布状态=True).exclude(id=wenyi_id).annotate(comment_no=Count("评论_文艺",filter=Q(评论_文艺__通过='已通过')))[:5]
+        wenyi = 文艺.objects.get(id=wenyi_id)
+        comments = wenyi.评论_文艺_set.filter(通过='已通过')
+        context = {
+            'all_文艺': all_文艺,
+            'wenyi':wenyi,
+            'form':form,
+            'comments':comments
+        }
+        return render(request, self.template_name, context)
+
+    def post(self,request,wenyi_id):
+        form = 文艺_comment_form(request.POST)
+        if form.is_valid():
+            commentForm = form.save(commit=False)
+            commentForm.文艺 = 文艺.objects.get(id=wenyi_id)
+            commentForm.save()
+            comment = form.cleaned_data['评论']
+            args = {
+                'form': form,
+                'comment': comment
+            }
+            msg = '评论已提交，待审核'
+            messages.success(request, msg)
+            return HttpResponseRedirect(reverse('home:wenyidetail', kwargs={'wenyi_id': wenyi_id}))
 
 def ShiPing(request):
     all_视频 = 视频.objects.all().filter(发布状态=True).annotate(comment_no=Count("评论_视频",filter=Q(评论_视频__通过='已通过')))
