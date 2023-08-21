@@ -41,44 +41,34 @@
             </div>
 
         </div>
-
-        <div class="col-3 border rounded ml-2 max-height h-50 sticky-scroll " >
-            <div class="row p-2 bg-light align-items-stretch mb-2">
-                <h4>其他通讯</h4>
-            </div>
-            {% for obj in all_通讯 %}
-            <a href="{% url 'home:tongxundetail' obj.id %}">
-                <div class="card card-img-horizontal border rounded mb-2" style="flex-direction: row;">
-                    {% if obj.图片 %}
-                    <img class="w-100 align-middle" src="{{ MEDIA_URL }}{{ obj.图片 }}">
-                    {% else %}
-                    <img class="w-100 align-middle" src="{% static 'images/default-placeholder.png' %}">
-                    {% endif %}
-                    <div class="card-body p-2">
-                        <small class="text-muted">标题</small>
-                        <h5 class="card-title font-weight-bold">{{ obj.标题 }}</h5>
-                        <small class="text-muted card-date">{{ obj.更新时间|date:'Y-m-d h:i:s' }}</small>
+        <div class="col-4 ml-2 ">
+            <div class="row border rounded pb-2 sticky-scroll">
+                <div class="row no-gutters p-2 bg-light align-items-stretch mb-2">
+                    <h4>其他通讯</h4>
+                </div>
+                {% for obj in all_通讯 %}
+                <a href="{% url 'home:tongxundetail' obj.id %}">
+                    <div class="card card-img-horizontal border rounded mb-2" style="flex-direction:row;">
+                        {% if obj.图片 %}
+                        <img class="w-100 align-middle" src="{{ MEDIA_URL }}{{ obj.图片 }}">
+                        {% else %}
+                        <img class="w-100 align-middle" src="{% static 'images/default-placeholder.png' %}">
+                        {% endif %}
+                        <div class="card-body p-2">
+                            <small class="text-muted">标题</small>
+                            <h5 class="card-title font-weight-bold">{{obj.标题|truncatechars:15 }}</h5>
+                            <small class="text-muted card-date">{{obj.更新时间|date:'Y-m-d h:i:s' }}</small>
+                        </div>
                     </div>
-                </div>
-            </a>
-            {% endfor %}
-            <a class="nav-link" href="{% url 'home:tongxun' %}">
-                <div class="w-100 btn btn-outline-dark bg-light mb-2">
-                    更多通讯
-                </div>
-            </a>
+                </a>
+                {% endfor %}
+                <a class="nav-link" href="{% url 'home:tongxun' %}">
+                    <div class=" w-100 btn btn-outline-dark bg-light mb-2">
+                        更多通讯
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
-
-
 </div>
-<style>
-.sticky-scroll {
-    position: sticky;
-    top: 100px; 
-}
-</style>
-
-
-
 {% endblock %}

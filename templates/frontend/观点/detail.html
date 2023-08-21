@@ -60,7 +60,7 @@
         </div>
 
         <div class="col-4 ml-2">
-          <div class="row border rounded pb-2">
+          <div class="row border rounded pb-2 sticky-scroll">
             <div class="row no-gutters p-2 bg-light align-items-stretch mb-2">
                 <h4>其他观点 </h4>
             </div>
@@ -74,7 +74,7 @@
                     {% endif %}
                     <div class="card-body p-2">
                         <small class="text-muted">标题</small>
-                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <h5 class="card-title font-weight-bold">{{obj.标题|truncatechars:20 }}</h5>
                         <small class="text-muted card-date">{{obj.更新时间|date:'Y-m-d h:i:s' }}</small>
                     </div>
                 </div>

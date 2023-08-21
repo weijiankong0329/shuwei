@@ -6,19 +6,19 @@
     <div class="row mb-4 mt-4">
         <div class="col">
             <h2>
-                <strong>{{.标题}}</strong>
+                <strong>{{wenyi.标题}}</strong>
             </h2>
         </div>
         <div class="col-2 text-right text-muted">
             更新时间<br/>
-            {{.更新时间|date:'Y' }}年{{.更新时间|date:'m' }}月{{.更新时间|date:'d' }}日 {{.更新时间|date:'h:i:s' }}
+            {{wenyi.更新时间|date:'Y' }}年{{wenyi.更新时间|date:'m' }}月{{wenyi.更新时间|date:'d' }}日 {{wenyi.更新时间|date:'h:i:s' }}
 
         </div>
     </div>
     <hr>
     <div class="row mb-4 mt-4">
-        {% if .图片 %}
-        <img class="w-100" src="{{ MEDIA_URL }}{{ .图片 }}">
+        {% if wenyi.图片 %}
+        <img class="w-100" src="{{ MEDIA_URL }}{{ wenyi.图片 }}">
         {% else %}
         <img class="w-100" src="{% static 'images/default-placeholder.png' %}">
         {% endif %}
@@ -26,11 +26,11 @@
     <div class="row mb-4 mt-4 pb-4">
         <div class="col">
             <div class="row">
-                {{.内容|safe}}
+                {{wenyi.内容|safe}}
             </div>
             <div class="row mt-4">
                 <p>
-                作者:&nbsp{{.作者}}<br/>
+                作者:&nbsp{{wenyi.作者}}<br/>
                 </p>
             </div>
           <div class="row mt-3 mb-3 border-bottom">
@@ -60,7 +60,7 @@
         </div>
 
         <div class="col-4 ml-2">
-          <div class="row border rounded pb-2">
+          <div class="row border rounded pb-2 sticky-scroll">
             <div class="row no-gutters p-2 bg-light align-items-stretch mb-2">
                 <h4>其他文艺 </h4>
             </div>
@@ -74,13 +74,13 @@
                     {% endif %}
                     <div class="card-body p-2">
                         <small class="text-muted">标题</small>
-                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <h5 class="card-title font-weight-bold">{{obj.标题|truncatechars:20 }}</h5>
                         <small class="text-muted card-date">{{obj.更新时间|date:'Y-m-d h:i:s' }}</small>
                     </div>
                 </div>
             </a>
           {% endfor %}
-            <a class="nav-link" href="{% url 'home:' %}">
+            <a class="nav-link" href="{% url 'home:wenyi' %}">
                 <div class=" w-100 btn btn-outline-dark bg-light mb-2">
                     更多文艺
                 </div>
