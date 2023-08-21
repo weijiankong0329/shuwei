@@ -31,13 +31,14 @@ $(function() {
   var body = $("body");
   var menu_logo = $("#menu-logo");
   var search_form = $("#search-form")
+
   function scrollHeader() {
     // adding sticky class
-    if (window.pageYOffset > 105) {
+    if (window.pageYOffset > 105 && $('.navbar-close').css('display') == 'none') {
       $(header).addClass("sticky");
       $(menu_logo).attr("hidden",false);
       $(search_form).attr("hidden",false);
-    } else {
+    } else if (window.pageYOffset < 105 && $('.navbar-close').css('display') == 'none'){
       // removing sticky class
       $(header).removeClass("sticky");
       $(menu_logo).attr("hidden",true);
@@ -52,7 +53,10 @@ $(function() {
     // $(header).toggleClass("sticky-not");
     $(".navbar-close").show();
     $(menu_logo).show();
+    $(menu_logo).attr("hidden",false);
+    $(search_form).attr("hidden",false);
   });
+
   $(".navbar-close").on("click", function() {
     $(".collapse").toggleClass("show");
     $(".navbar-close").hide();

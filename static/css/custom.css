@@ -19,7 +19,7 @@
 }
 
 footer .footer-logo {
-  width: 25%;
+  width: 50%;
 }
 
 .btn-circle{
@@ -58,7 +58,6 @@ footer .footer-logo {
     outline: 0;
     background: none;
     line-height: 40px;
-    width: 150px;
 }
 
 .navbar-left-base li{
@@ -275,3 +274,19 @@ form{
 .admin-main-content img{
     width:100%;
 }
+
+.tongxun-banner-box{
+      border:1px solid;
+}
+
+.admin-nav-link:hover{
+    background-color:black;
+    color:white;
+}
+
+@media screen and (max-width: 992px) {
+  .search-bar-div{
+    display: none;
+  }
+}
+
