@@ -152,7 +152,6 @@ class 译林(models.Model):
 class 文摘(models.Model):
     标题 = models.CharField(max_length=150)
     内容 = RichTextField(blank=True, null=True)
-    #内容 = models.TextField()
     更新时间 = models.DateTimeField(auto_now=True)
     作者 = models.CharField(max_length=200, null=True, blank=True)
     图片 = models.ImageField(upload_to='images/wenzhai/', blank=True, null=True)

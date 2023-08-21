@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import 评论_视频,评论_问答,评论_书评,评论_观点,评论_文艺
+from .models import 评论_视频,评论_问答,评论_书评,评论_观点,评论_文艺,评论_文摘
 class 视频_comment_form(ModelForm):
     class Meta:
         model = 评论_视频
@@ -37,6 +37,14 @@ class 文艺_comment_form(ModelForm):
     class Meta:
         model = 评论_文艺
         exclude =['文艺', '发表时间','通过']
+        widgets = {
+            '评论': forms.Textarea(attrs={'class': 'form-control'})
+        }
+
+class 文摘_comment_form(ModelForm):
+    class Meta:
+        model = 评论_文摘
+        exclude =['文摘', '发表时间','通过']
         widgets = {
             '评论': forms.Textarea(attrs={'class': 'form-control'})
         }

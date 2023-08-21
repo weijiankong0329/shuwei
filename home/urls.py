@@ -43,6 +43,9 @@ urlpatterns = [
     path('论文/<int:lunwen_id>/', views.LunWencontent, name='lunwendetail'),
     path('译林/', views.YiLing, name='yiling'),
     path('译林/<int:yiling_id>/', views.YiLingcontent, name='yilingdetail'),
+
+    path('文摘/',views.WenZhai,name="wenzhai"),
+    path('文摘/<int:wenzhai_id>',views.WenZhaiDetail.as_view(),name="wenzhaidetail"),
 ]
 
 
