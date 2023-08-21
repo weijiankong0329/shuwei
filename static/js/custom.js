@@ -4,8 +4,10 @@ $(function() {
     var time_show = $('#time-show');
     fn();
     var content_height = $("body").height()-$("header").height()-$("footer").height();
+
     $("#content-wrap").css("min-height",content_height);
     $(".admin-main-content").css("min-height",content_height);
+
     if($("#id_参考问答").prop('checked')){
         $("#参考问答项目-div").removeAttr("hidden");
         $("#答案-div").attr("hidden","true");

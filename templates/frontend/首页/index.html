@@ -8,11 +8,12 @@
     <div class="col-lg-8">
       <div class="owl-carousel owl-theme" id="main-banner-carousel">
         {% for obj in all_通讯|slice:":4" %}
+        <a href="{% url 'home:tongxundetail' obj.id %}" class="text-decoration-none">
           <div class="item">
             <div class="carousel-content-wrapper mb-2 main-page-banner ">
-              <div class="carousel-content">
+              <div class="carousel-content tongxun-banner-box">
                 <h1 class="font-weight-bold">{{obj.标题}}</h1>
-                <h5 class="font-weight-normal  m-0">{{obj.内容|safe}}</h5>
+                <h5 class="font-weight-normal  m-0">{{obj.内容|safe|truncatechars:50}}</h5>
                 <p class="text-color m-0 pt-2 d-flex align-items-center">
                   <span class="fs-10 mr-1">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</span>
                   <i class="mdi mdi-bookmark-outline mr-3"></i>
@@ -27,6 +28,7 @@
               </div>
             </div>
           </div>
+        </a>
         {% endfor %}
       </div>
     </div>
@@ -45,19 +47,23 @@
         {% if forloop.counter|divisibleby:2 is False %}
           <div class="row">
         {% endif %}
-          <div class="col-sm-6 pr-1">
-            <div class="py-3 border-bottom">
-              <div class="ps-1 d-flex align-items-center pb-2">
-                <span class="fs-12 text-muted">{{obj.作者}}</span>
+
+              <div class="col-sm-6 pr-1">
+                <a href="{% url 'home:tongxundetail' obj.id %}" class="text-decoration-none">
+                <div class="py-3 border-bottom">
+                  <div class="ps-1 d-flex align-items-center pb-2">
+                    <span class="fs-12 text-muted">{{obj.作者}}</span>
+                  </div>
+                  <p class="ps-1 fs-16 m-0 font-weight-medium line-height-sm display-5">
+                    <strong>{{obj.标题}}</strong>
+                  </p><br/>
+                  <p class="content-list-date">
+                    <span class="fs-12 text-muted">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</span>
+                  </p>
+                </div>
+
+            </a>
               </div>
-              <p class="ps-1 fs-16 m-0 font-weight-medium line-height-sm display-5">
-                <strong>{{obj.标题}}</strong>
-              </p><br/>
-              <p class="content-list-date">
-                <span class="fs-12 text-muted">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</span>
-              </p>
-            </div>
-          </div>
         {% if forloop.counter|divisibleby:2 %}
           </div>
         {% endif %}
@@ -80,22 +86,24 @@
           </div>
         </div>
         {% for obj in all_书讯 %}
-        <div class="row no-gutters pb-2 mr-2">
-            <div class="col-5 pr-1">
-              <div class="d-flex align-items-center content-list-img">
-                {% if obj.图片 %}
-                <img src="{{ MEDIA_URL }}{{ obj.图片}}">
-                {% else %}
-                <img src="{% static 'images/default-placeholder.png' %}" alt="" />
-                {% endif %}
+        <a href="{% url 'home:shuxundetail' obj.id %}" class="text-decoration-none">
+          <div class="row no-gutters pb-2 mr-2">
+              <div class="col-5 pr-1">
+                <div class="d-flex align-items-center content-list-img">
+                  {% if obj.图片 %}
+                  <img src="{{ MEDIA_URL }}{{ obj.图片}}">
+                  {% else %}
+                  <img src="{% static 'images/default-placeholder.png' %}" alt="" />
+                  {% endif %}
+                </div>
               </div>
-            </div>
-            <div class="col pr-2 pl-1">
-                <p><strong class="display-5">{{obj.标题}}</strong></p>
-                <small class="text-muted blockquote-footer">{{obj.作者}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
-            </div>
-        </div>
+              <div class="col pr-2 pl-1">
+                  <p><strong class="display-5">{{obj.标题}}</strong></p>
+                  <small class="text-muted blockquote-footer">{{obj.作者}}</small>
+                  <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
+              </div>
+          </div>
+        </a>
         {% endfor %}
         <div class="row text-muted text-right">
           <small>更多</small>
@@ -111,22 +119,24 @@
           </div>
         </div>
         {% for obj in all_书评 %}
-        <div class="row no-gutters pb-2 mr-2">
-            <div class="col-5 pr-1">
-              <div class="d-flex align-items-center content-list-img">
-                {% if obj.图片 %}
-                <img src="{{ MEDIA_URL }}{{ obj.图片}}">
-                {% else %}
-                <img src="{% static 'images/default-placeholder.png' %}" alt="" />
-                {% endif %}
+        <a href="{% url 'home:shupingdetail' obj.id %}" class="text-decoration-none">
+          <div class="row no-gutters pb-2 mr-2">
+              <div class="col-5 pr-1">
+                <div class="d-flex align-items-center content-list-img">
+                  {% if obj.图片 %}
+                  <img src="{{ MEDIA_URL }}{{ obj.图片}}">
+                  {% else %}
+                  <img src="{% static 'images/default-placeholder.png' %}" alt="" />
+                  {% endif %}
+                </div>
               </div>
-            </div>
-            <div class="col pr-2 pl-1">
-                <p><strong class="display-5">{{obj.标题}}</strong></p>
-                <small class="text-muted blockquote-footer">{{obj.书评作者}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
-            </div>
-        </div>
+              <div class="col pr-2 pl-1">
+                  <p><strong class="display-5">{{obj.标题}}</strong></p>
+                  <small class="text-muted blockquote-footer">{{obj.书评作者}}</small>
+                  <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
+              </div>
+          </div>
+        </a>
         {% endfor %}
         <div class="row text-muted text-right">
           <small>更多</small>
@@ -142,22 +152,24 @@
           </div>
         </div>
         {% for obj in all_观点 %}
-        <div class="row no-gutters pb-2 mr-2">
-            <div class="col-5 pr-1">
-              <div class="d-flex align-items-center content-list-img">
-                {% if obj.图片 %}
-                <img src="{{ MEDIA_URL }}{{ obj.图片}}">
-                {% else %}
-                <img src="{% static 'images/default-placeholder.png' %}" alt="" />
-                {% endif %}
+        <a href="{% url 'home:guandiandetail' obj.id %}" class="text-decoration-none">
+          <div class="row no-gutters pb-2 mr-2">
+              <div class="col-5 pr-1">
+                <div class="d-flex align-items-center content-list-img">
+                  {% if obj.图片 %}
+                  <img src="{{ MEDIA_URL }}{{ obj.图片}}">
+                  {% else %}
+                  <img src="{% static 'images/default-placeholder.png' %}" alt="" />
+                  {% endif %}
+                </div>
               </div>
-            </div>
-            <div class="col pr-2 pl-1">
-                <p><strong class="display-5">{{obj.标题}}</strong></p>
-                <small class="text-muted blockquote-footer">{{obj.作者}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
-            </div>
-        </div>
+              <div class="col pr-2 pl-1">
+                  <p><strong class="display-5">{{obj.标题}}</strong></p>
+                  <small class="text-muted blockquote-footer">{{obj.作者}}</small>
+                  <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
+              </div>
+          </div>
+        </a>
         {% endfor %}
         <div class="row text-muted text-right">
           <small>更多</small>
@@ -178,22 +190,24 @@
           </div>
         </div>
         {% for obj in all_文艺 %}
-        <div class="row no-gutters pb-2 mr-2">
-            <div class="col-5 pr-1">
-              <div class="d-flex align-items-center content-list-img">
-                {% if obj.图片 %}
-                <img src="{{ MEDIA_URL }}{{ obj.图片}}">
-                {% else %}
-                <img src="{% static 'images/default-placeholder.png' %}" alt="" />
-                {% endif %}
+        <a href="{% url 'home:wenyidetail' obj.id %}" class="text-decoration-none">
+          <div class="row no-gutters pb-2 mr-2">
+              <div class="col-5 pr-1">
+                <div class="d-flex align-items-center content-list-img">
+                  {% if obj.图片 %}
+                  <img src="{{ MEDIA_URL }}{{ obj.图片}}">
+                  {% else %}
+                  <img src="{% static 'images/default-placeholder.png' %}" alt="" />
+                  {% endif %}
+                </div>
               </div>
-            </div>
-            <div class="col pr-2 pl-1">
-                <p><strong class="display-5">{{obj.标题}}</strong></p>
-                <small class="text-muted blockquote-footer">{{obj.作者}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
-            </div>
-        </div>
+              <div class="col pr-2 pl-1">
+                  <p><strong class="display-5">{{obj.标题}}</strong></p>
+                  <small class="text-muted blockquote-footer">{{obj.作者}}</small>
+                  <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
+              </div>
+          </div>
+        </a>
         {% endfor %}
         <div class="row text-muted text-right">
           <small>更多</small>
@@ -252,21 +266,24 @@
               </div>
             </div>
             {% for obj in all_译林 %}
-            <div class="row no-gutters pb-2 mr-2">
-              <div class="col-5 pr-1">
-                <div class="d-flex align-items-center content-list-img">
-                  {% if obj.图片 %}<img src="{{ MEDIA_URL }}{{ obj.图片}}">
-                {% else %}
-                <img src="{% static 'images/default-placeholder.png' %}" alt="" />
-                {% endif %}
+            <a href="{% url 'home:yilindetail' obj.id %}" class="text-decoration-none">
+              <div class="row no-gutters pb-2 mr-2">
+                <div class="col-5 pr-1">
+                  <div class="d-flex align-items-center content-list-img">
+                    {% if obj.图片 %}<img src="{{ MEDIA_URL }}{{ obj.图片}}">
+                  {% else %}
+                  <img src="{% static 'images/default-placeholder.png' %}" alt="" />
+                  {% endif %}
+                  </div>
+                </div>
+                <div class="col pr-2 pl-1">
+                  <p><strong class="display-5">{{obj.标题}}</strong></p>
+                  <small class="text-muted blockquote-footer">{{obj.译文作者}}</small>
+                  <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
                 </div>
               </div>
-              <div class="col pr-2 pl-1">
-                <p><strong class="display-5">{{obj.标题}}</strong></p>
-                <small class="text-muted blockquote-footer">{{obj.译文作者}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
-              </div>
-          </div>
+            </a>
+
             {% endfor %}
             <div class="row text-muted text-right">
               <small>更多</small>
@@ -282,21 +299,23 @@
               </div>
             </div>
             {% for obj in all_文摘 %}
-            <div class="row no-gutters pb-2 mr-2">
-              <div class="col-5 pr-1">
-                <div class="d-flex align-items-center content-list-img">
-                  {% if obj.图片 %}<img src="{{ MEDIA_URL }}{{ obj.图片}}">
-                {% else %}
-                <img src="{% static 'images/default-placeholder.png' %}" alt="" />
-                {% endif %}
+            <a href="{% url 'home:wenzhaidetail' obj.id %}" class="text-decoration-none">
+              <div class="row no-gutters pb-2 mr-2">
+                <div class="col-5 pr-1">
+                  <div class="d-flex align-items-center content-list-img">
+                    {% if obj.图片 %}<img src="{{ MEDIA_URL }}{{ obj.图片}}">
+                  {% else %}
+                  <img src="{% static 'images/default-placeholder.png' %}" alt="" />
+                  {% endif %}
+                  </div>
+                </div>
+                <div class="col pr-2 pl-1">
+                  <p><strong class="display-5">{{obj.标题}}</strong></p>
+                  <small class="text-muted blockquote-footer">{{obj.作者}}</small>
+                  <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
                 </div>
               </div>
-              <div class="col pr-2 pl-1">
-                <p><strong class="display-5">{{obj.标题}}</strong></p>
-                <small class="text-muted blockquote-footer">{{obj.作者}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
-              </div>
-          </div>
+            </a>
             {% endfor %}
             <div class="row text-muted text-right">
               <small>更多</small>
