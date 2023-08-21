@@ -13,7 +13,7 @@
                 </div>
                 {% for 章节 in 章节_results %}
                 <div class="container mt-4">
-                    <h2><a href="{% url 'home:content' 章节.id %}">{{ 章节.章节 }}</a></h2>
+                    <h2><a href="{% url 'home:jingxundetail' 章节.id %}">{{ 章节.章节 }}</a></h2>
                     <p>{% if 章节.内容|lower|find:keyword|default:-1 != -1 %}
                         {{ 章节.内容|highlight:keyword|safe }}
                     {% else %}

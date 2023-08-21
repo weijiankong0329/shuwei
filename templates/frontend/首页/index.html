@@ -53,7 +53,7 @@
                 <span class="fs-12 text-muted">{{obj.作者}}</span>
               </div>
               <p class="ps-1 fs-16 m-0 font-weight-medium line-height-sm display-7">
-                <strong>{{obj.标题|truncatechars:15}}</strong>
+                <strong><a href="{% url 'home:tongxundetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong>
               </p><br/>
               <p class="content-list-date">
                 <span class="fs-12 text-muted">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</span>
@@ -65,7 +65,7 @@
         {% endif %}
       {% endfor %}
        <div class="row text-muted text-right pt-3">
-          <small>更多</small>
+          <small><a href="{% url 'home:tongxun'%}">更多</a></small>
         </div>
     </div>
   </div>
@@ -93,14 +93,14 @@
               </div>
             </div>
             <div class="col pr-2 pl-1">
-                <p><strong class="display-7">{{obj.标题|truncatechars:15}}</strong></p>
+                <p><strong class="display-7"><a href="{% url 'home:shuxundetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong></p>
                 <small class="text-muted blockquote-footer">{{obj.作者}}</small>
                 <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
             </div>
         </div>
         {% endfor %}
         <div class="row text-muted text-right">
-          <small>更多</small>
+          <small><a href="{% url 'home:shuxun'%}">更多</a></small>
         </div>
       </div>
       <div class="col-lg-4">
@@ -124,14 +124,14 @@
               </div>
             </div>
             <div class="col pr-2 pl-1">
-                <p><strong class="display-7">{{obj.标题|truncatechars:15}}</strong></p>
+                <p><strong class="display-7"><a href="{% url 'home:shupingdetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong></p>
                 <small class="text-muted blockquote-footer">{{obj.书评作者}}</small>
                 <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
             </div>
         </div>
         {% endfor %}
         <div class="row text-muted text-right">
-          <small>更多</small>
+          <small><a href="{% url 'home:shuping'%}">更多</a></small>
         </div>
       </div>
       <div class="col-lg-4">
@@ -155,14 +155,14 @@
               </div>
             </div>
             <div class="col pr-2 pl-1">
-                <p><strong class="display-7">{{obj.标题|truncatechars:15}}</strong></p>
+                <p><strong class="display-7"><a href="{% url 'home:guandiandetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong></p>
                 <small class="text-muted blockquote-footer">{{obj.作者}}</small>
                 <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
             </div>
         </div>
         {% endfor %}
         <div class="row text-muted text-right">
-          <small>更多</small>
+          <small><a href="{% url 'home:guandian'%}">更多</a></small>
         </div>
       </div>
     </div>
@@ -191,14 +191,14 @@
               </div>
             </div>
             <div class="col pr-2 pl-1">
-                <p><strong class="display-7">{{obj.标题|truncatechars:15}}</strong></p>
+                <p><strong class="display-7"><a href="{% url 'home:wenyidetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong></p>
                 <small class="text-muted blockquote-footer">{{obj.作者}}</small>
                 <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
             </div>
         </div>
         {% endfor %}
         <div class="row text-muted text-right">
-          <small>更多</small>
+          <small><a href="{% url 'home:wenyi'%}">更多</a></small>
         </div>
       </div>
       <div class="col-lg-8">
@@ -232,7 +232,7 @@
             </div>
         {% endfor %}
              <div class="row text-muted text-right">
-          <small>更多</small>
+          <small><a href="{% url 'home:shiping'%}">更多</a></small>
         </div>
           </div>
         </div>
@@ -264,14 +264,14 @@
                 </div>
               </div>
               <div class="col pr-2 pl-1">
-                <p><strong class="display-7">{{obj.标题|truncatechars:15}}</strong></p>
+                <p><strong class="display-7"><a href="{% url 'home:yilingdetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong></p>
                 <small class="text-muted blockquote-footer">{{obj.译文作者}}</small>
                 <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
               </div>
           </div>
             {% endfor %}
             <div class="row text-muted text-right">
-              <small>更多</small>
+              <small><a href="{% url 'home:yiling'%}">更多</a></small>
             </div>
           </div>
           <div class="col-lg">
@@ -294,14 +294,14 @@
                 </div>
               </div>
               <div class="col pr-2 pl-1">
-                <p><strong class="display-7">{{obj.标题|truncatechars:15}}</strong></p>
+                <p><strong class="display-7"><a href="{% url 'home:wenzhaidetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong></p>
                 <small class="text-muted blockquote-footer">{{obj.作者}}</small>
                 <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
               </div>
           </div>
             {% endfor %}
             <div class="row text-muted text-right">
-              <small>更多</small>
+              <small><a href="{% url 'home:wenzhai'%}">更多</a></small>
             </div>
           </div>
         </div>
@@ -323,7 +323,7 @@
                 </div>
               </div>
               <div class="col pr-2 pl-1">
-                <strong class="display-7">{{obj.标题|truncatechars:15}}</strong>
+                <strong class="display-7"><a href="{% url 'home:wendadetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong>
                 {% if obj.参考问答 %}
                   <small class="text-muted">{{obj.参考问答项目.答案|safe|truncatechars:30}}</small>
                 {% else %}
@@ -334,7 +334,7 @@
           </div>
             {% endfor %}
             <div class="row text-muted text-right">
-              <small>更多</small>
+              <small><a href="{% url 'home:wenda'%}">更多</a></small>
             </div>
           </div>
           <div class="col-lg">
@@ -357,14 +357,14 @@
                 </div>
               </div>
               <div class="col pr-2 pl-1">
-                <strong class="display-7">{{obj.标题|truncatechars:15}}</strong><br/>
+                <strong class="display-7"><a href="{% url 'home:jingxundetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong><br/>
                 <small class="text-muted">章节数量: {{obj.章节_经训_set.count}}</small>
                 <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
               </div>
           </div>
             {% endfor %}
             <div class="row text-muted text-right">
-              <small>更多</small>
+              <small><a href="{% url 'home:jingxun'%}">更多</a></small>
             </div>
           </div>
         </div>
@@ -382,18 +382,21 @@
             {% for obj in all_论文 %}
             <div class="row no-gutters pb-2 mr-2">
               <div class="col pr-2 pl-1">
-                <p><strong class="display-7">{{obj.标题|truncatechars:20}}</strong></p>
+                <p><strong class="display-7"><a href="{% url 'home:lunwendetail' obj.id %}">{{obj.标题|truncatechars:20}}</a></strong></p>
                 <small class="text-muted blockquote-footer pt-2">{{obj.作者}}</small>
               </div>
               <div class="col-1 pr-1 text-muted">
-                {% bs_icon 'book' size='1.5em' extra_classes="mt-1 mr-2" %}
+
+                <a href="{% url 'home:lunwendetail' obj.id %}">        
+                     {% bs_icon 'book' size='1.5em' extra_classes="mt-1 mr-2" %}
+                    </a>
               </div>
             </div>
             {% endfor %}
 
           </div>
           <div class="row text-muted text-right">
-              <small>更多</small>
+              <small><a href="{% url 'home:lunwen'%}">更多</a></small>
           </div>
         </div>
         <hr class="mb-3">
@@ -405,18 +408,20 @@
             {% for obj in all_古籍 %}
             <div class="row no-gutters pb-2 mr-2">
               <div class="col pr-2 pl-1">
-                <p><strong class="display-7">{{obj.标题|truncatechars:20}}</strong></p>
+                <p><strong class="display-7"><a href="{% url 'home:gujidetail' obj.id %}">{{obj.标题|truncatechars:20}}</a></strong></p>
                 <small class="text-muted blockquote-footer pt-2">{{obj.作者}}</small>
               </div>
               <div class="col-1 pr-1">
-                {% bs_icon 'book' size='1.5em' extra_classes="text-muted mt-1 mr-2" %}
+                <a href="{% url 'home:gujidetail' obj.id %}">        
+                  {% bs_icon 'book' size='1.5em' extra_classes="mt-1 mr-2" %}
+                 </a>
               </div>
             </div>
             {% endfor %}
 
           </div>
           <div class="row text-muted text-right">
-            <small>更多</small>
+            <small><a href="{% url 'home:guji'%}">更多</a></small>
           </div>
         </div>
         <hr class="mb-3">
@@ -428,18 +433,20 @@
             {% for obj in all_书库 %}
             <div class="row no-gutters pb-2 mr-2">
               <div class="col pr-2 pl-1">
-                <p><strong class="display-7">{{obj.标题|truncatechars:20}}</strong></p>
+                <p><strong class="display-7"><a href="{% url 'home:detail' obj.id %}">{{obj.标题|truncatechars:20}}</a></strong></p>
                 <small class="text-muted blockquote-footer pt-2">{{obj.作者}}</small>
               </div>
               <div class="col-1 pr-1">
-                {% bs_icon 'book' size='1.5em' extra_classes="text-muted mt-1 mr-2" %}
+                <a href="{% url 'home:detail' obj.id %}">        
+                  {% bs_icon 'book' size='1.5em' extra_classes="mt-1 mr-2" %}
+                 </a>
               </div>
             </div>
             {% endfor %}
 
           </div>
           <div class="row text-muted text-right">
-            <small>更多</small>
+            <small><a href="{% url 'home:shuku'%}">更多</a></small>
           </div>
         </div>
 

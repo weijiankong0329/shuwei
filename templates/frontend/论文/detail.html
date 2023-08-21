@@ -3,12 +3,17 @@
 {% block content %}
 <div class="container">
     <div class="row mt-4 mb-4">
-        <div class="col-12">
-            <h2><strong>{{ lunwen.标题 }}</strong></h2>
-        </div>
-        <div class="col-12 text-right mt-3">
-            <h5>{{ lunwen.更新时间|date:"Y年m月d日 " }}</h5>
-        </div>
+            <div class="col">
+                <h2>
+                    <strong>{{lunwen.标题}}</strong>
+                </h2>
+            </div>
+            <div class="col-2 text-right text-muted">
+                更新时间<br/>
+                {{lunwen.更新时间|date:'Y' }}年{{lunwen.更新时间|date:'m' }}月{{lunwen.更新时间|date:'d' }}日 {{lunwen.更新时间|date:'h:i:s' }}
+    
+            </div>
+
         {% if lunwen.文档 %}
         <div class="col-12 mt-3">
             <div class="_df_book border" height="500" width="100%" webgl="true" backgroundcolor="dark"

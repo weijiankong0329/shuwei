@@ -2,3 +2,12 @@
     position: sticky;
     top: 100px;
 }  /* 侧边框滑动效果 */
+.card-img-top-zoom {
+    overflow: hidden;
+    transition: transform 0.5s ease;
+}
+
+.card-img-top-zoom img:hover {
+    transform: scale(1.1);
+}
+/* } 图片缩放功能 */

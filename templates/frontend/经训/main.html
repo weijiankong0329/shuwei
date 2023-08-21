@@ -31,7 +31,7 @@
                                 {% for 章节 in 经训.章节_经训_set.all %}
                                 {% if forloop.counter <= 6 %} <li class="list-group-item">
                                     <a class="nav-link chapter-link custom-nav-link "
-                                        href="{% url 'home:content' 章节.id %}" data-章节="{{ 章节.章节 }}">
+                                        href="{% url 'home:jingxundetail' 章节.id %}" data-章节="{{ 章节.章节 }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
                                             <path

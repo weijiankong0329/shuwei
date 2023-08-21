@@ -3,11 +3,15 @@
 {% block content %}
 <div class="container">
     <div class="row mt-4 mb-4">
-        <div class="col-12">
-            <h2><strong>{{ yiling.标题 }}</strong></h2>
+        <div class="col">
+            <h2>
+                <strong>{{yiling.标题}}</strong>
+            </h2>
         </div>
-        <div class="col-12 text-right mt-3">
-            <h5>{{ yiling.更新时间|date:"Y年m月d日 "}}</h5>
+        <div class="col-2 text-right text-muted">
+            更新时间<br/>
+            {{yiling.更新时间|date:'Y' }}年{{yiling.更新时间|date:'m' }}月{{yiling.更新时间|date:'d' }}日 {{yiling.更新时间|date:'h:i:s' }}
+
         </div>
         <div class="col-12 card border bg-light rounded p-4">
             <h5>
