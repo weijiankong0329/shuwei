@@ -57,9 +57,9 @@
                   <a class="navbar-brand" href="{% url 'home:homepage' %}" ><img src="{% static 'images/logo_black.png' %}" class="w-50" alt=""/></a>
                 </div>
 		        <div class="col-md col-lg search-bar-div">
-                  <form class="form-inline" method="get">
+                  <form class="form-inline" action="{% url 'home:searchAll' %}" method="get">
                     <div class="search-bar w-100">
-                      <input class="search-input ml-3" type="text" placeholder="关键词..."/>
+                      <input class="search-input ml-3" name="keyword" type="text" placeholder="关键词..."/>
                       <button class="search-button" type="submit">{% bs_icon 'search' size='0.75em' %}</button>
                     </div>
                   </form>
@@ -83,11 +83,11 @@
                         {% bs_icon 'x-circle' %}
                       </button>
                     </li>
-                    <li><a class="nav-item" href="#" ><img class="p-2" src="{% static 'images/logo_black.png' %}" id ="menu-logo" alt="" style ="width:100px;" hidden="true"/></a></li>
+                    <li><a class="nav-item" href="{% url 'home:homepage' %}" ><img class="p-2" src="{% static 'images/logo_black.png' %}" id ="menu-logo" alt="" style ="width:100px;" hidden="true"/></a></li>
                     <li>
-                      <form class="form-inline" id="search-form" method="get" hidden="true">
+                      <form class="form-inline" action="{% url 'home:searchAll' %}" id="search-form" method="get" hidden="true">
                         <div class="search-bar">
-                          <input class="search-input ml-3" type="text" placeholder="关键词..."/>
+                          <input class="search-input ml-3" type="text" name="keyword" placeholder="关键词..."/>
                           <button class="search-button" type="submit">{% bs_icon 'search' size='0.75em' %}</button>
                         </div>
                       </form>

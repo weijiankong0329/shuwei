@@ -1,0 +1,337 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap_icons %}
+{% block content %}
+<div class="container">
+    <div class="row mb-4 mt-4">
+        <h2>
+            <strong>搜索结果 {{result_count}}:</strong>
+        </h2>
+    </div>
+    {% if 通讯.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>通讯&nbsp{{通讯.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 通讯 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:tongxundetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% if 书讯.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>书讯&nbsp{{书讯.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 书讯 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:shuxundetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% if 书评.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>书评&nbsp{{书评.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 书评 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:shupingdetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% if 观点.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>观点&nbsp{{观点.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 观点 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:guandiandetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% if 文艺.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>文艺&nbsp{{文艺.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 文艺 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:wenyidetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% if 问答.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>问答&nbsp{{问答.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 问答 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:wendadetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% if 视频.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>视频&nbsp{{视频.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 视频 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:shipingdetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% if 论文.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>论文&nbsp{{论文.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 论文 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:lunwendetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% if 古籍.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>古籍&nbsp{{古籍.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 古籍 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:gujidetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% if 书库.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>书库&nbsp{{书库.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 书库 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:shukudetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% if 文摘.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>文摘&nbsp{{文摘.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 文摘 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:wenzhaidetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% if 经训.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>经训&nbsp{{经训.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 经训 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:jingxundetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

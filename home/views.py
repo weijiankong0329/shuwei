@@ -29,6 +29,42 @@ def MainView(request):
     }
     return render(request,'frontend/首页/index.html',context)
 
+def SearchAll(request):
+    keyword = request.GET.get('keyword')
+    tongxun_result=通讯.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    shuxun_result=书讯.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    shuping_result=书评.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    guandian_result=观点.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    wenyi_result=文艺.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    wenda_result=问答.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    shiping_result=视频.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    lunwen_result=论文.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    guji_result=古籍.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    shuku_result=书库.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    yilin_result=译林.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    wenzhai_result=文摘.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    jingxun_result=经训.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    result_count= tongxun_result.count() + shuxun_result.count() + shuping_result.count() + guandian_result.count() + wenyi_result.count() +\
+                  wenda_result.count() + shiping_result.count() + lunwen_result.count() + guji_result.count() + shuku_result.count() +\
+                  yilin_result.count() + wenzhai_result.count() + jingxun_result.count()
+    context = {
+        '通讯':tongxun_result,
+        '书讯':shuxun_result,
+        '书评':shuping_result,
+        '观点':guandian_result,
+        '文艺':wenyi_result,
+        '问答':wenda_result,
+        '视频':shiping_result,
+        '论文':lunwen_result,
+        '古籍':guji_result,
+        '书库':shuku_result,
+        '译林':yilin_result ,
+        '文摘':wenzhai_result,
+        '经训':jingxun_result,
+        'result_count':result_count
+    }
+    return render(request, 'frontend/search.html', context)
+
 def TongXun(request):
     all_通讯 = 通讯.objects.all().filter(发布状态=True)
     context = {
