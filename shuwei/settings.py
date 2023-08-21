@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'ckeditor',
-    'django_select2'
+    'django_select2',
+    'optimized_image',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -151,4 +152,9 @@ MESSAGE_TAGS = {
         messages.SUCCESS: 'alert-success',
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
+}
+
+OPTIMIZED_IMAGE_SETTINGS = {
+    'quality': 10,  # 设置图片压缩质量，范围从0到100
+    'formats': ['JPEG', 'PNG'],  # 设置支持的图片格式
 }

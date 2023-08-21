@@ -6,13 +6,13 @@
     <div class="row mb-4 mt-4">
         <div class="col">
             <h2>
-                <strong>{{guandian.标题}}</strong>
+                <strong>{{ guandian.标题 }}</strong>
             </h2>
-        </div>
-        <div class="col-2 text-right text-muted">
-            更新时间<br/>
-            {{guandian.更新时间|date:'Y' }}年{{guandian.更新时间|date:'m' }}月{{guandian.更新时间|date:'d' }}日 {{guandian.更新时间|date:'h:i:s' }}
-
+            <div class=" text-right text-muted">
+                更新时间<br />
+                {{ guandian.更新时间|date:'Y' }}年{{ guandian.更新时间|date:'m' }}月{{ guandian.更新时间|date:'d' }}日
+                {{ guandian.更新时间|date:'h:i:s' }}
+            </div>
         </div>
     </div>
     <hr>
@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <div class="col-4 ml-2">
+        <div class="col-4   ml-2 d-none d-md-block">
           <div class="row border rounded pb-2 sticky-scroll">
             <div class="row no-gutters p-2 bg-light align-items-stretch mb-2">
                 <h4>其他观点 </h4>

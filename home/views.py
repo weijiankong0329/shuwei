@@ -280,9 +280,11 @@ def JingXun(request):
 def show_all_chapters(request, 经训_id):
     经训_instance = 经训.objects.get(pk=经训_id)
     章节_list = 章节_经训.objects.filter(经训=经训_instance)
+    all_经训 = 经训.objects.all()
     context = {
         '经训': 经训_instance,
         '章节_list': 章节_list,
+        'all_经训':all_经训,
     }
     return render(request, 'frontend/经训/all_chapter.html', context)
 

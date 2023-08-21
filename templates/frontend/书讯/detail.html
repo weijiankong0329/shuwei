@@ -6,13 +6,13 @@
     <div class="row mb-4 mt-4">
         <div class="col">
             <h2>
-                <strong>{{shuxun.标题}}</strong>
+                <strong>{{ shuxun.标题 }}</strong>
             </h2>
-        </div>
-        <div class="col-2 text-right text-muted">
-            更新时间<br/>
-            {{shuxun.更新时间|date:'Y' }}年{{shuxun.更新时间|date:'m' }}月{{shuxun.更新时间|date:'d' }}日 {{shuxun.更新时间|date:'h:i:s' }}
-
+            <div class=" text-right text-muted">
+                更新时间<br />
+                {{ shuxun.更新时间|date:'Y' }}年{{ shuxun.更新时间|date:'m' }}月{{ shuxun.更新时间|date:'d' }}日
+                {{ shuxun.更新时间|date:'h:i:s' }}
+            </div>
         </div>
     </div>
     <hr>
@@ -35,32 +35,34 @@
                 </p>
             </div>
         </div>
-        <div class="col-4 border rounded ml-2">
-            <div class="row p-2 bg-light align-items-stretch mb-2">
-                <h4>其他书讯</h4>
+        <div class="col-4 ml-2 d-none d-md-block">
+            <div class="row border rounded pb-2 sticky-scroll">
+              <div class="row no-gutters p-2 bg-light align-items-stretch mb-2">
+                  <h4>其他书讯 </h4>
+              </div>
+              {% for obj in all_书讯 %}
+              <a href ="{% url 'home:detail' obj.id %}" >
+                  <div class="card card-img-horizontal border rounded mb-2" style="flex-direction:row;">
+                      {% if obj.图片 %}
+                      <img class="w-100 align-middle" src="{{ MEDIA_URL }}{{ obj.图片 }}">
+                      {% else %}
+                      <img class="w-100 align-middle" src="{% static 'images/default-placeholder.png' %}">
+                      {% endif %}
+                      <div class="card-body p-2">
+                          <small class="text-muted">标题</small>
+                          <h5 class="card-title font-weight-bold">{{obj.标题|truncatechars:20 }}</h5>
+                          <small class="text-muted card-date">{{obj.更新时间|date:'Y-m-d h:i:s' }}</small>
+                      </div>
+                  </div>
+              </a>
+            {% endfor %}
+              <a class="nav-link" href="{% url 'home:shuxun' %}">
+                  <div class=" w-100 btn btn-outline-dark bg-light mb-2">
+                      更多书讯
+                  </div>
+              </a>
             </div>
-            {% for obj in all_书讯 %}
-            <a href ="{% url 'home:shuxundetail' obj.id %}" >
-                <div class="card card-img-horizontal border rounded mb-2" style="flex-direction:row;">
-                    {% if obj.图片 %}
-                    <img class="w-100 align-middle" src="{{ MEDIA_URL }}{{ obj.图片 }}">
-                    {% else %}
-                    <img class="w-100 align-middle" src="{% static 'images/default-placeholder.png' %}">
-                    {% endif %}
-                    <div class="card-body p-2">
-                        <small class="text-muted">标题</small>
-                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
-                        <small class="text-muted card-date">{{obj.更新时间|date:'Y-m-d h:i:s' }}</small>
-                    </div>
-                </div>
-            </a>
-        {% endfor %}
-            <a class="nav-link" href="{% url 'home:shuxun' %}">
-                <div class=" w-100 btn btn-outline-dark bg-light mb-2">
-                    更多书讯
-                </div>
-            </a>
-        </div>
+          </div>
     </div>
 </div>
 {% endblock %}
