@@ -278,6 +278,33 @@
     {% endfor %}
     </div>
     {% endif %}
+    {% if 译林.count > 0 %}
+    <div class="row mb-4 mt-4">
+        <h3>
+            <strong>文摘&nbsp{{译林.count}}</strong>
+        </h3>
+    </div>
+    <div class="row mb-4 mt-4">
+     {% for obj in 译林 %}
+        <div class="col-md-3 mb-3 ">
+            <a href="{% url 'home:wenzhaidetail' obj.id %}"  class="text-decoration-none " >
+                <div class="card border h-100 bg-light rounded">
+                    <div class="card-body p-3">
+                        <small class="text-muted">标题</small>
+                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
+                        <div class="card-date">
+                            <small class="text-muted">
+                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
     {% if 文摘.count > 0 %}
     <div class="row mb-4 mt-4">
         <h3>
