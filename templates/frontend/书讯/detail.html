@@ -1,69 +1,45 @@
 {% extends 'base.html' %}
-{% load bootstrap_icons %}
 {% load static %}
 {% block content %}
 <div class="container">
-    <div class="row mb-4 mt-4">
-        <div class="col">
-            <h2>
-                <strong>{{ shuxun.标题 }}</strong>
-            </h2>
-            <div class=" text-right text-muted">
-                更新时间<br />
-                {{ shuxun.更新时间|date:'Y' }}年{{ shuxun.更新时间|date:'m' }}月{{ shuxun.更新时间|date:'d' }}日
-                {{ shuxun.更新时间|date:'h:i:s' }}
-            </div>
+    <div class="row mt-4 mb-4">
+        <div class="col-md-4 text-center card-img-top-zoom">
+            <img src="{{ shuxun.图片.url }}" alt="{{ shuxun.标题 }}" class="img-fluid" width="250">
+        </div>
+        <div class="col-md-8">
+            <h2><strong>{{ shuxun.标题 }}</strong></h2>
+            <p><strong>作者:</strong> {{ shuxun.作者 }}</p>
+            <p><strong>序号:</strong> {{ shuxun.序号 }}</p>
+            <p><strong>更新时间:</strong> {{ shuxun.更新时间|date:"Y年m月d日 " }}</p>
+            <p><strong>简介:</strong> {{ shuxun.简介|safe }}</p>
+            <!-- 其他详细信息字段 -->
         </div>
     </div>
-    <hr>
-    <div class="row mb-4 mt-4">
-        {% if shuxun.图片 %}
-        <img class="w-100" src="{{ MEDIA_URL }}{{ shuxun.图片 }}">
-        {% else %}
-        <img class="w-100" src="{% static 'images/default-placeholder.png' %}">
-        {% endif %}
-    </div>
-    <div class="row mb-4 mt-4 pb-4">
-        <div class="col">
-            <div class="row">
-                {{shuxun.简介|safe}}
-            </div>
-            <div class="row mt-4">
-                <p>
-                作者:
-                {{shuxun.作者}}<br/>
-                </p>
-            </div>
+    <hr class="border-4 bg-dark">
+    <div class="mb-4 ">
+        <div class="mb-3">
+            <h3>相关推荐</h3>
         </div>
-        <div class="col-4 ml-2 d-none d-md-block">
-            <div class="row border rounded pb-2 sticky-scroll">
-              <div class="row no-gutters p-2 bg-light align-items-stretch mb-2">
-                  <h4>其他书讯 </h4>
-              </div>
-              {% for obj in all_书讯 %}
-              <a href ="{% url 'home:detail' obj.id %}" >
-                  <div class="card card-img-horizontal border rounded mb-2" style="flex-direction:row;">
-                      {% if obj.图片 %}
-                      <img class="w-100 align-middle" src="{{ MEDIA_URL }}{{ obj.图片 }}">
-                      {% else %}
-                      <img class="w-100 align-middle" src="{% static 'images/default-placeholder.png' %}">
-                      {% endif %}
-                      <div class="card-body p-2">
-                          <small class="text-muted">标题</small>
-                          <h5 class="card-title font-weight-bold">{{obj.标题|truncatechars:20 }}</h5>
-                          <small class="text-muted card-date">{{obj.更新时间|date:'Y-m-d h:i:s' }}</small>
-                      </div>
-                  </div>
-              </a>
+        <div class="d-flex flex-wrap ">
+            {% for obj in all_书讯|slice:":4" %}
+            <div class="col-md-3 mb-4 ">
+                <div class="card border bg-light rounded">
+                    <div class="d-flex justify-content-between">
+                        <div class="card-img-top-zoom">
+                            <img src="{{ obj.图片.url }}" alt="" srcset="" height="100" width="100">
+                        </div>
+                        <div class="p-2 mt-3 ml-0">
+                            <a href="{% url 'home:shuxundetail' obj.id %}">
+                                <h5 class="font-weight-bold">{{ obj.标题 }}</h5>
+                            </a>
+                            <small class="text-muted card-date">{{obj.更新时间|date:'Y-m-d ' }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
-              <a class="nav-link" href="{% url 'home:shuxun' %}">
-                  <div class=" w-100 btn btn-outline-dark bg-light mb-2">
-                      更多书讯
-                  </div>
-              </a>
-            </div>
-          </div>
+        </div>
     </div>
 </div>
-{% endblock %}
 
+{% endblock %}

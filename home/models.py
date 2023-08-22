@@ -207,3 +207,11 @@ class 书库(models.Model):
     图片 = ImageField(upload_to='images/shuku/', default='null', null=True)
     序号 = models.IntegerField()
     发布状态 = models.BooleanField(default=False)
+
+
+class Contact(models.Model):
+    邮箱 = models.EmailField(null=False, blank=False)
+    主题 = models.CharField(max_length=255)
+    内容 = models.TextField(null=False, blank=False)
+    def __str__(self):
+        return self.邮箱
