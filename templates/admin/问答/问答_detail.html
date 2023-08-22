@@ -110,7 +110,7 @@
                                 <br/>
                                 <br/>
                                 <div class="text-right comment-edit-div" id="{{comment.id}}" hidden>
-                                    <form action="{% url 'admin_task:comment-approval' content='书评' content_id=content_item.id type='comment-detail' id=comment.id %}" method="post">
+                                    <form action="{% url 'admin_task:comment-approval' content='问答' content_id=content_item.id type='comment-detail' id=comment.id %}" method="post">
                                         {% csrf_token %}
                                     {% if comment.通过 == "已拒绝" or comment.通过 == "审查中" %}
                                         <button class="border comment-edit-btn" name="approve" value="approve" type="submit">
@@ -122,7 +122,7 @@
                                             拒绝
                                         </button>
                                     {% endif %}
-                                    <a href="{% url 'admin_task:content-item-delete' content='书评' id=comment.id task='content-detail-comment' %}" onclick="return confirm('确认删除此评论?');" class="text-decoration-none small text-danger">
+                                    <a href="{% url 'admin_task:content-item-delete' content='问答' id=comment.id task='content-detail-comment' %}" onclick="return confirm('确认删除此评论?');" class="text-decoration-none small text-danger">
                                         {% bs_icon 'trash3' size='1em' %}
                                     </a>
                                     </form>
