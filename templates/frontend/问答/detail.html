@@ -35,8 +35,7 @@
             {% for comment in comments %}
             <div class="row border mt-3 mb-3 p-3">
                 <div class="col">{{comment.评论}}</div>
-                <div class="col text-right text-muted">{{comment.发布时间|date:'Y' }}年{{comment.发布时间|date:'m'
-                    }}月{{comment.发布时间|date:'d' }}日 {{comment.发布时间|date:'h:i:s' }}</div>
+                <div class="col text-right text-muted">{{comment.发布时间|date:'Y' }}年{{comment.发布时间|date:'m'}}月{{comment.发布时间|date:'d' }}日 {{comment.发布时间|date:'h:i:s' }}</div>
 
             </div>
             {% endfor %}
@@ -65,8 +64,7 @@
                                         {{obj.序号}}
                                     </div>
                                     <h4 class="mt-2 card-title font-weight-bold">问题: {{obj.标题 }}</h4>
-                                    <small class="text-muted">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m'
-                                        }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
+                                    <small class="text-muted">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m'}}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
                                     <div class="text-right ">{% bs_icon 'chat-right-dots' %}{{obj.comment_no}}</div>
                                 </div>
 

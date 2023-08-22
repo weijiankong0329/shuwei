@@ -1,9 +1,9 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from home.models import 通讯, 书讯, 书评, 观点, 文艺, 问答, 视频, 译林, 文摘, 论文, 经训, 古籍, 书库, 章节_经训, 提问_问答
-from .forms import 视频_comment_form,问答_comment_form,书评_comment_form,观点_comment_form,文艺_comment_form,文摘_comment_form
+from .forms import 视频_comment_form,问答_comment_form,书评_comment_form,观点_comment_form,文艺_comment_form,文摘_comment_form,ContactForm
 from django.contrib import messages
 from django.db.models import Count,Q
 
@@ -460,3 +460,22 @@ class WenZhaiDetail(generic.TemplateView):
             msg = '评论已提交，待审核'
             messages.success(request, msg)
             return HttpResponseRedirect(reverse('home:wenzhaidetail', kwargs={'wenzhai_id': wenzhai_id}))
+        
+
+
+
+
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '信息已经提交！请等待回复')
+            return HttpResponseRedirect(reverse('home:contact_us'))
+    else:
+        form = ContactForm()
+    context = {'form': form}
+    return render(request, 'contact_us.html', context)
+

@@ -1213,15 +1213,3 @@ class ShuKuEditView(generic.TemplateView):
         else:
             messages.error(request, '书库内容修改错误，请更正错误后提交更改内容')
             return HttpResponseRedirect(reverse('admin_task:书库_edit', kwargs={'pk': pk}))
-
-
-
-
-
-
-
-
-
-
-
-

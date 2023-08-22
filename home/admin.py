@@ -19,6 +19,7 @@ from .models import 论文
 from .models import 经训
 from .models import 古籍
 from .models import 书库
+from .models import Contact
 
 
 # Register your models here.
@@ -42,3 +43,4 @@ admin.site.register(论文)
 admin.site.register(经训)
 admin.site.register(古籍)
 admin.site.register(书库)
+admin.site.register(Contact)
