@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'ckeditor',
-    'django_select2'
+    'django_select2',
+    'sorl.thumbnail',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -92,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shuwei',
         'USER': 'root',
-        'PASSWORD': '112233',
+        'PASSWORD': '7556530@KwJ',
         'HOST': 'localhost',
         'PORT': '3306',
     }

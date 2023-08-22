@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 {% load bootstrap_icons %}
 {% load static %}
+{% load thumbnail %}
 {% block content %}
 <div class="container" id="content-wrap">
   <div class="row">
@@ -21,9 +22,9 @@
               </div>
               <div class="main-page-banner-img carousel-image img-fluid">
                 {% if obj.图片 %}
-                <img class="img-loader" data-src="{{ MEDIA_URL }}{{ obj.图片}}" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                <img class="img-loader" src="{% thumbnail obj.图片 '1920' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}" alt="" />
                 {% else %}
-                <img class="img-loader" data-src="{% static 'images/default-placeholder.png' %}" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
                 {% endif %}
               </div>
             </div>
@@ -86,9 +87,9 @@
             <div class="col-5 pr-1">
               <div class="d-flex align-items-center content-list-img">
                 {% if obj.图片 %}
-                <img class="img-loader" data-src="{{ MEDIA_URL }}{{ obj.图片}}" src="{% static 'images/default-placeholder.png' %}">
+                <img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
                 {% else %}
-                <img class="img-loader" data-src="{% static 'images/default-placeholder.png' %}" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
                 {% endif %}
               </div>
             </div>
@@ -117,9 +118,9 @@
             <div class="col-5 pr-1">
               <div class="d-flex align-items-center content-list-img">
                 {% if obj.图片 %}
-                <img class="img-loader" data-src="{{ MEDIA_URL }}{{ obj.图片}}" src="{% static 'images/default-placeholder.png' %}">
+                <img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
                 {% else %}
-                <img class="img-loader" data-src="{% static 'images/default-placeholder.png' %}" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
                 {% endif %}
               </div>
             </div>
@@ -148,9 +149,9 @@
             <div class="col-5 pr-1">
               <div class="d-flex align-items-center content-list-img">
                 {% if obj.图片 %}
-                <img class="img-loader" data-src="{{ MEDIA_URL }}{{ obj.图片}}" src="{% static 'images/default-placeholder.png' %}">
+                <img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
                 {% else %}
-                <img class="img-loader" data-src="{% static 'images/default-placeholder.png' %}" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
                 {% endif %}
               </div>
             </div>
@@ -184,9 +185,9 @@
             <div class="col-5 pr-1">
               <div class="d-flex align-items-center content-list-img">
                 {% if obj.图片 %}
-                <img class="img-loader" data-src="{{ MEDIA_URL }}{{ obj.图片}}" src="{% static 'images/default-placeholder.png' %}">
+                <img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
                 {% else %}
-                <img class="img-loader" data-src="{% static 'images/default-placeholder.png' %}" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
                 {% endif %}
               </div>
             </div>
@@ -257,9 +258,9 @@
             <div class="row no-gutters pb-2 mr-2">
               <div class="col-5 pr-1">
                 <div class="d-flex align-items-center content-list-img">
-                  {% if obj.图片 %}<img class="img-loader" data-src="{{ MEDIA_URL }}{{ obj.图片}}" src="{% static 'images/default-placeholder.png' %}">
+                  {% if obj.图片 %}<img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}" %}">
                 {% else %}
-                <img class="img-loader" data-src="{% static 'images/default-placeholder.png' %}" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
                 {% endif %}
                 </div>
               </div>
@@ -287,9 +288,9 @@
             <div class="row no-gutters pb-2 mr-2">
               <div class="col-5 pr-1">
                 <div class="d-flex align-items-center content-list-img">
-                  {% if obj.图片 %}<img class="img-loader" data-src="{{ MEDIA_URL }}{{ obj.图片}}" src="{% static 'images/default-placeholder.png' %}">
+                  {% if obj.图片 %}<img src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
                 {% else %}
-                <img class="img-loader" data-src="{% static 'images/default-placeholder.png' %}" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                <img src="{% static 'images/default-placeholder.png' %}" alt="" />
                 {% endif %}
                 </div>
               </div>
@@ -350,9 +351,9 @@
             <div class="row no-gutters pb-2 mr-2">
               <div class="col-5 pr-1">
                 <div class="d-flex align-items-center content-list-img">
-                  {% if obj.图片 %}<img class="img-loader" data-src="{{ MEDIA_URL }}{{ obj.图片}}" src="{% static 'images/default-placeholder.png' %}">
+                  {% if obj.图片 %}<img src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
                 {% else %}
-                <img class="img-loader" data-src="{% static 'images/default-placeholder.png' %}" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                <img src="{% static 'images/default-placeholder.png' %}" alt="" />
                 {% endif %}
                 </div>
               </div>
