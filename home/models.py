@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from sorl.thumbnail import ImageField
 # Create your models here.
 # 通讯
 class 通讯(models.Model):
@@ -9,10 +10,11 @@ class 通讯(models.Model):
     发布状态 = models.BooleanField(default=False)
     资源 = models.CharField(max_length=200,null=True,blank=True,default="无资源信息")
     作者 = models.CharField(max_length=200,null=True,blank=True,default="无作者信息")
-    图片 = models.ImageField(upload_to='images/tongxun/',blank=True,null=True)
+    图片 = ImageField(upload_to='images/tongxun/',blank=True,null=True)
 
     def __str__(self):
         return self.标题
+
 
 class 书讯(models.Model):
     标题 = models.CharField(max_length=150)
@@ -21,7 +23,7 @@ class 书讯(models.Model):
     发布状态 = models.BooleanField(default=False)
     序号 = models.IntegerField(null=True,blank=True)
     作者 = models.CharField(max_length=200,null=True,blank=True,default="无作者信息")
-    图片 = models.ImageField(upload_to='images/shuxun/',blank=True,null=True)
+    图片 = ImageField(upload_to='images/shuxun/',blank=True,null=True)
     def __str__(self):
         return self.标题
 
@@ -32,7 +34,7 @@ class 书评(models.Model):
     书评内容 = RichTextField()
     更新时间 = models.DateTimeField(auto_now=True)
     书评作者 = models.CharField(max_length=200,null=True,blank=True)
-    图片 = models.ImageField(upload_to='images/shuping/',blank=True,null=True)
+    图片 = ImageField(upload_to='images/shuping/',blank=True,null=True)
     发布状态 = models.BooleanField(default=False)
 
     def __str__(self):
@@ -52,7 +54,7 @@ class 观点(models.Model):
     内容 = RichTextField(blank=True,null=True)
     更新时间 = models.DateTimeField(auto_now=True)
     作者 = models.CharField(max_length=200, null=True,blank=True)
-    图片 = models.ImageField(upload_to='images/guandian/',blank=True,null=True)
+    图片 = ImageField(upload_to='images/guandian/',blank=True,null=True)
     发布状态 = models.BooleanField(default=False)
 
     def __str__(self):
@@ -72,7 +74,7 @@ class 文艺(models.Model):
     内容 = RichTextField(blank=True,null=True)
     更新时间 = models.DateTimeField(auto_now=True)
     作者 = models.CharField(max_length=200,  null=True,blank=True)
-    图片 = models.ImageField(upload_to='images/wenyi/',blank=True,null=True)
+    图片 = ImageField(upload_to='images/wenyi/',blank=True,null=True)
     发布状态 = models.BooleanField(default=False)
     def __str__(self):
         return self.标题
@@ -146,7 +148,7 @@ class 译林(models.Model):
     译文内容 = RichTextField(blank=True,null=True)
     原文作者 = models.CharField(max_length=100, null=True, blank=True)
     原文出版日期 = models.DateField(null=True,blank=True)
-    图片 = models.ImageField(upload_to='images/yiling/', blank=True, null=True)
+    图片 = ImageField(upload_to='images/yiling/', blank=True, null=True)
     发布状态 = models.BooleanField(default=False)
 
 class 文摘(models.Model):
@@ -154,7 +156,7 @@ class 文摘(models.Model):
     内容 = RichTextField(blank=True, null=True)
     更新时间 = models.DateTimeField(auto_now=True)
     作者 = models.CharField(max_length=200, null=True, blank=True)
-    图片 = models.ImageField(upload_to='images/wenzhai/', blank=True, null=True)
+    图片 = ImageField(upload_to='images/wenzhai/', blank=True, null=True)
     资源 = models.CharField(max_length=200, null=True, blank=True)
     发布状态 = models.BooleanField(default=False)
     def __str__(self):
@@ -178,7 +180,7 @@ class 论文(models.Model):
 
 class 经训(models.Model):
     标题 = models.CharField(max_length=150)
-    图片 = models.ImageField(upload_to='images/jingxun/', blank=True, null=True)
+    图片 = ImageField(upload_to='images/jingxun/', blank=True, null=True)
     更新时间 = models.DateTimeField(auto_now=True)
     发布状态 = models.BooleanField(default=False)
 
@@ -200,6 +202,6 @@ class 书库(models.Model):
     更新时间 = models.DateTimeField(auto_now=True)
     文档 = models.FileField(upload_to='pdf/shuku/')
     简介 = models.TextField()
-    图片 = models.ImageField(upload_to='images/shuku/', default='null', null=True)
+    图片 = ImageField(upload_to='images/shuku/', default='null', null=True)
     序号 = models.IntegerField()
     发布状态 = models.BooleanField(default=False)
