@@ -12,6 +12,7 @@ class 通讯(models.Model):
     作者 = models.CharField(max_length=200,null=True,blank=True,default="无作者信息")
     图片 = ImageField(upload_to='images/tongxun/',blank=True,null=True)
 
+
     def __str__(self):
         return self.标题
 
@@ -181,6 +182,7 @@ class 论文(models.Model):
 class 经训(models.Model):
     标题 = models.CharField(max_length=150)
     图片 = ImageField(upload_to='images/jingxun/', blank=True, null=True)
+
     更新时间 = models.DateTimeField(auto_now=True)
     发布状态 = models.BooleanField(default=False)
 

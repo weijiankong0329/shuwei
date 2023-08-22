@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'ckeditor',
     'django_select2',
-    'sorl.thumbnail',
+    'sorl.thumbnail'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -153,3 +153,4 @@ MESSAGE_TAGS = {
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
 }
+
