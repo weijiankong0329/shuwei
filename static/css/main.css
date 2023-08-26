@@ -1,7 +1,9 @@
 .sticky-scroll {
     position: sticky;
     top: 100px;
-}  /* 侧边框滑动效果 */
+}
+
+/* 侧边框滑动效果 */
 .card-img-top-zoom {
     overflow: hidden;
     transition: transform 0.5s ease;
@@ -10,4 +12,34 @@
 .card-img-top-zoom img:hover {
     transform: scale(1.1);
 }
+
 /* } 图片缩放功能 */
+
+
+
+/* 鼠标指加深 */
+.custom-nav-link.nav-link {
+    transition: background-color 0.3s!important;
+    /* 添加过渡效果 */
+}
+
+.custom-nav-link.nav-link:hover {
+    background-color: rgba(180, 192, 206, 0.815)!important;
+    /* 自定义悬停背景颜色 */
+
+}
+
+.custom-nav-link.nav-link:active {
+    background-color: rgba(180, 192, 206, 0.815)!important;
+    /* 悬停和选中时的背景颜色 */
+    color: #fff!important;
+    /* 更改字体颜色以确保可读性 */
+}
+
+
+
+
+.highlight {
+    background-color: rgba(255, 255, 255, 0) !important;
+    font-weight: bold !important;
+}

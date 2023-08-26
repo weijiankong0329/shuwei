@@ -172,10 +172,16 @@ form{
     height: 400px;
 }
 
+.main-page-banner-img{
+
+  background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
 .main-page-banner-img > img{
   width:100%;
   height:100%;
   object-fit:cover;
+  opacity:0.2
 }
 
 .content-list-img >img{
@@ -248,10 +254,6 @@ form{
     padding: 0 .5rem;
 }
 
-.pdf-section {
-     border:0.25px solid;
-     border-color:#dddddd;
-}
 
 .card-img{
     width:100%;
@@ -275,9 +277,6 @@ form{
     width:100%;
 }
 
-.tongxun-banner-box{
-      border:1px solid;
-}
 
 .admin-nav-link:hover{
     background-color:black;
@@ -288,8 +287,36 @@ form{
   .search-bar-div{
     display: none;
   }
+  .time-div{
+    display:none;
+  }
+  #home-logo{
+    width:60%;
+  }
+  header{
+    margin-bottom:10px;
+    position: sticky;
+    top: 0px;
+    height: 100%;
+    z-index: 200;
+    overflow: auto;
+    background:white;
+  }
 }
 
 #menu-logo{
     width:100px;
+}
+
+.border-bottom-solid{
+    border-bottom: 1px solid #dbdbdb !important ;
+}
+
+.blockquote-footer-main {
+  font-size: 80%;
+  color: #6c757d;
+}
+
+.blockquote-footer-main::before {
+  content: "\2014\00A0";
 }

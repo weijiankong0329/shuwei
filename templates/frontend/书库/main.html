@@ -12,9 +12,9 @@
          {% for obj in all_书库 %}
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3 ">
             <a href="{% url 'home:detail' obj.id %}"  class="text-decoration-none " >
-                <div class="card border h-100 bg-light rounded card-img-top-zoom">
+                <div class="card border  bg-light rounded card-img-top-zoom">
                     {% if obj.图片 %}
-                    <img class="card-img-top card-img " src="{{ MEDIA_URL }}{{ obj.图片}}">
+                    <img class="card-img-top card-img  " src="{{ MEDIA_URL }}{{ obj.图片}}" style="height: 250px;">
                     {% else %}
                     <img class="card-img-top card-img  " src="{% static 'images/default-placeholder.png' %}">
                     {% endif %}
@@ -23,7 +23,7 @@
                         <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
                         <small class="text-muted">简介</small>
                         <div class="fs-6 fw-light">
-                            {{obj.简介|striptags|safe|truncatechars:25 }}
+                            {{obj.简介|striptags|safe|truncatechars:30 }}
                             {% if obj.简介|length > 25 %}
                             <small class="text-muted">更多</small>
                             {% endif %}
@@ -41,14 +41,5 @@
         {% endfor %}
     </div>
 </div>
-<style>
-    .card-img-top-zoom {
-        overflow: hidden;
-        transition: transform 0.5s ease;
-    }
 
-    .card-img-top-zoom img:hover {
-        transform: scale(1.1);
-    }
-</style>
 {% endblock %}

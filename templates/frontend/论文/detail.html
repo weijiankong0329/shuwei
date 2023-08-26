@@ -2,21 +2,29 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <div class="row mb-4 mt-4">
-        <div class="col">
-            <h2>
-                <strong>{{ lunwen.标题 }}</strong>
-            </h2>
-            <div class=" text-right text-muted">
-                更新时间<br />
-                {{ lunwen.更新时间|date:'Y' }}年{{ lunwen.更新时间|date:'m' }}月{{ lunwen.更新时间|date:'d' }}日
-                {{ lunwen.更新时间|date:'h:i:s' }}
+    <div class="row mt-3">
+        <div class="col ">
+            <h1 >
+                {{ lunwen.标题 }}
+            </h1>
+            <div class="row ">
+                <div class="col-md-10">
+                    <h5 class=" text-muted" >
+                       作者:{{lunwen.作者 }}
+                    </h5>
+                </div>
+                <div class="col text-right">
+                    <h5 class=" text-md-right text-muted">
+                        更新时间<br />
+                        {{ lunwen.更新时间|date:'Y' }}年{{ lunwen.更新时间|date:'m' }}月{{ lunwen.更新时间|date:'d' }}日
+                    </h5>
+                </div>
             </div>
+            <hr class="hr-content mt-0">
         </div>
     </div>
-
         {% if lunwen.文档 %}
-        <div class="col-12 mt-3">
+        <div class="col-12 ">
             <div class="_df_book border" height="500" width="100%" webgl="true" backgroundcolor="dark"
                 source="{{ lunwen.文档.url }}" id="df_manual_book" style="width:100%">
             </div>

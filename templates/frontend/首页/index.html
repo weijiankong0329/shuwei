@@ -8,21 +8,21 @@
   <div class="row">
     <div class="col-lg-8">
       <div class="owl-carousel owl-theme" id="main-banner-carousel">
-        {% for obj in all_通讯|slice:":4" %}
-        <a href="{% url 'home:tongxundetail' obj.id %}" class="text-decoration-none">
+        <!-- 观点 -->
+        {% if all_观点.first %}
+        <a href="{% url 'home:guandiandetail' all_观点.first.id %}" class="text-decoration-none">
           <div class="item">
-            <div class="carousel-content-wrapper mb-2 main-page-banner ">
+            <div class="carousel-content-wrapper mb-2 main-page-banner w-100">
               <div class="carousel-content tongxun-banner-box">
-                <h1 class="font-weight-bold">{{obj.标题 }}</h1>
-                <h5 class="font-weight-normal  m-0">{{obj.内容|safe|truncatechars:50}}</h5>
-                <p class="text-color m-0 pt-2 d-flex align-items-center">
-                  <span class="fs-10 mr-1">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</span>
-                  <i class="mdi mdi-bookmark-outline mr-3"></i>
+                <h1 class="font-weight-bold">{{all_观点.first.标题|truncatechars:15 }}</h1>
+                <h5 class="font-weight-normal  m-0">{{all_观点.first.内容|safe|truncatechars:50}}</h5>
+                <p class="text-color m-0 pt-1 d-flex align-items-center">
+                  <span class="fs-12 mr-1">观点 --{{all_观点.first.更新时间|date:'Y' }}年{{all_观点.first.更新时间|date:'m' }}月{{all_观点.first.更新时间|date:'d' }}日 {{all_观点.first.更新时间|date:'h:i:s' }}</span>
                 </p>
               </div>
               <div class="main-page-banner-img carousel-image img-fluid">
-                {% if obj.图片 %}
-                <img class="img-loader" src="{% thumbnail obj.图片 '1920' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}" alt="" />
+                {% if all_观点.first.图片 %}
+                <img class="img-loader" src="{% thumbnail all_观点.first.图片 '1920' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}" alt="" />
                 {% else %}
                 <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
                 {% endif %}
@@ -30,61 +30,121 @@
             </div>
           </div>
         </a>
-        {% endfor %}
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="row">
-        <div class="col d-flex position-relative float-left mt-3">
-          <h3 class="section-title">通讯</h3>
-        </div>
-        <div class="col  float-right text-right mt-3">
-          <h3>{% bs_icon 'chevron-right' %}</h3>
-
-        </div>
-
-      </div>
-      {% for obj in all_通讯|slice:"4:10" %}
-        {% if forloop.counter|divisibleby:2 is False %}
-          <div class="row">
         {% endif %}
-          <div class="col-sm-6 pr-1">
-            <div class="py-3 border-bottom">
-              <div class="ps-1 d-flex align-items-center pb-2">
-                <span class="fs-12 text-muted">{{obj.作者}}</span>
+        <!-- 文艺 -->
+        {% if all_文艺.first %}
+        <a href="{% url 'home:wenyidetail' all_文艺.first.id %}" class="text-decoration-none">
+          <div class="item">
+            <div class="carousel-content-wrapper mb-2 main-page-banner ">
+              <div class="carousel-content tongxun-banner-box">
+                <h1 class="font-weight-bold">{{all_文艺.first.标题|truncatechars:15 }}</h1>
+                <h5 class="font-weight-normal  m-0">{{all_文艺.first.内容|safe|truncatechars:50}}</h5>
+                <p class="text-color m-0 pt-1 d-flex align-items-center">
+                  <span class="fs-12 mr-1">文艺 --{{all_文艺.first.更新时间|date:'Y' }}年{{all_文艺.first.更新时间|date:'m' }}月{{all_文艺.first.更新时间|date:'d' }}日 {{all_文艺.first.更新时间|date:'h:i:s' }}</span>
+                </p>
               </div>
-              <p class="ps-1 fs-16 m-0 font-weight-medium line-height-sm display-7">
-                <strong><a href="{% url 'home:tongxundetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong>
-              </p><br/>
-              <p class="content-list-date">
-                <span class="fs-12 text-muted">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</span>
-              </p>
+              <div class="main-page-banner-img carousel-image img-fluid">
+                {% if all_文艺.first.图片 %}
+                <img class="img-loader" src="{% thumbnail all_文艺.first.图片 '1920' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}" alt="" />
+                {% else %}
+                <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                {% endif %}
+              </div>
             </div>
           </div>
-        {% if forloop.counter|divisibleby:2 %}
-          </div>
+        </a>
         {% endif %}
+        <!-- 译林 -->
+        {% if all_译林.first %}
+        <a href="{% url 'home:yilingdetail' all_译林.first.id %}" class="text-decoration-none">
+          <div class="item">
+            <div class="carousel-content-wrapper mb-2 main-page-banner ">
+              <div class="carousel-content tongxun-banner-box">
+                <h1 class="font-weight-bold">{{all_译林.first.标题|truncatechars:15 }}</h1>
+                <p class="text-color m-0 pt-2 d-flex align-items-center">
+                  <span class="fs-12 mr-1">译林 --{{all_译林.first.更新时间|date:'Y' }}年{{all_译林.first.更新时间|date:'m' }}月{{all_译林.first.更新时间|date:'d' }}日 {{all_译林.first.更新时间|date:'h:i:s' }}</span>
+                </p>
+              </div>
+              <div class="main-page-banner-img carousel-image img-fluid">
+                {% if all_译林.first.图片 %}
+                <img class="img-loader" src="{% thumbnail all_译林.first.图片 '1920' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}" alt="" />
+                {% else %}
+                <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </a>
+        {% endif %}
+        <!-- 文摘 -->
+        {% if all_文摘.first %}
+        <a href="{% url 'home:wenzhaidetail' all_文摘.first.id %}" class="text-decoration-none">
+          <div class="item">
+            <div class="carousel-content-wrapper mb-2 main-page-banner ">
+              <div class="carousel-content tongxun-banner-box">
+                <h1 class="font-weight-bold">{{all_文摘.first.标题|truncatechars:15 }}</h1>
+                <h5 class="font-weight-normal  m-0">{{all_文摘.first.内容|safe|truncatechars:50}}</h5>
+                <p class="text-color m-0 pt-1 d-flex align-items-center">
+                  <span class="fs-12 mr-1">文摘 --{{all_文摘.first.更新时间|date:'Y' }}年{{all_文摘.first.更新时间|date:'m' }}月{{all_文摘.first.更新时间|date:'d' }}日 {{all_文摘.first.更新时间|date:'h:i:s' }}</span>
+                </p>
+              </div>
+              <div class="main-page-banner-img carousel-image img-fluid">
+                {% if all_文摘.first.图片 %}
+                <img class="img-loader" src="{% thumbnail all_文摘.first.图片 '1920' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}" alt="" />
+                {% else %}
+                <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-lg-4 ml-0">
+      <div class="row text-secondary">
+          <div class="col d-flex position-relative float-left mt-2">
+            <a href="{% url 'home:tongxun' %}" class="text-decoration-none">
+              <h3 class="section-title">通讯</h3>
+            </a>
+          </div>
+          <div class="col  float-right text-right mt-2">
+            <a href="{% url 'home:tongxun' %}" class="text-decoration-none">
+              <h3>{% bs_icon 'chevron-right' %}</h3>
+            </a>
+          </div>
+      </div>
+      {% for obj in all_通讯 %}
+      <div class="row mr-1 ml-1">
+        <div class="col pt-1 pb-1 no-gutters pl-0">
+              <a href="{% url 'home:tongxundetail' obj.id %}" class="text-decoration-none">{{obj.标题|truncatechars:30}}</a>
+            </div>
+        {% if forloop.last != True %}
+          <div class="border-bottom"></div>
+        {% endif %}
+      </div>
+
       {% endfor %}
-       <div class="row text-muted text-right pt-3">
-          <small><a href="{% url 'home:tongxun'%}">更多</a></small>
-        </div>
     </div>
   </div>
-
   <div class="news">
-    <div class="row pb-3">
+    <div class="row pb-1">
       <div class="col-lg-4">
         <div class="row">
-          <div class="col d-flex position-relative float-left mt-3">
-            <h3 class="section-title">书讯</h3>
+          <div class="col d-flex position-relative float-left">
+            <a href="{% url 'home:shuxun' %}" class="text-decoration-none">
+              <h3 class="section-title">书讯</h3>
+            </a>
           </div>
-          <div class="col  float-right text-right mt-3">
-            <h3>{% bs_icon 'chevron-right' %}</h3>
+          <div class="col float-right text-right">
+            <a href="{% url 'home:shuxun' %}" class="text-decoration-none">
+              <h3>{% bs_icon 'chevron-right' %}</h3>
+            </a>
           </div>
         </div>
         {% for obj in all_书讯 %}
-        <div class="row no-gutters pb-2 mr-2">
-            <div class="col-5 pr-1">
+        <div class="row mr-1">
+            <div class="col-5 pt-1 pb-1 no-gutters">
               <div class="d-flex align-items-center content-list-img">
                 {% if obj.图片 %}
                 <img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
@@ -93,29 +153,33 @@
                 {% endif %}
               </div>
             </div>
-            <div class="col pr-2 pl-1">
-                <p><strong class="display-7"><a href="{% url 'home:shuxundetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong></p>
-                <small class="text-muted blockquote-footer">{{obj.作者}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
+            <div class="col pt-1 pb-1 no-gutters pl-0">
+              <a href="{% url 'home:shuxundetail' obj.id %}" class="text-decoration-none">{{obj.标题|truncatechars:30}}</a>
+              <br/>
+              <small class="text-muted blockquote-footer-main">{{obj.作者}}</small>
             </div>
+            {% if forloop.last != True %}
+              <div class="border-bottom"></div>
+            {% endif %}
         </div>
         {% endfor %}
-        <div class="row text-muted text-right">
-          <small><a href="{% url 'home:shuxun'%}">更多</a></small>
-        </div>
       </div>
       <div class="col-lg-4">
         <div class="row">
-          <div class="col d-flex position-relative float-left mt-3">
-            <h3 class="section-title">书评</h3>
+          <div class="col d-flex position-relative float-left">
+            <a href="{% url 'home:shuping' %}" class="text-decoration-none">
+              <h3 class="section-title">书评</h3>
+            </a>
           </div>
-          <div class="col  float-right text-right mt-3">
-            <h3>{% bs_icon 'chevron-right' %}</h3>
+          <div class="col  float-right text-right">
+            <a href="{% url 'home:shuping' %}" class="text-decoration-none">
+              <h3>{% bs_icon 'chevron-right' %}</h3>
+            </a>
           </div>
         </div>
         {% for obj in all_书评 %}
-        <div class="row no-gutters pb-2 mr-2">
-            <div class="col-5 pr-1">
+        <div class="row mr-1">
+            <div class="col-5 pt-1 pb-1 no-gutters">
               <div class="d-flex align-items-center content-list-img">
                 {% if obj.图片 %}
                 <img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
@@ -124,47 +188,51 @@
                 {% endif %}
               </div>
             </div>
-            <div class="col pr-2 pl-1">
-                <p><strong class="display-7"><a href="{% url 'home:shupingdetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong></p>
-                <small class="text-muted blockquote-footer">{{obj.书评作者}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
+            <div class="col pt-1 pb-1 no-gutters pl-0">
+              <a href="{% url 'home:shupingdetail' obj.id %}" class="text-decoration-none">{{obj.标题|truncatechars:30}}</a>
+              <br/>
+              <small class="text-muted blockquote-footer-main">{{obj.书评作者}}</small>
             </div>
+            {% if forloop.last != True %}
+              <div class="border-bottom"></div>
+            {% endif %}
         </div>
         {% endfor %}
-        <div class="row text-muted text-right">
-          <small><a href="{% url 'home:shuping'%}">更多</a></small>
-        </div>
       </div>
       <div class="col-lg-4">
         <div class="row">
-        <div class="col d-flex position-relative float-left mt-3">
-            <h3 class="section-title">观点</h3>
+          <div class="col d-flex position-relative float-left">
+            <a href="{% url 'home:guandian' %}" class="text-decoration-none">
+              <h3 class="section-title">观点</h3>
+            </a>
           </div>
-          <div class="col  float-right text-right mt-3">
-            <h3>{% bs_icon 'chevron-right' %}</h3>
+          <div class="col  float-right text-right">
+            <a href="{% url 'home:guandian' %}" class="text-decoration-none">
+              <h3>{% bs_icon 'chevron-right' %}</h3>
+            </a>
           </div>
         </div>
         {% for obj in all_观点 %}
-        <div class="row no-gutters pb-2 mr-2">
-            <div class="col-5 pr-1">
-              <div class="d-flex align-items-center content-list-img">
-                {% if obj.图片 %}
-                <img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
-                {% else %}
-                <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
-                {% endif %}
-              </div>
+        <div class="row mr-1">
+          <div class="col-5 pt-1 pb-1 no-gutters">
+            <div class="d-flex align-items-center content-list-img">
+              {% if obj.图片 %}
+              <img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
+              {% else %}
+              <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
+              {% endif %}
             </div>
-            <div class="col pr-2 pl-1">
-                <p><strong class="display-7"><a href="{% url 'home:guandiandetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong></p>
-                <small class="text-muted blockquote-footer">{{obj.作者}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
-            </div>
+          </div>
+          <div class="col pt-1 pb-1 no-gutters pl-0">
+            <a href="{% url 'home:guandiandetail' obj.id %}" class="text-decoration-none">{{obj.标题|truncatechars:30}}</a>
+            <br/>
+            <small class="text-muted blockquote-footer-main">{{obj.作者}}</small>
+          </div>
+          {% if forloop.last != True %}
+          <div class="border-bottom"></div>
+          {% endif %}
         </div>
         {% endfor %}
-        <div class="row text-muted text-right">
-          <small><a href="{% url 'home:guandian'%}">更多</a></small>
-        </div>
       </div>
     </div>
   </div>
@@ -173,16 +241,20 @@
     <div class="row">
       <div class="col-lg">
         <div class="row">
-          <div class="col d-flex position-relative float-left mt-3">
-            <h3 class="section-title">文艺</h3>
+          <div class="col d-flex position-relative float-left">
+            <a href="{% url 'home:wenyi' %}" class="text-decoration-none">
+              <h3 class="section-title">文艺</h3>
+            </a>
           </div>
-          <div class="col  float-right text-right mt-3">
-            <h3>{% bs_icon 'chevron-right' %}</h3>
+          <div class="col  float-right text-right">
+            <a href="{% url 'home:wenyi' %}" class="text-decoration-none">
+              <h3>{% bs_icon 'chevron-right' %}</h3>
+            </a>
           </div>
         </div>
         {% for obj in all_文艺 %}
-        <div class="row no-gutters pb-2 mr-2">
-            <div class="col-5 pr-1">
+        <div class="row mr-1">
+            <div class="col-5 pt-1 pb-1 no-gutters">
               <div class="d-flex align-items-center content-list-img">
                 {% if obj.图片 %}
                 <img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
@@ -191,264 +263,273 @@
                 {% endif %}
               </div>
             </div>
-            <div class="col pr-2 pl-1">
-                <p><strong class="display-7"><a href="{% url 'home:wenyidetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong></p>
-                <small class="text-muted blockquote-footer">{{obj.作者}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
+            <div class="col pt-1 pb-1 no-gutters pl-0">
+              <a href="{% url 'home:wenyidetail' obj.id %}" class="text-decoration-none">{{obj.标题|truncatechars:30}}</a>
+              <br/>
+              <small class="text-muted blockquote-footer-main">{{obj.作者}}</small>
             </div>
+            {% if forloop.last != True %}
+              <div class="border-bottom"></div>
+            {% endif %}
         </div>
         {% endfor %}
-        <div class="row text-muted text-right">
-          <small><a href="{% url 'home:wenyi'%}">更多</a></small>
-        </div>
       </div>
-      <div class="col-lg-8">
+      <div class="border rounded bg-light col-lg-8 pt-2">
         <div class="row">
-          <div class="col d-flex position-relative float-left mt-3">
-            <h3 class="section-title">视频</h3>
+          <div class="col d-flex position-relative float-left">
+            <a href="{% url 'home:shiping' %}" class="text-decoration-none">
+              <h3 class="section-title">视频</h3>
+            </a>
           </div>
-          <div class="col  float-right text-right mt-3">
-            <h3>{% bs_icon 'chevron-right' %}</h3>
+          <div class="col  float-right text-right">
+            <a href="{% url 'home:shiping' %}" class="text-decoration-none">
+              <h3>{% bs_icon 'chevron-right' %}</h3>
+            </a>
           </div>
         </div>
         <div class="row mb-2">
-          <div class="col-8 main-video">
+          <div class="col-md-7 no-gutters ml-2 mr-2 p-0 bg-dark rounded main-video">
             <video src="{{ MEDIA_URL }}{{ all_视频.first.视频文件}}" class="w-100 h-100" controls></video>
           </div>
-          <div class="col videos">
-            <div class="row pb-1">
-              <h4>视频列表</h4>
+          <div class="col-md no-gutters pl-0 videos">
+            <div class="row ml-1 mr-1 mt-1">
+              <h4 class="pb-2 pl-1 pr-1 border-bottom-solid">视频列表</h4>
             </div>
             {% for obj in all_视频 %}
-            <div class="row video no-gutters pt-1 pb-2 mr-2" data-value="{{ MEDIA_URL }}{{obj.视频文件}}">
-              <div class="col no-gutters">
+            <div class="row video no-gutters pt-1 pb-1 mr-2" data-value="{{ MEDIA_URL }}{{obj.视频文件}}">
+              <div class="col-md-9 no-gutters">
                 <h5 class="title"><strong>{{obj.标题|truncatechars:10}}</strong></h5>
-                <small class="date text-muted mt-2 text-right">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
+                <small class="date text-muted mt-1 text-right">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
               </div>
-              <div class="col-2 svg vid-ctrl">
-                {% bs_icon 'play-circle' size='1.5em' extra_classes='mt-1 ml-1 play' %}
-                {% bs_icon 'pause-circle' size='1.5em' extra_classes='mt-1 ml-1 pause hidden' %}
+              <div class="col-md svg vid-ctrl text-right">
+                {% bs_icon 'play-circle' size='1.5em' extra_classes='ml-1 play' %}
+                {% bs_icon 'pause-circle' size='1.5em' extra_classes='ml-1 pause hidden' %}
               </div>
-
             </div>
+            {% if forloop.last != True %}
+              <div class="border-bottom"></div>
+            {% endif %}
         {% endfor %}
-             <div class="row text-muted text-right">
-          <small><a href="{% url 'home:shiping'%}">更多</a></small>
-        </div>
           </div>
         </div>
       </div>
 
     </div>
   </div>
-  <div class="translate-">
-    <div class="row pb-3">
+  <div class="translate">
+    <div class="row mt-1">
       <div class="col no-gutters">
         <div class="row">
           <div class="col-lg">
             <div class="row">
-              <div class="col d-flex position-relative float-left mt-3">
-                <h3 class="section-title">译林</h3>
+              <div class="col d-flex position-relative float-left">
+                <a href="{% url 'home:yiling' %}" class="text-decoration-none">
+                  <h3 class="section-title">译林</h3>
+                </a>
               </div>
-              <div class="col  float-right text-right mt-3">
-                <h3>{% bs_icon 'chevron-right' %}</h3>
+              <div class="col  float-right text-right">
+                <a href="{% url 'home:yiling' %}" class="text-decoration-none">
+                  <h3>{% bs_icon 'chevron-right' %}</h3>
+                </a>
               </div>
             </div>
             {% for obj in all_译林 %}
-            <div class="row no-gutters pb-2 mr-2">
-              <div class="col-5 pr-1">
+            <div class="row mr-1">
+              <div class="col-5 pt-1 pb-1 no-gutters">
                 <div class="d-flex align-items-center content-list-img">
-                  {% if obj.图片 %}<img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}" %}">
-                {% else %}
-                <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
-                {% endif %}
+                  {% if obj.图片 %}
+                  <img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
+                  {% else %}
+                  <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                  {% endif %}
                 </div>
               </div>
-              <div class="col pr-2 pl-1">
-                <p><strong class="display-7"><a href="{% url 'home:yilingdetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong></p>
-                <small class="text-muted blockquote-footer">{{obj.译文作者}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
-              </div>
-          </div>
-            {% endfor %}
-            <div class="row text-muted text-right">
-              <small><a href="{% url 'home:yiling'%}">更多</a></small>
+            <div class="col pt-1 pb-1 no-gutters pl-0">
+              <a href="{% url 'home:guandiandetail' obj.id %}" class="text-decoration-none">{{obj.标题|truncatechars:30}}</a>
+              <br/>
+              <small class="text-muted blockquote-footer-main">{{obj.译文作者}}</small>
             </div>
+            {% if forloop.last != True %}
+            <div class="border-bottom"></div>
+            {% endif %}
+            </div>
+            {% endfor %}
           </div>
           <div class="col-lg">
             <div class="row">
-              <div class="col d-flex position-relative float-left mt-3">
-                <h3 class="section-title">文摘</h3>
+              <div class="col d-flex position-relative float-left">
+                <a href="{% url 'home:wenzhai' %}" class="text-decoration-none">
+                  <h3 class="section-title">文摘</h3>
+                </a>
               </div>
-              <div class="col  float-right text-right mt-3">
-                <h3>{% bs_icon 'chevron-right' %}</h3>
+              <div class="col  float-right text-right">
+                <a href="{% url 'home:wenzhai' %}" class="text-decoration-none">
+                  <h3>{% bs_icon 'chevron-right' %}</h3>
+                </a>
               </div>
             </div>
             {% for obj in all_文摘 %}
-            <div class="row no-gutters pb-2 mr-2">
-              <div class="col-5 pr-1">
+            <div class="row mr-1">
+              <div class="col-5 pt-1 pb-1 no-gutters">
                 <div class="d-flex align-items-center content-list-img">
-                  {% if obj.图片 %}<img src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
-                {% else %}
-                <img src="{% static 'images/default-placeholder.png' %}" alt="" />
-                {% endif %}
+                  {% if obj.图片 %}
+                  <img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
+                  {% else %}
+                  <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                  {% endif %}
                 </div>
               </div>
-              <div class="col pr-2 pl-1">
-                <p><strong class="display-7"><a href="{% url 'home:wenzhaidetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong></p>
-                <small class="text-muted blockquote-footer">{{obj.作者}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
-              </div>
-          </div>
-            {% endfor %}
-            <div class="row text-muted text-right">
-              <small><a href="{% url 'home:wenzhai'%}">更多</a></small>
+            <div class="col pt-1 pb-1 no-gutters pl-0">
+              <a href="{% url 'home:guandiandetail' obj.id %}" class="text-decoration-none">{{obj.标题|truncatechars:30}}</a>
+              <br/>
+              <small class="text-muted blockquote-footer-main">{{obj.作者}}</small>
             </div>
+            {% if forloop.last != True %}
+            <div class="border-bottom"></div>
+            {% endif %}
+            </div>
+            {% endfor %}
           </div>
         </div>
         <div class="row">
           <div class="col-lg">
             <div class="row">
-              <div class="col d-flex position-relative float-left mt-3">
-                <h3 class="section-title">问答</h3>
+              <div class="col d-flex position-relative float-left">
+                <a href="{% url 'home:wenda' %}" class="text-decoration-none">
+                  <h3 class="section-title">问答</h3>
+                </a>
               </div>
-              <div class="col  float-right text-right mt-3">
-                <h3>{% bs_icon 'chevron-right' %}</h3>
+              <div class="col float-right text-right">
+                <a href="{% url 'home:wenda' %}" class="text-decoration-none">
+                  <h3>{% bs_icon 'chevron-right' %}</h3>
+                </a>
               </div>
             </div>
             {% for obj in all_问答 %}
-            <div class="row no-gutters pb-2 mr-2">
-              <div class="col-2 pr-1">
-                <div class="text-center text-white bg-secondary p-1 mx-auto status-tab ">
+            <div class="row no-gutters mr-1">
+              <div class="col-2 pt-1 pb-1 no-gutters">
+                <div class="text-center text-white bg-secondary p-1 mr-1 mx-auto status-tab ">
                   {{obj.序号}}
                 </div>
               </div>
-              <div class="col pr-2 pl-1">
-                <strong class="display-7"><a href="{% url 'home:wendadetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong>
+              <div class="col ml-2 pt-1 pb-1 no-gutters">
+                <a href="{% url 'home:wendadetail' obj.id %}" class="text-decoration-none">{{obj.标题|truncatechars:15}}</a>
                 {% if obj.参考问答 %}
                   <small class="text-muted">{{obj.参考问答项目.答案|safe|truncatechars:30}}</small>
                 {% else %}
                   <small class="text-muted">{{obj.答案|safe|truncatechars:30}}</small>
                 {% endif %}
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
               </div>
-          </div>
-            {% endfor %}
-            <div class="row text-muted text-right">
-              <small><a href="{% url 'home:wenda'%}">更多</a></small>
             </div>
+            {% if forloop.last != True %}
+            <div class="border-bottom"></div>
+            {% endif %}
+            {% endfor %}
+
           </div>
           <div class="col-lg">
             <div class="row">
-              <div class="col d-flex position-relative float-left mt-3">
-                <h3 class="section-title">经训</h3>
-              </div>
-              <div class="col  float-right text-right mt-3">
-                <h3>{% bs_icon 'chevron-right' %}</h3>
-              </div>
-            </div>
-            {% for obj in all_经训 %}
-            <div class="row no-gutters pb-2 mr-2">
-              <div class="col-5 pr-1">
-                <div class="d-flex align-items-center content-list-img">
-                  {% if obj.图片 %}<img src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
-                {% else %}
-                <img src="{% static 'images/default-placeholder.png' %}" alt="" />
-                {% endif %}
+                <div class="col d-flex position-relative float-left">
+                  <a href="{% url 'home:jingxun' %}" class="text-decoration-none">
+                    <h3 class="section-title">经训</h3>
+                  </a>
+                </div>
+                <div class="col  float-right text-right">
+                  <a href="{% url 'home:jingxun' %}" class="text-decoration-none">
+                    <h3>{% bs_icon 'chevron-right' %}</h3>
+                  </a>
                 </div>
               </div>
-              <div class="col pr-2 pl-1">
-                <strong class="display-7"><a href="{% url 'home:jingxundetail' obj.id %}">{{obj.标题|truncatechars:15}}</a></strong><br/>
-                <small class="text-muted">章节数量: {{obj.章节_经训_set.count}}</small>
-                <small class="text-muted content-list-date">{{obj.更新时间|date:'Y' }}年{{obj.更新时间|date:'m' }}月{{obj.更新时间|date:'d' }}日 {{obj.更新时间|date:'h:i:s' }}</small>
+              {% for obj in all_经训 %}
+              <div class="row mr-1">
+                <div class="col-5 pt-1 pb-1 no-gutters">
+                <div class="d-flex align-items-center content-list-img">
+                  {% if obj.图片 %}
+                  <img class="img-loader" src="{% thumbnail obj.图片 '500' as im %}{{ MEDIA_URL }}{{ im }}{% endthumbnail %}">
+                  {% else %}
+                  <img class="img-loader" src="{% static 'images/default-placeholder.png' %}" alt="" />
+                  {% endif %}
+                </div>
               </div>
-          </div>
-            {% endfor %}
-            <div class="row text-muted text-right">
-              <small><a href="{% url 'home:jingxun'%}">更多</a></small>
+            <div class="col pt-1 pb-1 no-gutters pl-0">
+              <a href="{% url 'home:jingxundetail' obj.id %}" class="text-decoration-none">{{obj.标题|truncatechars:30}}</a>
+              <br/>
+              <small class="text-muted">章节数量: {{obj.章节_经训_set.count}}</small>
             </div>
+            {% if forloop.last != True %}
+            <div class="border-bottom"></div>
+            {% endif %}
+            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
-      <div class="col-lg-4 ml-3 pb-3 pdf-section text-secondary border-2">
-
-        <div class="row text-center p-1 mb-3 pdf-title bg-secondary">
-          <h4 class="p-2 text-white"><strong>文档区</strong></h4>
+      <div class="col-lg-4 pb-3 text-secondary pr-0">
+        <div class="row-md row-lg text-center p-1 pdf-title bg-secondary rounded">
+          <h4 class="text-white"><strong>文档区</strong></h4>
         </div>
-        <div class="row mb-3">
-          <div class="col-2 text-center my-auto">
-            <h4><strong>论文</strong></h4>
-          </div>
-          <div class="col border-start border-1 border-secondary">
-            {% for obj in all_论文 %}
-            <div class="row no-gutters pb-2 mr-2">
-              <div class="col pr-2 pl-1">
-                <p><strong class="display-7"><a href="{% url 'home:lunwendetail' obj.id %}">{{obj.标题|truncatechars:20}}</a></strong></p>
-                <small class="text-muted blockquote-footer pt-2">{{obj.作者}}</small>
-              </div>
-              <div class="col-1 pr-1 text-muted">
+        <div class="row">
+          {% for obj in all_论文 %}
+          <div class="col-lg-12 mt-1 mb-1">
+            <div class="card border bg-light h-100 rounded p-1">
+              <div class="row">
+                <div class="col-2 m-2 border-end text-center ">
+                  <span class="align-middle">
 
-                <a href="{% url 'home:lunwendetail' obj.id %}">        
-                     {% bs_icon 'book' size='1.5em' extra_classes="mt-1 mr-2" %}
+                    <a href="{% url 'home:lunwen' %}" class="text-decoration-none">
+                      <h4><strong>论文</strong></h4>
+                      {% bs_icon 'book' size='1.5em'%}
                     </a>
+                  </span>
+                </div>
+                <div class="col-8 mt-2 no-gutters">
+                  <p class="display-7"><a href="{% url 'home:lunwendetail' obj.id %}" class="text-decoration-none">{{obj.标题|truncatechars:30}}</a></p>
+                  <small class="text-muted blockquote-footer">{{obj.作者}}</small>
+                </div>
               </div>
             </div>
-            {% endfor %}
-
           </div>
-          <div class="row text-muted text-right">
-              <small><a href="{% url 'home:lunwen'%}">更多</a></small>
-          </div>
-        </div>
-        <hr class="mb-3">
-        <div class="row border-3 mb-3">
-          <div class="col-2 text-center my-auto">
-            <h4><strong>古籍</strong></h4>
-          </div>
-          <div class="col border-start border-1 border-secondary">
-            {% for obj in all_古籍 %}
-            <div class="row no-gutters pb-2 mr-2">
-              <div class="col pr-2 pl-1">
-                <p><strong class="display-7"><a href="{% url 'home:gujidetail' obj.id %}">{{obj.标题|truncatechars:20}}</a></strong></p>
-                <small class="text-muted blockquote-footer pt-2">{{obj.作者}}</small>
-              </div>
-              <div class="col-1 pr-1">
-                <a href="{% url 'home:gujidetail' obj.id %}">        
-                  {% bs_icon 'book' size='1.5em' extra_classes="mt-1 mr-2" %}
-                 </a>
+          {% endfor %}
+          {% for obj in all_古籍 %}
+          <div class="col-lg-12 mt-1 mb-1">
+            <div class="card border bg-light h-100 rounded p-1">
+              <div class="row">
+                <div class="col-2 m-2 border-end text-center ">
+                  <span class="align-middle">
+                    <a href="{% url 'home:guji' %}" class="text-decoration-none">
+                      <h4><strong>古籍</strong></h4>
+                      {% bs_icon 'book' size='1.5em'%}
+                    </a>
+                  </span>
+                </div>
+                <div class="col-8 mt-2 no-gutters">
+                  <p class="display-7"><a href="{% url 'home:gujidetail' obj.id %}" class="text-decoration-none">{{obj.标题|truncatechars:30}}</a></p>
+                  <small class="text-muted blockquote-footer">{{obj.作者}}</small>
+                </div>
               </div>
             </div>
-            {% endfor %}
-
           </div>
-          <div class="row text-muted text-right">
-            <small><a href="{% url 'home:guji'%}">更多</a></small>
-          </div>
-        </div>
-        <hr class="mb-3">
-        <div class="row ">
-          <div class="col-2 text-center my-auto">
-            <h4><strong>书库</strong></h4>
-          </div>
-          <div class="col border-start border-1 border-secondary">
-            {% for obj in all_书库 %}
-            <div class="row no-gutters pb-2 mr-2">
-              <div class="col pr-2 pl-1">
-                <p><strong class="display-7"><a href="{% url 'home:detail' obj.id %}">{{obj.标题|truncatechars:20}}</a></strong></p>
-                <small class="text-muted blockquote-footer pt-2">{{obj.作者}}</small>
-              </div>
-              <div class="col-1 pr-1">
-                <a href="{% url 'home:detail' obj.id %}">        
-                  {% bs_icon 'book' size='1.5em' extra_classes="mt-1 mr-2" %}
-                 </a>
+          {% endfor %}
+          {% for obj in all_书库 %}
+          <div class="col-lg-12 mt-1 mb-1">
+            <div class="card border bg-light h-100 rounded p-1">
+              <div class="row">
+                <div class="col-2 m-2 border-end text-center ">
+                  <span class="align-middle">
+                    <a href="{% url 'home:shuku' %}" class="text-decoration-none">
+                      <h4><strong>书库</strong></h4>
+                      {% bs_icon 'book' size='1.5em'%}
+                    </a>
+                  </span>
+                </div>
+                <div class="col-8 mt-2 no-gutters">
+                  <p class="display-7"><a href="{% url 'home:detail' obj.id %}" class="text-decoration-none">{{obj.标题|truncatechars:30}}</a></p>
+                  <small class="text-muted blockquote-footer">{{obj.作者}}</small>
+                </div>
               </div>
             </div>
-            {% endfor %}
-
           </div>
-          <div class="row text-muted text-right">
-            <small><a href="{% url 'home:shuku'%}">更多</a></small>
-          </div>
+          {% endfor %}
         </div>
 
       </div>

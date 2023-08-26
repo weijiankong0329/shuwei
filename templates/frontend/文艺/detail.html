@@ -3,20 +3,28 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <div class="row mb-4 mt-4">
-        <div class="col">
-            <h2>
-                <strong>{{ wenyi.标题 }}</strong>
-            </h2>
-            <div class=" text-right text-muted">
-                更新时间<br />
-                {{ wenyi.更新时间|date:'Y' }}年{{ wenyi.更新时间|date:'m' }}月{{ wenyi.更新时间|date:'d' }}日
-                {{ wenyi.更新时间|date:'h:i:s' }}
+    <div class="row mt-3">
+        <div class="col ">
+            <h1>
+                {{ wenyi.标题 }}
+            </h1>
+            <div class="row ">
+                <div class="col">
+                    <h5 class="text-muted">
+                        作者：{{wenyi.作者}}
+                    </h5>
+                </div>
+                <div class="col text-right">
+                    <h5 class=" text-md-right text-muted">
+                        更新时间<br />
+                        {{ wenyi.更新时间|date:'Y' }}年{{ wenyi.更新时间|date:'m' }}月{{ wenyi.更新时间|date:'d' }}日
+                    </h5>
+                </div>
             </div>
+            <hr class="hr-content mt-0">
         </div>
     </div>
-    <hr>
-    <div class="row mb-4 mt-4">
+    <div class="row  mt-0">
         {% if wenyi.图片 %}
         <img class="w-100" src="{{ MEDIA_URL }}{{ wenyi.图片 }}">
         {% else %}
@@ -26,7 +34,10 @@
     <div class="row mb-4 mt-4 pb-4">
         <div class="col">
             <div class="row">
-                {{wenyi.内容|safe}}
+                <p>
+                    {{wenyi.内容|safe}}
+                </p>
+               
             </div>
             <div class="row mt-4">
                 <p>

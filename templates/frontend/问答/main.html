@@ -8,9 +8,6 @@
                 <strong>问答列表</strong>
             </h2>
         </div>
-        <div class="col-6 col-md-1">
-            <h2 class="text-success add-question-btn">{% bs_icon 'plus-circle' size='0.25em' %}</h2>
-        </div>
         <div class="col-6 col-md-5">
             <form action="{% url 'home:wendasearch' %}" class="form-inline justify-content-end" method="GET">
                 <input class="form-control ml-3" name="keyword" type="text" placeholder="题目关键词"/>
@@ -18,8 +15,7 @@
             </form>
         </div>
     </div>
-    <div class="row add-question-section mt-4 mb-4 ml-4 mr-4 p-4 border border-2" hidden>
-        <div class="col-1 text-right"><h3>{% bs_icon 'x-circle' size='0.5em' extra_classes='text-warning close-question-btn' %}</h3></div>
+    <div class="row add-question-section mt-4 mb-4 ml-4 mr-4 p-4 border border-2 " >
         <div class="col-2 text-right"><h3><strong>提出问题</strong></h3></div>
         <div class="col-9 col-md-8">
             <form action="{% url 'home:wendaaddquestion' %}" class="form-inline w-100" method="POST">

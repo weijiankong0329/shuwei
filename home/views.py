@@ -12,16 +12,16 @@ from django.db.models import Count,Q
 
 def MainView(request):
     context ={
-        'all_通讯':通讯.objects.all().filter(发布状态=True).order_by("-更新时间")[:10],
+        'all_通讯':通讯.objects.all().filter(发布状态=True).order_by("-更新时间")[:11],
         'all_书讯': 书讯.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],
         'all_书评': 书评.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],
         'all_观点': 观点.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],
         'all_文艺': 文艺.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],
-        'all_问答': 问答.objects.all().filter(发布状态=True).order_by("-更新时间")[:5],
+        'all_问答': 问答.objects.all().filter(发布状态=True).order_by("-更新时间")[:6],
         'all_视频': 视频.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],
-        'all_论文': 论文.objects.all().filter(发布状态=True).order_by("-更新时间")[:3],
-        'all_古籍': 古籍.objects.all().filter(发布状态=True).order_by("-更新时间")[:3],
-        'all_书库': 书库.objects.all().filter(发布状态=True).order_by("-更新时间")[:3],
+        'all_论文': 论文.objects.all().filter(发布状态=True).order_by("-更新时间")[:2],
+        'all_古籍': 古籍.objects.all().filter(发布状态=True).order_by("-更新时间")[:2],
+        'all_书库': 书库.objects.all().filter(发布状态=True).order_by("-更新时间")[:2],
         'all_译林': 译林.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],
         'all_文摘': 文摘.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],
         'all_经训': 经训.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],

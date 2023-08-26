@@ -2,36 +2,38 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <div class="row mt-4 mb-4">
-        <div class="col">
-        <h2>
-            <strong>{{ yiling.标题 }}</strong>
-        </h2>
-        <div class=" text-right text-muted">
-            更新时间<br />
-            {{ yiling.更新时间|date:'Y' }}年{{ yiling.更新时间|date:'m' }}月{{ yiling.更新时间|date:'d' }}日
-            {{ yiling.更新时间|date:'h:i:s' }}
+    <div class="row mt-3">
+        <div class="col ">
+            <h1>
+                {{ yiling.标题 }}
+            </h1>
+            <div class="row ">
+                <div class="col-md-10">
+                    <h5 class="  text-muted">
+                        原文标题:{{yiling.原文标题}}
+                    </h5>
+                    <h5 class=" text-muted">
+                        译文作者:{{yiling.译文作者 }}
+                    </h5>
+
+                    <h5 class=" text-muted">
+                        原文作者:{{yiling.原文作者 }}
+                    </h5>
+                </div>
+                <div class="col text-right">
+                    <h5 class=" text-md-right text-muted">
+                        更新时间<br />
+                        {{ yiling.更新时间|date:'Y' }}年{{ yiling.更新时间|date:'m' }}月{{ yiling.更新时间|date:'d' }}日
+                    </h5>
+                </div>
+            </div>
+            <hr class="hr-content mt-0">
         </div>
     </div>
-        <div class="col-12 card border bg-light rounded p-4">
-            <h5>
-               <strong>译文作者：</strong>{{yiling.译文作者}}
-            </h5>
-            <h5>
-                <strong>原文标题：</strong>{{yiling.原文标题 }}
-            </h5>
-            <h5>
-                <strong>原文作者：</strong>{{yiling.原文作者 }}
-            </h5>
-            <h5>
-                <strong>原文出版日期：</strong>{{yiling.原文出版日期|date:"Y年m月d日"  }}
-            </h5>
-        </div>
-        <div>
-            <p>
-                {{yiling.译文内容 |safe}}
-            </p>
-        </div>
+    <div class="row">
+        <p>
+            {{yiling.译文内容|safe}}
+        </p>
     </div>
     <div class="mb-4">
         <div class="mb-3">

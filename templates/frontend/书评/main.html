@@ -20,7 +20,7 @@
                     {% endif %}
                     <div class="card-body p-3">
                         <small class="text-muted">标题</small>
-                        <h4 class="card-title font-weight-bold">{{ obj.标题 }}</h4>
+                        <h4 class="card-title font-weight-bold">{{ obj.标题 |truncatechars:14 }}</h4>
                         <small class="text-muted">内容</small>
                         <div class="fs-6 fw-light mb-4">
                             {{ obj.书评内容|striptags|safe|truncatechars:25 }}

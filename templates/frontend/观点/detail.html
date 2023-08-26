@@ -3,20 +3,28 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <div class="row mb-4 mt-4">
-        <div class="col">
-            <h2>
-                <strong>{{ guandian.标题 }}</strong>
-            </h2>
-            <div class=" text-right text-muted">
-                更新时间<br />
-                {{ guandian.更新时间|date:'Y' }}年{{ guandian.更新时间|date:'m' }}月{{ guandian.更新时间|date:'d' }}日
-                {{ guandian.更新时间|date:'h:i:s' }}
+    <div class="row mt-3">
+        <div class="col ">
+            <h1>
+                {{ guandian.标题 }}
+            </h1>
+            <div class="row ">
+                <div class="col">
+                    <h5 class="  text-muted">
+                        作者：{{guandian.作者}}
+                    </h5>
+                </div>
+                <div class="col text-right">
+                    <h5 class=" text-md-right text-muted">
+                        更新时间<br />
+                        {{ guandian.更新时间|date:'Y' }}年{{ guandian.更新时间|date:'m' }}月{{ guandian.更新时间|date:'d' }}日
+                    </h5>
+                </div>
             </div>
+            <hr class="hr-content mt-0">
         </div>
     </div>
-    <hr>
-    <div class="row mb-4 mt-4">
+    <div class="row mb-4 ">
         {% if guandian.图片 %}
         <img class="w-100" src="{{ MEDIA_URL }}{{ guandian.图片 }}">
         {% else %}
@@ -26,20 +34,17 @@
     <div class="row mb-4 mt-4 pb-4">
         <div class="col">
             <div class="row">
-                {{guandian.内容|safe}}
-            </div>
-            <div class="row mt-4">
                 <p>
-                作者:&nbsp{{guandian.作者}}<br/>
+                    {{guandian.内容|safe}}
                 </p>
             </div>
-          <div class="row mt-3 mb-3 border-bottom">
-                 <div class="col mt-3 mb-3">
-                     <h4><strong>评论区</strong></h4>
-                 </div>
-                 <div class="col mt-3 mb-3 text-right">
-                     {% bs_icon 'chat-right-dots' %}{{comments.count}}
-                 </div>
+            <div class="row mt-3 mb-3 border-bottom">
+                <div class="col mt-3 mb-3">
+                    <h4><strong>评论区</strong></h4>
+                </div>
+                <div class="col mt-3 mb-3 text-right">
+                    {% bs_icon 'chat-right-dots' %}{{comments.count}}
+                </div>
             </div>
             {% for comment in comments %}
             <div class="row border mt-3 mb-3 p-3">
@@ -49,7 +54,7 @@
             </div>
             {% endfor %}
             <div class="row">
-                <form method="POST" >
+                <form method="POST">
                     <div class="form-floating">
                         {% csrf_token %}
                         {{ form.as_p }}
@@ -60,34 +65,33 @@
         </div>
 
         <div class="col-4   ml-2 d-none d-md-block">
-          <div class="row border rounded pb-2 sticky-scroll">
-            <div class="row no-gutters p-2 bg-light align-items-stretch mb-2">
-                <h4>其他观点 </h4>
-            </div>
-            {% for obj in all_观点 %}
-            <a href ="{% url 'home:guandiandetail' obj.id %}" >
-                <div class="card card-img-horizontal border rounded mb-2" style="flex-direction:row;">
-                    {% if obj.图片 %}
-                    <img class="w-100 align-middle" src="{{ MEDIA_URL }}{{ obj.图片 }}">
-                    {% else %}
-                    <img class="w-100 align-middle" src="{% static 'images/default-placeholder.png' %}">
-                    {% endif %}
-                    <div class="card-body p-2">
-                        <small class="text-muted">标题</small>
-                        <h5 class="card-title font-weight-bold">{{obj.标题|truncatechars:20 }}</h5>
-                        <small class="text-muted card-date">{{obj.更新时间|date:'Y-m-d h:i:s' }}</small>
+            <div class="row border rounded pb-2 sticky-scroll">
+                <div class="row no-gutters p-2 bg-light align-items-stretch mb-2">
+                    <h4>其他观点 </h4>
+                </div>
+                {% for obj in all_观点 %}
+                <a href="{% url 'home:guandiandetail' obj.id %}">
+                    <div class="card card-img-horizontal border rounded mb-2" style="flex-direction:row;">
+                        {% if obj.图片 %}
+                        <img class="w-100 align-middle" src="{{ MEDIA_URL }}{{ obj.图片 }}">
+                        {% else %}
+                        <img class="w-100 align-middle" src="{% static 'images/default-placeholder.png' %}">
+                        {% endif %}
+                        <div class="card-body p-2">
+                            <small class="text-muted">标题</small>
+                            <h5 class="card-title font-weight-bold">{{obj.标题|truncatechars:20 }}</h5>
+                            <small class="text-muted card-date">{{obj.更新时间|date:'Y-m-d h:i:s' }}</small>
+                        </div>
                     </div>
-                </div>
-            </a>
-          {% endfor %}
-            <a class="nav-link" href="{% url 'home:guandian' %}">
-                <div class=" w-100 btn btn-outline-dark bg-light mb-2">
-                    更多观点
-                </div>
-            </a>
-          </div>
+                </a>
+                {% endfor %}
+                <a class="nav-link" href="{% url 'home:guandian' %}">
+                    <div class=" w-100 btn btn-outline-dark bg-light mb-2">
+                        更多观点
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>
 {% endblock %}
-
