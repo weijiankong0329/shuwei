@@ -281,13 +281,13 @@
     {% if 译林.count > 0 %}
     <div class="row mb-4 mt-4">
         <h3>
-            <strong>文摘&nbsp{{译林.count}}</strong>
+            <strong>文史&nbsp{{译林.count}}</strong>
         </h3>
     </div>
     <div class="row mb-4 mt-4">
      {% for obj in 译林 %}
         <div class="col-md-3 mb-3 ">
-            <a href="{% url 'home:wenzhaidetail' obj.id %}"  class="text-decoration-none " >
+            <a href="{% url 'home:wenshidetail' obj.id %}"  class="text-decoration-none " >
                 <div class="card border h-100 bg-light rounded">
                     <div class="card-body p-3">
                         <small class="text-muted">标题</small>
@@ -305,16 +305,16 @@
     {% endfor %}
     </div>
     {% endif %}
-    {% if 文摘.count > 0 %}
+    {% if 文史.count > 0 %}
     <div class="row mb-4 mt-4">
         <h3>
-            <strong>文摘&nbsp{{文摘.count}}</strong>
+            <strong>文史&nbsp{{文史.count}}</strong>
         </h3>
     </div>
     <div class="row mb-4 mt-4">
-     {% for obj in 文摘 %}
+     {% for obj in 文史 %}
         <div class="col-md-3 mb-3 ">
-            <a href="{% url 'home:wenzhaidetail' obj.id %}"  class="text-decoration-none " >
+            <a href="{% url 'home:WenShidetail' obj.id %}"  class="text-decoration-none " >
                 <div class="card border h-100 bg-light rounded">
                     <div class="card-body p-3">
                         <small class="text-muted">标题</small>

@@ -14,10 +14,10 @@
         <div class="col  pb-4 m-4 h-100 admin-main-content" id="content">
            <div class="row text-center">
                <div class="col p-2">
-                   <h3>文摘详情-评论</h3>
+                   <h3>文史详情-评论</h3>
                </div>
                <div class="col-4 text-right pt-1">
-                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='文摘' task='comment' %}">全部文摘评论 {% bs_icon 'list' size='0.75em' %}</a>
+                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='文史' task='comment' %}">全部文史评论 {% bs_icon 'list' size='0.75em' %}</a>
                </div>
            </div>
            <div class="border p-4 mt-3">
@@ -112,7 +112,7 @@
                             拒绝
                         </button>
                         {% endif %}
-                        <a href="{% url 'admin_task:content-item-delete' content='文摘' id=comment.id task='comment' %}" onclick="return confirm('确认删除此评论?');" class="text-decoration-none small text-danger">
+                        <a href="{% url 'admin_task:content-item-delete' content='文史' id=comment.id task='comment' %}" onclick="return confirm('确认删除此评论?');" class="text-decoration-none small text-danger">
                             {% bs_icon 'trash3' size='1em' %}
                         </a>
                     </form>

@@ -33,10 +33,28 @@
                         {% endif %}
                 </div>
                 <div class="row pl-3 pr-3 pt-3">
-                    <strong>简介</strong>
+                    <strong>内容简介</strong>
                 </div>
                 <div class="row px-3 pt-2">
-                    {{content_item.简介|safe}}
+                    {{content_item.内容简介|safe}}
+                </div>
+                <div class="row pl-3 pr-3 pt-3">
+                    <strong>作者简介</strong>
+                </div>
+                <div class="row px-3 pt-2">
+                    {{content_item.作者简介|safe}}
+                </div>
+                <div class="row pl-3 pr-3 pt-3">
+                    <strong>目录</strong>
+                </div>
+                <div class="row px-3 pt-2">
+                    {{content_item.目录|safe}}
+                </div>
+                <div class="row pl-3 pr-3 pt-3">
+                    <strong>前言</strong>
+                </div>
+                <div class="row px-3 pt-2">
+                    {{content_item.前言|safe}}
                 </div>
                 <div class="row pl-3 pr-3 pt-3">
                     <div class="col">
@@ -49,10 +67,50 @@
                     </div>
                     <div class="col">
                         <div class="row pt-2">
-                            <strong>序号</strong>
+                            <strong>出版社</strong>
                         </div>
                         <div class="row">
-                            {{content_item.序号}}
+                            {{content_item.出版社}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row pt-2">
+                            <strong>出版年</strong>
+                        </div>
+                        <div class="row">
+                            {{content_item.出版年}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row pt-2">
+                            <strong>ISBN</strong>
+                        </div>
+                        <div class="row">
+                            {{content_item.ISBN}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row pt-2">
+                            <strong>定价</strong>
+                        </div>
+                        <div class="row">
+                            {{content_item.定价}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row pt-2">
+                            <strong>装帧</strong>
+                        </div>
+                        <div class="row">
+                            {{content_item.装帧}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row pt-2">
+                            <strong>页数</strong>
+                        </div>
+                        <div class="row">
+                            {{content_item.页数}}
                         </div>
                     </div>
                 </div>

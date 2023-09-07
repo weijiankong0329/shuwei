@@ -2,19 +2,22 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <div class="row mt-4 mb-4">
-        <div class="col-md-4 text-center card-img-top-zoom">
-            <img src="{{ shuku.图片.url }}" alt="{{ shuku.标题 }}" class="img-fluid" width="250">
-        </div>
-        <div class="col-md-8">
-            <h2><strong>{{ shuku.标题 }}</strong></h2>
-            <p><strong>作者:</strong> {{ shuku.作者 }}</p>
-            <p><strong>序号:</strong> {{ shuku.序号 }}</p>
-            <p><strong>更新时间:</strong> {{ shuku.更新时间|date:"Y年m月d日 " }}</p>
-            <p><strong>简介:</strong> {{ shuku.简介 }}</p>
-            <!-- 其他详细信息字段 -->
+    <div class="row  mt-2">
+        <div class="col-md-3 text-center bg-light rounded border"
+            style="background-image: url('{{ MEDIA_URL }}{{ shuku.图片 }}'); background-size: cover; background-repeat: no-repeat;">
+            <img src="{{ MEDIA_URL }}{{ shuku.图片 }}" alt="{{ shuku.标题 }}" class="img-fluid img-fit"
+                style="visibility: hidden; max-width: 100%; height: auto;">
         </div>
 
+        <div class="col-md-9">
+            <h2><strong>{{ shuku.标题 }}</strong></h2>
+            <p><strong>作者:</strong> {{ shuku.作者 }}</p>
+            <p><strong>ISBN:</strong> {{ shuku.ISBN }}</p>
+            <p><strong>出版日期:</strong> {{ shuku.出版日期|date:"Y年m月d日 " }}</p>
+            <p><strong>内容简介:</strong> {{ shuku.内容简介|safe }}</p>
+            <p><strong>作者简介:</strong> {{ shuku.作者简介|safe }}</p>
+            <!-- 其他详细信息字段 -->
+        </div>
         {% if shuku.文档 %}
         <div class="_df_book border mt-4 rounded" height="500" width="100%" webgl="true" backgroundcolor="dark"
             source="{{ shuku.文档.url }}" id="df_manual_book" style="width:100%">
@@ -23,23 +26,24 @@
         暂无上传文档
         {% endif %}
     </div>
+
     <div class="mb-4 ">
         <div class="mb-3">
             <h3>相关推荐</h3>
         </div>
         <div class="d-flex flex-wrap ">
-            {% for shuku in all_书库|slice:":4" %}
+            {% for obj in all_书库|slice:":4" %}
             <div class="col-md-3 mb-4 ">
                 <div class="card border bg-light rounded">
                     <div class="d-flex justify-content-between">
                         <div class="card-img-top-zoom">
-                            <img src="{{ shuku.图片.url }}" alt="" srcset="" height="100" width="100">
+                            <img src="{{ MEDIA_URL }}{{ obj.图片}}" alt="" srcset="" height="100" width="100">
                         </div>
-                        <div class="p-2 mt-3">
-                            <a href="{% url 'home:detail' shuku.id %}">
-                                <h4 class="font-weight-bold">{{ shuku.标题 }}</h4>
+                        <div class="p-2 mt-3 ml-0">
+                            <a href="{% url 'home:shuxundetail' obj.id %}">
+                                <h5 class="font-weight-bold">{{ obj.标题|truncatechars:7 }}</h5>
                             </a>
-                            <p>{{ shuku.更新时间|date:"Y年m月d日" }}</p>
+                            <small class="text-muted card-date">{{obj.更新时间|date:'Y-m-d ' }}</small>
                         </div>
                     </div>
                 </div>
@@ -48,5 +52,6 @@
         </div>
     </div>
 </div>
+
 
 {% endblock %}

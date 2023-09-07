@@ -2,8 +2,8 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from home.models import 通讯, 书讯, 书评, 观点, 文艺, 问答, 视频, 译林, 文摘, 论文, 经训, 古籍, 书库, 章节_经训, 提问_问答
-from .forms import 视频_comment_form,问答_comment_form,书评_comment_form,观点_comment_form,文艺_comment_form,文摘_comment_form,ContactForm
+from home.models import 通讯, 书讯, 书评, 观点, 文艺, 问答, 视频, 译林, 文史, 论文, 经训, 古籍, 书库, 章节_经训, 提问_问答
+from .forms import 视频_comment_form,问答_comment_form,书评_comment_form,观点_comment_form,文艺_comment_form,文史_comment_form,ContactForm
 from django.contrib import messages
 from django.db.models import Count,Q
 
@@ -23,7 +23,7 @@ def MainView(request):
         'all_古籍': 古籍.objects.all().filter(发布状态=True).order_by("-更新时间")[:2],
         'all_书库': 书库.objects.all().filter(发布状态=True).order_by("-更新时间")[:2],
         'all_译林': 译林.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],
-        'all_文摘': 文摘.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],
+        'all_文史': 文史.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],
         'all_经训': 经训.objects.all().filter(发布状态=True).order_by("-更新时间")[:4],
     }
     return render(request,'frontend/首页/index.html',context)
@@ -41,11 +41,11 @@ def SearchAll(request):
     guji_result=古籍.objects.all().filter(发布状态=True,标题__icontains=keyword)
     shuku_result=书库.objects.all().filter(发布状态=True,标题__icontains=keyword)
     yilin_result=译林.objects.all().filter(发布状态=True,标题__icontains=keyword)
-    wenzhai_result=文摘.objects.all().filter(发布状态=True,标题__icontains=keyword)
+    wenshi_result=文史.objects.all().filter(发布状态=True,标题__icontains=keyword)
     jingxun_result=经训.objects.all().filter(发布状态=True,标题__icontains=keyword)
     result_count= tongxun_result.count() + shuxun_result.count() + shuping_result.count() + guandian_result.count() + wenyi_result.count() +\
                   wenda_result.count() + shiping_result.count() + lunwen_result.count() + guji_result.count() + shuku_result.count() +\
-                  yilin_result.count() + wenzhai_result.count() + jingxun_result.count()
+                  yilin_result.count() + wenshi_result.count() + jingxun_result.count()
     context = {
         '通讯':tongxun_result,
         '书讯':shuxun_result,
@@ -58,7 +58,7 @@ def SearchAll(request):
         '古籍':guji_result,
         '书库':shuku_result,
         '译林':yilin_result ,
-        '文摘':wenzhai_result,
+        '文史':wenshi_result,
         '经训':jingxun_result,
         'result_count':result_count
     }
@@ -360,7 +360,7 @@ def ShuKu(request):
 
 def ShuKucontent(request, shuku_id):
     shuku = 书库.objects.get(id=shuku_id)
-    all_书库 = 书库.objects.all()
+    all_书库 = 书库.objects.all().filter(发布状态=True)
     context = {
         'shuku': shuku,
         'all_书库': all_书库,
@@ -379,7 +379,7 @@ def GuJi(request):
 
 def GuJicontent(request, guji_id):
     guji = 古籍.objects.get(id=guji_id)
-    all_古籍 = 古籍.objects.all()
+    all_古籍 = 古籍.objects.all().filter(发布状态=True)
     context = {
         'guji': guji,
         'all_古籍': all_古籍,
@@ -397,7 +397,7 @@ def LunWen(request):
 
 def LunWencontent(request, lunwen_id):
     lunwen = 论文.objects.get(id=lunwen_id)
-    all_论文 = 论文.objects.all()
+    all_论文 = 论文.objects.all().filter(发布状态=True)
     context = {
         'lunwen': lunwen,
         'all_论文':all_论文
@@ -415,7 +415,7 @@ def YiLing(request):
 
 def YiLingcontent(request, yiling_id):
     yiling = 译林.objects.get(id=yiling_id)
-    all_译林 = 译林.objects.all()
+    all_译林 = 译林.objects.all().filter(发布状态=True)
     context = {
         'yiling': yiling,
         'all_译林':all_译林
@@ -423,34 +423,34 @@ def YiLingcontent(request, yiling_id):
     return render(request, 'frontend/译林/detail.html', context)
 
 
-def WenZhai(request):
-    all_文摘 = 文摘.objects.all().filter(发布状态=True)
+def WenShi(request):
+    all_文史 = 文史.objects.all().filter(发布状态=True)
     context = {
-        'all_文摘': all_文摘,
+        'all_文史': all_文史,
     }
-    return render(request, 'frontend/文摘/main.html', context)
+    return render(request, 'frontend/文史/main.html', context)
 
-class WenZhaiDetail(generic.TemplateView):
-    template_name = "frontend/文摘/detail.html"
+class WenShiDetail(generic.TemplateView):
+    template_name = "frontend/文史/detail.html"
 
-    def get(self, request, wenzhai_id):
-        form = 文摘_comment_form
-        all_文摘 = 文摘.objects.all().filter(发布状态=True).exclude(id=wenzhai_id).annotate(comment_no=Count("评论_文摘",filter=Q(评论_文摘__通过='已通过')))[:5]
-        wenzhai = 文摘.objects.get(id=wenzhai_id)
-        comments = wenzhai.评论_文摘_set.filter(通过='已通过')
+    def get(self, request, wenshi_id):
+        form = 文史_comment_form
+        all_文史 = 文史.objects.all().filter(发布状态=True).exclude(id=wenshi_id).annotate(comment_no=Count("评论_文史",filter=Q(评论_文史__通过='已通过')))[:5]
+        wenshi = 文史.objects.get(id=wenshi_id)
+        comments = wenshi.评论_文史_set.filter(通过='已通过')
         context = {
-            'all_文艺': all_文摘,
-            'wenzhai':wenzhai,
+            'all_文艺': all_文史,
+            'wenshi':wenshi,
             'form':form,
             'comments':comments
         }
         return render(request, self.template_name, context)
 
-    def post(self,request,wenzhai_id):
-        form = 文摘_comment_form(request.POST)
+    def post(self,request,wenshi_id):
+        form = 文史_comment_form(request.POST)
         if form.is_valid():
             commentForm = form.save(commit=False)
-            commentForm.文摘 = 文摘.objects.get(id=wenzhai_id)
+            commentForm.文史 = 文史.objects.get(id=wenshi_id)
             commentForm.save()
             comment = form.cleaned_data['评论']
             args = {
@@ -459,7 +459,7 @@ class WenZhaiDetail(generic.TemplateView):
             }
             msg = '评论已提交，待审核'
             messages.success(request, msg)
-            return HttpResponseRedirect(reverse('home:wenzhaidetail', kwargs={'wenzhai_id': wenzhai_id}))
+            return HttpResponseRedirect(reverse('home:wenshidetail', kwargs={'wenshi_id': wenshi_id}))
         
 
 

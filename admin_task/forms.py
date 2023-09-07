@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from home.models import 通讯,书讯,书评,译林,文摘,论文,经训,古籍,书库,观点,文艺,视频,问答,章节_经训
+from home.models import 通讯,书讯,书评,译林,文史,论文,经训,古籍,书库,观点,文艺,视频,问答,章节_经训
 
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
@@ -30,9 +30,17 @@ class 书讯_add_form(ModelForm):
             '发布状态':'确认发布'
         }
         widgets = {
-            '序号': forms.TextInput(attrs={'class': 'form-control'}),
+            'ISBN': forms.TextInput(attrs={'class': 'form-control'}),
+            '出版社': forms.TextInput(attrs={'class': 'form-control'}),
+            '出版年': forms.TextInput(attrs={'class': 'form-control','type':'date'}),
+            '定价': forms.TextInput(attrs={'class': 'form-control'}),
+            '页数': forms.TextInput(attrs={'class': 'form-control'}),
+            '装帧': forms.TextInput(attrs={'class': 'form-control'}),
             '标题': forms.TextInput(attrs={'class': 'form-control'}),
-            '简介': forms.Textarea(attrs={'class': 'form-control'}),
+            '内容简介': forms.Textarea(attrs={'class': 'form-control'}),
+            '作者简介': forms.Textarea(attrs={'class': 'form-control'}),
+            '目录': forms.Textarea(attrs={'class': 'form-control'}),
+            '前言': forms.Textarea(attrs={'class': 'form-control'}),
             '作者': forms.TextInput(attrs={'class': 'form-control'})
         }
 
@@ -129,9 +137,9 @@ class 译林_add_form(ModelForm):
            
         }
 
-class 文摘_add_form(ModelForm):
+class 文史_add_form(ModelForm):
     class Meta:
-        model = 文摘
+        model = 文史
         fields ="__all__"
         labels={
             '发布状态':'确认发布'
@@ -211,7 +219,9 @@ class 书库_add_form(ModelForm):
             '标题': forms.TextInput(attrs={'class': 'form-control'}),
             '作者 ': forms.TextInput(attrs={'class': 'form-control'}),
             '文档': forms.FileInput(attrs={'id':'file'}),
-            '简介': forms.Textarea(attrs={'class': 'form-control'}),
+            '内容简介': forms.Textarea(attrs={'class': 'form-control'}),
+            '作者简介': forms.Textarea(attrs={'class': 'form-control'}),
             '图片': forms.FileInput(attrs={'id':'image'}),
-            '序号': forms.TextInput(attrs={'class': 'form-control'}),
+            'ISBN': forms.TextInput(attrs={'class': 'form-control'}),
+            '出版日期': forms.TextInput(attrs={'class': 'form-control','type':'date'}),
         }

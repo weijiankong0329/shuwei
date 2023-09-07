@@ -10407,9 +10407,7 @@ h6, .h6 {
   .navbar-collapse button {
     margin-bottom: 10px;
   }
-  .collapse:not(.show) {
-    display: block;
-  }
+
   .show {
     right: 0;
   }

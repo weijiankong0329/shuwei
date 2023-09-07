@@ -14,10 +14,10 @@
         <div class="col  pb-4 m-4 h-100 admin-main-content" id="content">
            <div class="row text-center">
                <div class="col p-2">
-                   <h3>文摘详情</h3>
+                   <h3>文史详情</h3>
                </div>
                <div class="col-4 text-right pt-1">
-                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='文摘' task='content' %}">全部文摘 {% bs_icon 'list' size='0.75em' %}</a>
+                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='文史' task='content' %}">全部文史 {% bs_icon 'list' size='0.75em' %}</a>
                </div>
            </div>
             <div class="border p-4 mt-3">
@@ -63,7 +63,7 @@
                 </div>
                  <div class="row pt-3">
                      <div class="col">
-                         <a href="{% url 'admin_task:文摘_edit' content_item.id %}" class="btn-text">
+                         <a href="{% url 'admin_task:文史_edit' content_item.id %}" class="btn-text">
                             <button class="btn btn-success w-100" type="button">
                                 编辑{% bs_icon 'pencil' size='1.5em' %}
                             </button>

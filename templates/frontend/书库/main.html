@@ -3,43 +3,27 @@
 {% load bootstrap_icons %}
 {% block content %}
 <div class="container">
-    <div class="row mb-4 mt-4">
-        <h2>
-            <strong>书库列表</strong>
-        </h2>
+    <div class="row mt-3">
+        <h2><strong>书库列表</strong></h2>
     </div>
-    <div class="row mb-4 ">
-         {% for obj in all_书库 %}
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3 ">
-            <a href="{% url 'home:detail' obj.id %}"  class="text-decoration-none " >
-                <div class="card border  bg-light rounded card-img-top-zoom">
-                    {% if obj.图片 %}
-                    <img class="card-img-top card-img  " src="{{ MEDIA_URL }}{{ obj.图片}}" style="height: 250px;">
-                    {% else %}
-                    <img class="card-img-top card-img  " src="{% static 'images/default-placeholder.png' %}">
-                    {% endif %}
-                    <div class="card-body p-3 mt-3 ">
-                        <small class="text-muted">标题</small>
-                        <h4 class="card-title font-weight-bold">{{obj.标题 }}</h4>
-                        <small class="text-muted">简介</small>
-                        <div class="fs-6 fw-light">
-                            {{obj.简介|striptags|safe|truncatechars:30 }}
-                            {% if obj.简介|length > 25 %}
-                            <small class="text-muted">更多</small>
-                            {% endif %}
-                        </div>
-                        <div class="card-date">
-                            <small class="text-muted">
-                                {{obj.更新时间|date:'Y-m-d h:i:s' }}
-                            </small>
-                        </div>
-
+    <div class="row">
+        {% for obj in all_书库 %}
+        <div class="col-6 col-md-4 col-lg-2 mb-3">
+            <div class="card card-img-top-zoom">
+                <a href="{% url 'home:detail' obj.id %}" class="text-decoration-none">
+                    <div>
+                        {% if obj.图片 %}
+                        <img class="card-img-top card-img" src="{{ MEDIA_URL }}{{ obj.图片 }}" style="height: 250px; width: 180px;">
+                        {% else %}
+                        <img src="{% static 'images/default-placeholder.png' %}" style="height: 200px; width: 150px;">
+                        {% endif %}
                     </div>
-                </div>
-            </a>
+                    <h4 class="card-title font-weight-bold mb-0 mt-2" style="color: #3377AA;">{{ obj.标题|truncatechars:8 }}</h4>
+                </a>
+                <h6 class="mt-0">{{ obj.作者 }}</h6>
+            </div>
         </div>
         {% endfor %}
     </div>
 </div>
-
 {% endblock %}

@@ -7,6 +7,7 @@
 
 
 .social-media-footer li a {
+
   padding: 8px;
   background-color: #ffffff;
   border-radius: 50%;
@@ -112,6 +113,7 @@ footer .footer-logo {
 }
 
 #page-container {
+
   position: relative;
   min-height: 100vh;
 }
@@ -293,15 +295,28 @@ form{
   #home-logo{
     width:60%;
   }
-  header{
-    margin-bottom:10px;
-    position: sticky;
-    top: 0px;
-    height: 100%;
-    z-index: 200;
-    overflow: auto;
-    background:white;
-  }
+
+
+.navbar-expand-full .navbar-collapse {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  z-index: 1000; /* 使导航栏显示在最上层 */
+  overflow-y: auto; /* 允许滚动 */
+  transition: transform 0.3s ease-in-out; /* 添加过渡效果 */
+  transform: translateX(100%); /* 初始状态将导航栏移到屏幕外 */
+}
+
+.navbar-expand-full .navbar-collapse.show {
+  transform: translateX(0); /* 当展开时，将导航栏移到屏幕内 */
+}
+.main-video{
+  display: block;
+}
+
 }
 
 #menu-logo{
@@ -319,4 +334,27 @@ form{
 
 .blockquote-footer-main::before {
   content: "\2014\00A0";
+}
+
+
+#back-to-top{
+  display: none; 
+  position: fixed; 
+  bottom: 20px; 
+  right: 20px; 
+  z-index: 100;
+  
+}
+
+.fixed-image{
+  width: 1500px !important;
+  height: 300px  !important;
+}
+
+.img-fit{
+  width: 100%; 
+  height: 100%; 
+
+  object-fit: cover; 
+  /* 控制书库detail内图片大小与div相同 */
 }

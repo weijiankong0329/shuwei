@@ -49,8 +49,8 @@
                                 {{obj.视频.标题}}
                             {% elif content_title == '问答' %}
                                 {{obj.问答.标题}}
-                            {% elif content_title == '文摘' %}
-                                {{obj.文摘.标题}}
+                            {% elif content_title == '文史' %}
+                                {{obj.文史.标题}}
                         {% endif %}
                         </strong>
                         <br/>
@@ -95,8 +95,8 @@
                          <a href="{% url 'admin_task:content-item-comment-detail' content=content_title content_id=obj.视频.id id=obj.id %}" class="text-decoration-none">
                          {% elif content_title == '问答' %}
                          <a href="{% url 'admin_task:content-item-comment-detail' content=content_title content_id=obj.问答.id id=obj.id %}" class="text-decoration-none">
-                        {% elif content_title == '文摘' %}
-                        <a href="{% url 'admin_task:content-item-comment-detail' content=content_title content_id=obj.文摘.id id=obj.id %}" class="text-decoration-none">
+                        {% elif content_title == '文史' %}
+                        <a href="{% url 'admin_task:content-item-comment-detail' content=content_title content_id=obj.文史.id id=obj.id %}" class="text-decoration-none">
                        {% endif %}
                            <button class="btn btn-info p-2" type="button">
                                 查看{% bs_icon 'file-text' size='1em' %}

@@ -13,17 +13,17 @@
         <div class="col  pb-4 m-4 h-100 admin-main-content" id="content">
            <div class="row text-center">
                <div class="col p-2">
-                   <h3>文摘内容编辑</h3>
+                   <h3>文史添加</h3>
                </div>
                <div class="col-4 text-right pt-1">
-                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='文摘' task='content' %}">全部文摘 {% bs_icon 'list' size='0.75em' %}</a>
+                   <a class="nav-link-sub active border btn btn-primary" href="{% url 'admin_task:content-item' content='文史' task='content' %}">全部文史 {% bs_icon 'list' size='0.75em' %}</a>
                </div>
            </div>
             <div class="border row p-4 mt-3">
             <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.media }} 
-                {{form.标题|as_crispy_field }}
+              {% csrf_token %}
+              {{ form.media }} 
+               {{form.标题|as_crispy_field }}
                 {{form.内容|as_crispy_field }}
                 <div class="form-row ">
                     <div class="form-group col">
@@ -33,18 +33,22 @@
                         {{form.资源|as_crispy_field }}
                     </div>
                 </div>
-                {{form.发布状态|as_crispy_field}}
-                <div class="form-row">
+               <div class="form-row">
                     <div class="form-group col" id="img-preview-div" hidden>
                         图片预览<br/>
-                        <img src="{{ MEDIA_URL }}{{ 文摘.图片}}" id="img-preview" class="w-100 border m-2">
+                        <img src="#" id="img-preview" class="w-100 border m-2">
                     </div>
                      <div class="form-group col mr-3" id="img-upload">
                         {{form.图片|as_crispy_field }}
                     </div>
                 </div>
                 <div class="form-row">
-                    <button type="submit" class="btn btn-primary w-100" name="submit-type" value="save">保存更改</button>
+                    <div class="form-group col">
+                        <button type="submit" class="btn btn-primary w-100" name="submit-type" value="save">保存</button>
+                    </div>
+                    <div class="form-group col">
+                        <button type="submit" class="btn btn-primary w-100" name="submit-type" value="publish">发布</button>
+                    </div>
                 </div>
             </form>
             </div>

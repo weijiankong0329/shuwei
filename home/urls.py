@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('关于我们/', TemplateView.as_view(template_name='about_us.html'), name='about_us'),
+    path('隐私和条款/', TemplateView.as_view(template_name='T-P.html'), name='T-P'),
     path('联系我们/', views.contact_view, name='contact_us'),
 
     path('搜索/',views.SearchAll,name='searchAll'),
@@ -45,8 +46,8 @@ urlpatterns = [
     path('译林/', views.YiLing, name='yiling'),
     path('译林/<int:yiling_id>/', views.YiLingcontent, name='yilingdetail'),
 
-    path('文摘/',views.WenZhai,name="wenzhai"),
-    path('文摘/<int:wenzhai_id>',views.WenZhaiDetail.as_view(),name="wenzhaidetail"),
+    path('文史/',views.WenShi,name="wenshi"),
+    path('文史/<int:wenshi_id>',views.WenShiDetail.as_view(),name="wenshidetail"),
 ]
 
 

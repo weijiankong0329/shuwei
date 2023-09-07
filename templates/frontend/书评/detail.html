@@ -29,9 +29,9 @@
     </div>
     <div class="row mb-2 ">
         {% if shuping.图片 %}
-        <img class="w-100" src="{{ MEDIA_URL }}{{ shuping.图片 }}" >
+        <img class="fixed-image" src="{{ MEDIA_URL }}{{ shuping.图片 }}" >
         {% else %}
-        <img class="w-100" src="{% static 'images/default-placeholder.png' %}">
+        <img class="fixed-image" src="{% static 'images/default-placeholder.png' %}">
         {% endif %}
     </div>
     <div class="row mb-4 -4 pb-4">

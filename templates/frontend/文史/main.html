@@ -5,16 +5,16 @@
 <div class="container">
     <div class="row mb-4 mt-4">
         <h2>
-            <strong>文摘列表</strong>
+            <strong>文史列表</strong>
         </h2>
     </div>
     <div class="row mb-4 mt-4">
-         {% for obj in all_文摘 %}
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
-            <a href="{% url 'home:wenzhaidetail' obj.id %}" class="text-decoration-none">
+         {% for obj in all_文史 %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+            <a href="{% url 'home:wenshidetail' obj.id %}" class="text-decoration-none">
                 <div class="card border h-100 bg-light rounded">
                     {% if obj.图片 %}
-                    <img class="card-img-top card-img h-50" src="{{ MEDIA_URL }}{{ obj.图片}}">
+                    <img class="card-img-top card-img h-50" src="{{ MEDIA_URL }}{{ obj.图片 }}">
                     {% else %}
                     <img class="card-img-top card-img h-50" src="{% static 'images/default-placeholder.png' %}">
                     {% endif %}
@@ -22,7 +22,7 @@
                         <small class="text-muted">标题</small>
                         <h4 class="card-title font-weight-bold">{{ obj.标题 }}</h4>
                         <small class="text-muted">内容</small>
-                        <div class="fs-6 fw-light">
+                        <div class="fs-6 fw-light mb-4">
                             {{ obj.内容|striptags|safe|truncatechars:25 }}
                             {% if obj.内容|length > 25 %}
                             <small class="text-muted">更多</small>
@@ -30,7 +30,7 @@
                         </div>
                         <div class="card-date">
                             <small class="text-muted">
-                                {{ obj.更新时间|date:'Y-m-d H:i:s' }}
+                                {{ obj.更新时间|date:'Y-m-d h:i:s' }}
                             </small>
                         </div>
                     </div>

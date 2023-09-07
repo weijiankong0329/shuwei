@@ -8,23 +8,34 @@
                 <strong>问答列表</strong>
             </h2>
         </div>
-        <div class="col-6 col-md-5">
-            <form action="{% url 'home:wendasearch' %}" class="form-inline justify-content-end" method="GET">
-                <input class="form-control ml-3" name="keyword" type="text" placeholder="题目关键词"/>
-                <button class="ml-2 search-button" type="submit">{% bs_icon 'search' size='0.25em' %}</button>
+        <div class="col-12 col-md-6 mt-3 mt-md-0">
+            <form action="{% url 'home:wendasearch' %}" class="form-inline justify-content-center justify-content-md-end" method="GET">
+                <div class="input-group">
+                    <input class="form-control" name="keyword" type="text" placeholder="题目关键词"/>
+                    <div class="input-group-append">
+                        <button class="btn " type="submit">{% bs_icon 'search' size='1x' %}</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
-    <div class="row add-question-section mt-4 mb-4 ml-4 mr-4 p-4 border border-2 " >
-        <div class="col-2 text-right"><h3><strong>提出问题</strong></h3></div>
-        <div class="col-9 col-md-8">
-            <form action="{% url 'home:wendaaddquestion' %}" class="form-inline w-100" method="POST">
-                 {% csrf_token %}
-                <input class="form-control w-75" id="question" name="question" type="text" placeholder="问题"/>
-                <button class="form-control btn btn-secondary" type="submit">提交</button>
+    <div class="row add-question-section mt-4 mb-4 ml-4 mr-4 p-4 border border-2 rounded">
+        <div class="col-12 text-center mb-3">
+            <h3><strong>提出问题</strong></h3>
+        </div>
+        <div class="">
+            <form action="{% url 'home:wendaaddquestion' %}" class="form-inline text-center" method="POST">
+                {% csrf_token %}
+                <div class="input-group text-center" style="">
+                    <input class="form-control " id="question" name="question" type="text" placeholder="问题" />
+                    <div class="input-group-append">
+                        <button class="btn" type="submit">提交</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
+    
     <hr class="mt-2 mb-4"/>
     {% if keyword %}
     <div class="row ml-2">
@@ -42,18 +53,18 @@
             <div class="card border bg-light h-100 rounded">
                 <div class="card-body p-4">
                     <div class="row">
-                        <div class="col-2 col-md-1">
+                        <div class="col-4 col-md-2">
                             <div class="text-center text-white bg-secondary p-1 mx-auto status-tab">
                                 {{ obj.序号 }}
                             </div>
                         </div>
-                        <div class="col-10 col-md-4">
+                        <div class="col-8 col-md-4 mt-3 mt-md-0">
                             <h4>{{ obj.更新时间|date:'Y-m-d H:i:s' }}</h4>
                         </div>
-                        <div class="col-12 col-md-5">
+                        <div class="col-12 col-md-6 mt-3 mt-md-0">
                             <h4 class="card-title font-weight-bold">问题: {{ obj.标题 }}</h4>
                         </div>
-                        <div class="col-2 col-md-2">
+                        <div class="col-12 mt-3">
                             <div class="text-right">
                                 {% bs_icon 'chat-right-dots' %}
                                 {{ obj.comment_no }}

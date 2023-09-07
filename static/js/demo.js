@@ -33,6 +33,7 @@ $(function() {
   var search_form = $("#search-form")
 
   function scrollHeader() {
+    
     // adding sticky class
     if (window.pageYOffset > 105 && $('.navbar-close').css('display') == 'none') {
       $(header).addClass("sticky");

@@ -31,8 +31,8 @@ urlpatterns = [
     path('main/译林/add', views.YiLingAddView.as_view(), name='译林_add'),
     path('main/译林/edit/<int:pk>', views.YiLingEditView.as_view(), name='译林_edit'),
 
-    path('main/文摘/add', views.WenZhaiAddView.as_view(), name='文摘_add'),
-    path('main/文摘/edit/<int:pk>', views.WenZhaiEditView.as_view(), name='文摘_edit'),
+    path('main/文史/add', views.WenShiAddView.as_view(), name='文史_add'),
+    path('main/文史/edit/<int:pk>', views.WenShiEditView.as_view(), name='文史_edit'),
 
     path('main/论文/add', views.LunWenAddView.as_view(), name='论文_add'),
     path('main/论文/edit/<int:pk>/', views.LunWenEditView.as_view(), name='论文_edit'),

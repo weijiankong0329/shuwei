@@ -6,23 +6,23 @@
     <div class="row mt-3">
         <div class="col ">
             <h1 >
-                {{ wenzhai.标题 }}
+                {{wenshi.标题 }}
             </h1>
             <div class="row ">
                 <div class="col-md-10">
 
                     <h5 class=" text-muted" >
-                       作者:{{wenzhai.作者 }}
+                       作者:{{wenshi.作者 }}
                     </h5>
                     <h5 class=" text-muted" >
-                        资源:{{wenzhai.资源 }}
+                        资源:{{wenshi.资源 }}
                      </h5>
 
                 </div>
                 <div class="col text-right">
                     <h5 class=" text-md-right text-muted">
                         更新时间<br />
-                        {{ wenzhai.更新时间|date:'Y' }}年{{ wenzhai.更新时间|date:'m' }}月{{ wenzhai.更新时间|date:'d' }}日
+                        {{ wenshi.更新时间|date:'Y' }}年{{ wenshi.更新时间|date:'m' }}月{{ wenshi.更新时间|date:'d' }}日
                     </h5>
                 </div>
             </div>
@@ -30,17 +30,17 @@
         </div>
     </div>
     <div class="row mb-4 ">
-        {% if wenzhai.图片 %}
-        <img class="w-100" src="{{ MEDIA_URL }}{{ wenzhai.图片 }}">
+        {% if wenshi.图片 %}
+        <img class="fixed-image" src="{{ MEDIA_URL }}{{ wenshi.图片 }}">
         {% else %}
-        <img class="w-100" src="{% static 'images/default-placeholder.png' %}">
+        <img class="fixed-image" src="{% static 'images/default-placeholder.png' %}">
         {% endif %}
     </div>
     <div class="row mb-4 mt-4 pb-4">
         <div class="col">
             <div class="row">
                 <p>
-                    {{wenzhai.内容|safe}}
+                    {{wenshi.内容|safe}}
                 </p>
                 
             </div>
@@ -74,10 +74,10 @@
         <div class="col-4 ml-2 d-none d-md-block">
           <div class="row border rounded pb-2 sticky-scroll">
             <div class="row no-gutters p-2 bg-light align-items-stretch mb-2">
-                <h4>其他文摘 </h4>
+                <h4>其他文史 </h4>
             </div>
-            {% for obj in all_文摘 %}
-            <a href ="{% url 'home:wenyidetail' obj.id %}" >
+            {% for obj in all_文史 %}
+            <a href ="{% url 'home:wenshidetail' obj.id %}" >
                 <div class="card card-img-horizontal border rounded mb-2" style="flex-direction:row;">
                     {% if obj.图片 %}
                     <img class="w-100 align-middle" src="{{ MEDIA_URL }}{{ obj.图片 }}">
@@ -92,9 +92,9 @@
                 </div>
             </a>
           {% endfor %}
-            <a class="nav-link" href="{% url 'home:wenzhai' %}">
+            <a class="nav-link" href="{% url 'home:wenshi' %}">
                 <div class=" w-100 btn btn-outline-dark bg-light mb-2">
-                    更多文艺
+                    更多文史
                 </div>
             </a>
           </div>

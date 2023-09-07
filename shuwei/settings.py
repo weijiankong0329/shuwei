@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'shuwei.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'shuwei',
+        'NAME': 'shuwei1',
         'USER': 'root',
         'PASSWORD': '112233',
         'HOST': 'localhost',

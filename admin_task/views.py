@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import modelformset_factory
 from django.contrib.auth.views import LoginView
 from .forms import CustomLoginForm
-from .forms import 通讯_add_form,书讯_add_form,书评_add_form,译林_add_form,文摘_add_form,论文_add_form,\
+from .forms import 通讯_add_form,书讯_add_form,书评_add_form,译林_add_form,文史_add_form,论文_add_form,\
     古籍_add_form,经训_add_form,书库_add_form,观点_add_form,文艺_add_form,视频_add_form,问答_add_form,章节_经训_Form
-from home.models import 通讯,书讯,书评,观点,文艺,问答,视频,译林,文摘,论文,经训,古籍,书库,章节_经训
+from home.models import 通讯,书讯,书评,观点,文艺,问答,视频,译林,文史,论文,经训,古籍,书库,章节_经训
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -82,8 +82,8 @@ def ContentItemDeleteView(request,content,task,id):
             content_id = delete_item.书评.id
         if content=='观点':
             content_id = delete_item.观点.id
-        if content == '文摘':
-            content_id = delete_item.文摘.id
+        if content == '文史':
+            content_id = delete_item.文史.id
         if content == '文艺':
             content_id = delete_item.文艺.id
         if content == '视频':
@@ -206,14 +206,13 @@ class TongXunAddView(generic.TemplateView):
             内容 = form.cleaned_data['内容']
             作者 = form.cleaned_data['作者']
             资源 = form.cleaned_data['资源']
-            图片 = form.cleaned_data['图片']
+
             args = {
                 'form': form,
                 '标题': 标题,
                 '内容': 内容,
                 '作者': 作者,
-                '资源': 资源,
-                '图片': 图片
+                '资源': 资源
             }
             messages.success(request, '通讯添加成功！')
             return HttpResponseRedirect(reverse('admin_task:content-item',kwargs={'content' : '通讯','task' : 'content'}))
@@ -272,16 +271,35 @@ class ShuXunAddView(generic.TemplateView):
                 shuxunForm.发布状态 = True
             form.save()
             标题 = form.cleaned_data['标题']
-            简介 = form.cleaned_data['简介']
+            内容简介 = form.cleaned_data['内容简介']
+            作者简介 = form.cleaned_data['作者简介']
+            目录 = form.cleaned_data['目录']
+            前言 = form.cleaned_data['前言']
             作者 = form.cleaned_data['作者']
-            序号 = form.cleaned_data['序号']
+            ISBN = form.cleaned_data['ISBN']
+            出版年 = form.cleaned_data['出版年']
+            出版社 = form.cleaned_data['出版社']
+            定价 = form.cleaned_data['定价']
+            页数 = form.cleaned_data['页数']
+            装帧 = form.cleaned_data['装帧']
+            作者 = form.cleaned_data['作者']
+           
             图片 = form.cleaned_data['图片']
             args = {
                 'form': form,
+                'ISBN': ISBN,
+                '出版社': 出版社,
+                '出版年': 出版年,
+                '定价': 定价,
+                '页数': 页数,
+                '装帧': 装帧,
+                '作者简介': 作者简介,
+                '目录': 目录,
+                '前言': 前言,
                 '标题': 标题,
-                '简介': 简介,
+                '内容简介': 内容简介,
                 '作者': 作者,
-                '序号': 序号,
+              
                 '图片': 图片
             }
             messages.success(request, '书讯添加成功！')
@@ -743,29 +761,29 @@ class YiLingEditView(generic.TemplateView):
             return HttpResponseRedirect(reverse('admin_task:译林_edit', kwargs={'pk': pk}))
 
 
-class WenZhaiAddView(generic.TemplateView):
-    template_name = 'admin/文摘/文摘_add.html'
+class WenShiAddView(generic.TemplateView):
+    template_name = 'admin/文史/文史_add.html'
 
     def get(self, request):
-        form = 文摘_add_form()
-        文摘_all = 文摘.objects.all()
+        form = 文史_add_form()
+        文史_all = 文史.objects.all()
         args = {
             'form': form,
-            '文摘_all': 文摘_all,
-            'content_title': '文摘',
+            '文史_all': 文史_all,
+            'content_title': '文史',
             'task': 'content'
         }
         return render(request, self.template_name, args)
 
     def post(self, request):
         action = request.POST.get('submit-type')
-        form = 文摘_add_form(request.POST, request.FILES)
+        form = 文史_add_form(request.POST, request.FILES)
         if form.is_valid():
-            wenzhaiForm = form.save(commit=False)
+            wenshiForm = form.save(commit=False)
             if action == 'save':
-                wenzhaiForm.发布状态 = False
+                wenshiForm.发布状态 = False
             else:
-                wenzhaiForm.发布状态 = True
+                wenshiForm.发布状态 = True
             form.save()
             标题 = form.cleaned_data['标题']
             内容 = form.cleaned_data['内容']
@@ -780,37 +798,37 @@ class WenZhaiAddView(generic.TemplateView):
                 '资源': 资源,
                 '图片': 图片
             }
-            messages.success(request, '文摘添加成功！')
-            return HttpResponseRedirect(reverse('admin_task:content-item',kwargs={'content' : '文摘','task' : 'content'}))
+            messages.success(request, '文史添加成功！')
+            return HttpResponseRedirect(reverse('admin_task:content-item',kwargs={'content' : '文史','task' : 'content'}))
         else:
-            messages.error(request, '文摘添加失败请检查填表！')
-            return render(request, self.template_name, {'form': form, 'content_title': '文摘', 'task': 'content'})
+            messages.error(request, '文史添加失败请检查填表！')
+            return render(request, self.template_name, {'form': form, 'content_title': '文史', 'task': 'content'})
 
-class WenZhaiEditView(generic.TemplateView):
-    template_name = "admin/文摘/文摘_edit.html"
+class WenShiEditView(generic.TemplateView):
+    template_name = "admin/文史/文史_edit.html"
 
     def get(self, request, pk):
-        wenzhai = 文摘.objects.get(id=pk)
-        form = 文摘_add_form(instance=wenzhai)
+        wenshi = 文史.objects.get(id=pk)
+        form = 文史_add_form(instance=wenshi)
         args = {
             'form': form,
-            '文摘': wenzhai,
-            'content_title': '文摘',
+            '文史': wenshi,
+            'content_title': '文史',
             'task': 'content'
         }
         return render(request, self.template_name, args)
 
     def post(self, request, pk):
-        wenzhai = 文摘.objects.get(id=pk)
-        form = 文摘_add_form(request.POST, request.FILES, instance=wenzhai)
+        wenshi = 文史.objects.get(id=pk)
+        form = 文史_add_form(request.POST, request.FILES, instance=wenshi)
         print(form)
         if form.is_valid():
             form.save()
-            messages.success(request, '文摘内容修改成功')
-            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content':'文摘','id': pk}))
+            messages.success(request, '文史内容修改成功')
+            return HttpResponseRedirect(reverse('admin_task:content-item-detail', kwargs={'content':'文史','id': pk}))
         else:
-            messages.error(request, '文摘内容修改错误，请更正错误后提交更改内容')
-            return HttpResponseRedirect(reverse('admin_task:文摘_edit', kwargs={'pk': pk}))
+            messages.error(request, '文史内容修改错误，请更正错误后提交更改内容')
+            return HttpResponseRedirect(reverse('admin_task:文史_edit', kwargs={'pk': pk}))
 
 
 class LunWenAddView(generic.TemplateView):
@@ -1171,11 +1189,15 @@ class ShuKuAddView(generic.TemplateView):
                 shukuForm.发布状态 = True
             form.save()
             标题 = form.cleaned_data['标题']
+            内容简介 = form.cleaned_data['内容简介']
+            作者简介 = form.cleaned_data['作者简介']
             文档 = form.cleaned_data['文档']
             作者 = form.cleaned_data['作者']
             args = {
                 'form': form,
                 '标题': 标题,
+                '内容简介': 内容简介,
+                '作者简介': 作者简介,
                 '文档': 文档,
                 '作者': 作者,
 

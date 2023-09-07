@@ -13,8 +13,8 @@ from .models import 问答
 from .models import 提问_问答
 from .models import 评论_问答
 from .models import 译林
-from .models import 文摘
-from .models import 评论_文摘
+from .models import 文史
+from .models import 评论_文史
 from .models import 论文
 from .models import 经训
 from .models import 古籍
@@ -37,8 +37,8 @@ admin.site.register(问答)
 admin.site.register(提问_问答)
 admin.site.register(评论_问答)
 admin.site.register(译林)
-admin.site.register(文摘)
-admin.site.register(评论_文摘)
+admin.site.register(文史)
+admin.site.register(评论_文史)
 admin.site.register(论文)
 admin.site.register(经训)
 admin.site.register(古籍)
