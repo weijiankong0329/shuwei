@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from sorl.thumbnail import ImageField
+from django.utils.html import strip_tags
 # Create your models here.
 # 通讯
 class 通讯(models.Model):
@@ -129,7 +130,7 @@ class 问答(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        title = self.序号 +" - "+ self.标题 +"\n" +self.答案
+        title = self.序号 +" - "+ self.标题 +"\n答案:" + strip_tags(self.答案)
         return title
 
 class 提问_问答(models.Model):
